@@ -1,0 +1,133 @@
+import { useMemo, useState } from 'react';
+import { Search, X } from 'lucide-react';
+import type { Player, PlayerPosition } from '../types';
+
+type PositionFilter = 'ALL' | PlayerPosition;
+
+interface PlayersTabProps {
+  players: Player[];
+  season: string;
+}
+
+const POSITION_OPTIONS: { id: PositionFilter; label: string }[] = [
+  { id: 'ALL', label: 'すべて' },
+  { id: 'GK', label: 'GK' },
+  { id: 'DF', label: 'DF' },
+  { id: 'MF', label: 'MF' },
+  { id: 'FW', label: 'FW' },
+];
+
+export function PlayersTab({ players, season }: PlayersTabProps) {
+  const [posFilter, setPosFilter] = useState<PositionFilter>('ALL');
+  const [query, setQuery] = useState('');
+
+  const filteredPlayers = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    return [...players]
+      .sort((a, b) => a.number - b.number)
+      .filter((p) => {
+        if (posFilter !== 'ALL' && p.position !== posFilter) return false;
+        if (!normalized) return true;
+        return (
+          String(p.number).includes(normalized) ||
+          p.name.toLowerCase().includes(normalized) ||
+          p.kana.toLowerCase().includes(normalized)
+        );
+      });
+  }, [players, posFilter, query]);
+
+  return (
+    <div className="tab-content">
+      <section className="section-block" aria-labelledby="players-heading">
+        <div className="section-header">
+          <h2 id="players-heading" className="section-title">
+            選手名鑑（{season}）
+          </h2>
+          <span className="section-meta num-font">{filteredPlayers.length}名表示</span>
+        </div>
+
+        {/* Search Box */}
+        <div className="search-input-wrap">
+          <Search size={17} className="search-icon" />
+          <input
+            type="search"
+            id="player-search-input"
+            className="search-input"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="背番号・選手名・カナで検索"
+            aria-label="選手を検索"
+          />
+          {query && (
+            <button
+              type="button"
+              className="search-clear-btn"
+              onClick={() => setQuery('')}
+              aria-label="検索をクリア"
+            >
+              <X size={15} />
+            </button>
+          )}
+        </div>
+
+        {/* Position Filter */}
+        <div className="filter-pills" role="tablist" aria-label="ポジションフィルタ">
+          {POSITION_OPTIONS.map((opt) => (
+            <button
+              key={opt.id}
+              type="button"
+              id={`pos-filter-${opt.id.toLowerCase()}`}
+              role="tab"
+              aria-selected={posFilter === opt.id}
+              className={`filter-pill ${posFilter === opt.id ? 'is-active' : ''}`}
+              onClick={() => setPosFilter(opt.id)}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Player Cards Grid */}
+        {filteredPlayers.length > 0 ? (
+          <div className="players-list">
+            {filteredPlayers.map((player) => (
+              <article key={player.number} className="surface-card player-card">
+                <div className={`player-number-badge pos-${player.position.toLowerCase()}`}>
+                  <span className="player-pos-tag">{player.position}</span>
+                  <strong className="player-num num-font">{player.number}</strong>
+                </div>
+
+                <div className="player-info">
+                  <div className="player-name-block">
+                    <h3 className="player-name">{player.name}</h3>
+                    <p className="player-kana">{player.kana}</p>
+                  </div>
+                  <p className="player-physical num-font">
+                    {player.height}cm / {player.weight}kg
+                  </p>
+                </div>
+
+                <div className="player-stats" aria-label="シーズン成績">
+                  <div className="p-stat">
+                    <span className="p-stat-label">出場</span>
+                    <strong className="p-stat-val num-font">{player.apps}</strong>
+                  </div>
+                  <div className="p-stat">
+                    <span className="p-stat-label">得点</span>
+                    <strong className="p-stat-val num-font is-accent">{player.goals}</strong>
+                  </div>
+                  <div className="p-stat">
+                    <span className="p-stat-label">A</span>
+                    <strong className="p-stat-val num-font">{player.assists}</strong>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="empty-card">条件に一致する選手が見つかりませんでした。</div>
+        )}
+      </section>
+    </div>
+  );
+}

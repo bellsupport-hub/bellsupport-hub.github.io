@@ -1,0 +1,44 @@
+{
+  "season": "2026-27",
+  "matches": [
+    {
+      "id": "2026-j2-18",
+      "round": "第18節",
+      "kickoff": "2026-11-29T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "カターレ富山",
+      "stadium": "富山県総合運動公園陸上競技場",
+      "status": "scheduled",
+      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "result": null,
+      "lineup": null,
+      "stats": null
+    },
+    {
+      "id": "2026-j2-17",
+      "round": "第17節",
+      "kickoff": "2026-11-25T19:00:00+09:00",
+      "is_home": true,
+      "opponent": "ヴァンフォーレ甲府",
+      "stadium": "レモンガススタジアム平塚",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 0,
+        "scorers": ["鈴木章斗 68'"]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [1, 4, 8, 22, 33, 14, 7, 13, 2, 10, 29],
+        "substitutes": [21, 3, 15, 18, 20, 9, 11]
+      },
+      "stats": {
+        "possession": 54,
+        "shots": 12,
+        "shots_on_target": 5,
+        "corners": 6
+      }
+    }
+  ]
+}

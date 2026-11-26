@@ -1,0 +1,11 @@
+{
+  "season": "2026-27",
+  "competition": "J2リーグ",
+  "standings": [
+    { "rank": 1, "team": "〇〇FC", "played": 17, "won": 11, "drawn": 4, "lost": 2, "gd": 18, "points": 37, "is_target": false },
+    { "rank": 2, "team": "△△ユナイテッド", "played": 17, "won": 10, "drawn": 5, "lost": 2, "gd": 14, "points": 35, "is_target": false },
+    { "rank": 3, "team": "湘南ベルマーレ", "played": 17, "won": 10, "drawn": 4, "lost": 3, "gd": 12, "points": 34, "is_target": true },
+    { "rank": 4, "team": "□□シティ", "played": 17, "won": 9, "drawn": 5, "lost": 3, "gd": 9, "points": 32, "is_target": false },
+    { "rank": 5, "team": "◇◇サンガ", "played": 17, "won": 8, "drawn": 6, "lost": 3, "gd": 7, "points": 30, "is_target": false }
+  ]
+}
