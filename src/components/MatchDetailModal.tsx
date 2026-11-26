@@ -23,13 +23,30 @@ interface MatchDetailModalProps {
   onClose: () => void;
 }
 
-const FORMATION_3142_ROWS = [
-  { label: 'FW', indices: [9, 10] },
-  { label: 'MF', indices: [5, 6, 7, 8] },
-  { label: 'DMF', indices: [4] },
-  { label: 'DF', indices: [1, 2, 3] },
-  { label: 'GK', indices: [0] },
-];
+function buildFormationRows(formation: string, totalStarters: number) {
+  const parts = formation
+    .split('-')
+    .map((n) => Number.parseInt(n.trim(), 10))
+    .filter((n) => Number.isFinite(n) && n > 0);
+
+  const outfieldSum = parts.reduce((acc, n) => acc + n, 0);
+  const effectiveParts =
+    parts.length >= 2 && outfieldSum + 1 === totalStarters ? parts : [3, 1, 4, 2];
+
+  // Build from GK (index 0) upward, then reverse so FW is at top of pitch
+  const rows: { label: string; indices: number[] }[] = [{ label: 'GK', indices: [0] }];
+  let cursor = 1;
+  effectiveParts.forEach((count, rowIdx) => {
+    const indices: number[] = [];
+    for (let i = 0; i < count && cursor < totalStarters; i += 1) {
+      indices.push(cursor);
+      cursor += 1;
+    }
+    rows.push({ label: `LINE-${rowIdx + 1}`, indices });
+  });
+
+  return rows.reverse();
+}
 
 export function MatchDetailModal({
   match,
@@ -200,7 +217,10 @@ export function MatchDetailModal({
                 </svg>
 
                 <div className="pitch-rows">
-                  {FORMATION_3142_ROWS.map((row) => (
+                  {buildFormationRows(
+                    match.lineup.formation,
+                    match.lineup.starters.length
+                  ).map((row) => (
                     <div key={row.label} className={`pitch-row pitch-row-${row.indices.length}`}>
                       {row.indices.map((idx) => {
                         const num = match.lineup?.starters[idx];

@@ -28,6 +28,18 @@ npm run dev
 npm run build
 ```
 
+## 実データ自動連携（API-Football + GitHub Actions）
+
+[scripts/sync-api-football.mjs](scripts/sync-api-football.mjs) と [.github/workflows/sync-data.yml](.github/workflows/sync-data.yml) により、API-Football（無料枠：1日100リクエスト）から湘南ベルマーレの順位表・試合日程＆結果・フォーメーション・スタッツ・選手名鑑を取得し、`public/api/v1/*.json` を自動更新して GitHub Pages に反映します。
+
+### 設定手順（3ステップ）
+
+1. [API-Football Dashboard](https://dashboard.api-football.com/) で無料アカウントを作成し、APIキーを取得します。
+2. このリポジトリの **Settings → Secrets and variables → Actions → New repository secret** で以下を登録します。
+   - Name: `API_FOOTBALL_KEY`
+   - Secret: 取得したAPIキー
+3. **Actions → Sync J.League Data → Run workflow** を実行すると、即座に実データが取得され、自動的に GitHub Pages へ再デプロイされます（以降は毎日 0:00 JST および水・土・日の 22:00 JST に自動実行）。
+
 ## 公開URL（GitHub Pages）
 
 - アプリ本体：`https://kei333naka.github.io/BellSupport-Hub/`

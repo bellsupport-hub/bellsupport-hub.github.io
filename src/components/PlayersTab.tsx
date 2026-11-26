@@ -100,11 +100,14 @@ export function PlayersTab({ players, season }: PlayersTabProps) {
                 <div className="player-info">
                   <div className="player-name-block">
                     <h3 className="player-name">{player.name}</h3>
-                    <p className="player-kana">{player.kana}</p>
+                    {player.kana && <p className="player-kana">{player.kana}</p>}
                   </div>
-                  <p className="player-physical num-font">
-                    {player.height}cm / {player.weight}kg
-                  </p>
+                  {(player.height > 0 || player.weight > 0) && (
+                    <p className="player-physical num-font">
+                      {player.height > 0 ? `${player.height}cm` : '-'} /{' '}
+                      {player.weight > 0 ? `${player.weight}kg` : '-'}
+                    </p>
+                  )}
                 </div>
 
                 <div className="player-stats" aria-label="シーズン成績">
