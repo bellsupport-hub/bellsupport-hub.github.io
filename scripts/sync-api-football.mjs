@@ -21,6 +21,7 @@ import {
   toJaTeamName,
   toJstIso,
 } from './jp-mapping.mjs';
+import { syncFromTheSportsDB } from './sync-thesportsdb.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const API_OUT_DIR = path.resolve(__dirname, '../public/api/v1');
@@ -28,13 +29,6 @@ const BASE_URL = 'https://v3.football.api-sports.io';
 const TICKET_URL = 'https://www.jleague-ticket.jp/club/sb/';
 
 const API_KEY = process.env.API_FOOTBALL_KEY?.trim();
-if (!API_KEY) {
-  console.log(
-    'API_FOOTBALL_KEY is not set. Skipping live sync.\n' +
-      'To enable live data sync, add API_FOOTBALL_KEY in GitHub repository Settings -> Secrets and variables -> Actions.'
-  );
-  process.exit(0);
-}
 
 const MAX_DETAIL_FETCH = Number(process.env.MAX_DETAIL_FETCH ?? 5);
 let requestCount = 0;
@@ -328,27 +322,33 @@ async function syncPlayers(leagueId, season, teamId) {
 
   // Fetch season stats (page 1 & 2 if needed, max 2 pages to stay frugal with free tier)
   const statsByPlayerId = new Map();
-  for (let page = 1; page <= 2; page += 1) {
-    const statsRes = await apiGet('/players', {
-      team: teamId,
-      league: leagueId,
-      season,
-      page,
-    });
-    for (const entry of statsRes.response ?? []) {
-      const pid = entry.player?.id;
-      if (!pid) continue;
-      const st = entry.statistics?.[0];
-      statsByPlayerId.set(pid, {
-        height: parseIntSafe(entry.player?.height),
-        weight: parseIntSafe(entry.player?.weight),
-        apps: st?.games?.appearences ?? 0,
-        goals: st?.goals?.total ?? 0,
-        assists: st?.goals?.assists ?? 0,
+  try {
+    for (let page = 1; page <= 2; page += 1) {
+      const statsRes = await apiGet('/players', {
+        team: teamId,
+        league: leagueId,
+        season,
+        page,
       });
+      for (const entry of statsRes.response ?? []) {
+        const pid = entry.player?.id;
+        if (!pid) continue;
+        const st = entry.statistics?.[0];
+        statsByPlayerId.set(pid, {
+          height: parseIntSafe(entry.player?.height),
+          weight: parseIntSafe(entry.player?.weight),
+          apps: st?.games?.appearences ?? 0,
+          goals: st?.goals?.total ?? 0,
+          assists: st?.goals?.assists ?? 0,
+        });
+      }
+      const totalPages = statsRes.paging?.total ?? 1;
+      if (page >= totalPages) break;
     }
-    const totalPages = statsRes.paging?.total ?? 1;
-    if (page >= totalPages) break;
+  } catch (err) {
+    console.warn(
+      `API-Football /players season stats unavailable (${err.message}); using /players/squads only.`
+    );
   }
 
   if (squadPlayers.length === 0) {
@@ -384,19 +384,93 @@ async function syncPlayers(leagueId, season, teamId) {
   return playersData;
 }
 
-async function main() {
-  const { teamId, leagueId, season, leagueName } = await resolveTeamAndLeague();
+function isPlanOrSeasonRestriction(err) {
+  const msg = String(err?.message ?? '').toLowerCase();
+  return (
+    msg.includes('free plans') ||
+    msg.includes('"plan"') ||
+    msg.includes('do not have access to this season') ||
+    msg.includes('requests limit') ||
+    msg.includes('rate limit')
+  );
+}
 
-  await syncStandings(leagueId, season, teamId, leagueName);
-  await syncMatches(leagueId, season, teamId);
-  await syncPlayers(leagueId, season, teamId);
+async function main() {
+  if (!API_KEY) {
+    console.log(
+      'API_FOOTBALL_KEY is not set. Falling back directly to TheSportsDB free API...'
+    );
+    await syncFromTheSportsDB();
+    return;
+  }
+
+  let standingsSynced = false;
+  let matchesSynced = false;
+  let playersSynced = false;
+  let resolvedSeason = process.env.API_FOOTBALL_SEASON
+    ? Number(process.env.API_FOOTBALL_SEASON)
+    : undefined;
+
+  try {
+    const { teamId, leagueId, season, leagueName } = await resolveTeamAndLeague();
+    resolvedSeason = season;
+
+    try {
+      const standings = await syncStandings(leagueId, season, teamId, leagueName);
+      standingsSynced = Boolean(standings);
+    } catch (err) {
+      console.warn(`API-Football standings failed: ${err.message}`);
+      if (!isPlanOrSeasonRestriction(err)) {
+        console.warn('Will attempt TheSportsDB fallback for standings.');
+      }
+    }
+
+    try {
+      const matches = await syncMatches(leagueId, season, teamId);
+      matchesSynced = Boolean(matches);
+    } catch (err) {
+      console.warn(`API-Football matches failed: ${err.message}`);
+      if (!isPlanOrSeasonRestriction(err)) {
+        console.warn('Will attempt TheSportsDB fallback for matches.');
+      }
+    }
+
+    try {
+      const players = await syncPlayers(leagueId, season, teamId);
+      playersSynced = Boolean(players);
+    } catch (err) {
+      console.warn(`API-Football players failed: ${err.message}`);
+    }
+  } catch (err) {
+    console.warn(`API-Football initialization failed (${err.message}); falling back to TheSportsDB.`);
+  }
+
+  if (!standingsSynced || !matchesSynced || !playersSynced) {
+    console.log(
+      `Triggering TheSportsDB free API fallback (standings=${!standingsSynced}, matches=${!matchesSynced}, players=${!playersSynced})...`
+    );
+    const fallbackResult = await syncFromTheSportsDB({
+      season: resolvedSeason,
+      skipStandings: standingsSynced,
+      skipMatches: matchesSynced,
+      skipPlayers: playersSynced,
+      skipMeta: true,
+    });
+    standingsSynced = standingsSynced || fallbackResult.standingsUpdated;
+    matchesSynced = matchesSynced || fallbackResult.matchesUpdated;
+    playersSynced = playersSynced || fallbackResult.playersUpdated;
+  }
+
+  if (!standingsSynced && !matchesSynced && !playersSynced) {
+    throw new Error('Neither API-Football nor TheSportsDB returned any updated data.');
+  }
 
   const metaData = {
     updated_at: toJstIso(new Date().toISOString()),
     schema_version: 1,
   };
   await writeJson('meta.json', metaData);
-  console.log(`Updated meta.json (total API requests used: ${requestCount})`);
+  console.log(`Updated meta.json (total API-Football requests used: ${requestCount})`);
 }
 
 main().catch((err) => {
