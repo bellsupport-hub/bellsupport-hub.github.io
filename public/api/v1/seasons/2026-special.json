@@ -1,0 +1,78 @@
+{
+  "id": "2026-special",
+  "label": "2026特別大会",
+  "competition": "J2・J3百年構想リーグ",
+  "manager": "長澤 徹",
+  "note": "秋春制移行前の2026年上半期に開催された百年構想リーグ（地域リーグラウンド EAST-A）。18試合11勝7敗（12位）で秋春制開幕へ弾みをつけた。",
+  "summary": {
+    "rank": 12,
+    "played": 18,
+    "won": 11,
+    "drawn": 0,
+    "lost": 7,
+    "gf": 25,
+    "ga": 19,
+    "gd": 6,
+    "points": 33
+  },
+  "standings": [
+    { "rank": 11, "team": "モンテディオ山形", "played": 18, "won": 11, "drawn": 0, "lost": 7, "gd": 8, "points": 33, "is_target": false },
+    { "rank": 12, "team": "湘南ベルマーレ", "played": 18, "won": 11, "drawn": 0, "lost": 7, "gd": 6, "points": 33, "is_target": true },
+    { "rank": 13, "team": "横浜FC", "played": 18, "won": 10, "drawn": 0, "lost": 8, "gd": 4, "points": 30, "is_target": false }
+  ],
+  "matches": [
+    {
+      "id": "2026-special-r18",
+      "round": "第18節",
+      "kickoff": "2026-05-24T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "モンテディオ山形",
+      "stadium": "NDソフトスタジアム山形",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 2, "opponent_score": 1, "scorers": ["鈴木章斗", "西野太陽"] },
+      "lineup": null,
+      "stats": null
+    },
+    {
+      "id": "2026-special-r17",
+      "round": "第17節",
+      "kickoff": "2026-05-16T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "ベガルタ仙台",
+      "stadium": "レモンガススタジアム平塚",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 2, "opponent_score": 0, "scorers": ["小田裕太郎", "平岡大陽"] },
+      "lineup": null,
+      "stats": null
+    },
+    {
+      "id": "2026-special-r10",
+      "round": "第10節",
+      "kickoff": "2026-04-11T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "横浜FC",
+      "stadium": "ニッパツ三ツ沢球技場",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 2, "opponent_score": 1, "scorers": ["鈴木章斗", "小野瀬康介"] },
+      "lineup": null,
+      "stats": null
+    }
+  ],
+  "players": [
+    { "id": "pope-william", "number": 1, "name": "ポープ ウィリアム", "kana": "ポープ ウィリアム", "position": "GK", "height": 192, "weight": 88, "apps": 16, "goals": 0, "assists": 0 },
+    { "id": "matsumura-sena", "number": 2, "name": "松村 晟怜", "kana": "マツムラ セナ", "position": "DF", "height": 182, "weight": 74, "apps": 15, "goals": 0, "assists": 2 },
+    { "id": "hakamata-yutaro", "number": 3, "name": "袴田 裕太郎", "kana": "ハカマタ ユウタロウ", "position": "DF", "height": 183, "weight": 78, "apps": 16, "goals": 1, "assists": 0 },
+    { "id": "tachi-koki", "number": 4, "name": "舘 幸希", "kana": "タチ コウキ", "position": "DF", "height": 174, "weight": 70, "apps": 18, "goals": 0, "assists": 1 },
+    { "id": "matsumoto-hiroya", "number": 5, "name": "松本 大弥", "kana": "マツモト ヒロヤ", "position": "MF", "height": 180, "weight": 74, "apps": 15, "goals": 2, "assists": 2 },
+    { "id": "takeda-shohei", "number": 6, "name": "武田 将平", "kana": "タケダ ショウヘイ", "position": "MF", "height": 181, "weight": 76, "apps": 14, "goals": 1, "assists": 1 },
+    { "id": "onose-kosuke", "number": 7, "name": "小野瀬 康介", "kana": "オノセ コウスケ", "position": "MF", "height": 176, "weight": 71, "apps": 17, "goals": 3, "assists": 4 },
+    { "id": "ohno-kazunari", "number": 8, "name": "大野 和成", "kana": "オオノ カズナリ", "position": "DF", "height": 180, "weight": 77, "apps": 14, "goals": 0, "assists": 0 },
+    { "id": "suzuki-akito", "number": 10, "name": "鈴木 章斗", "kana": "スズキ アキト", "position": "FW", "height": 179, "weight": 72, "apps": 18, "goals": 7, "assists": 3 },
+    { "id": "oda-yutaro", "number": 11, "name": "小田 裕太郎", "kana": "オダ ユウタロウ", "position": "FW", "height": 181, "weight": 70, "apps": 15, "goals": 4, "assists": 2 },
+    { "id": "hiraoka-taiyo", "number": 13, "name": "平岡 大陽", "kana": "ヒラオカ タイヨウ", "position": "MF", "height": 172, "weight": 66, "apps": 16, "goals": 3, "assists": 3 },
+    { "id": "nishino-taiyo", "number": 19, "name": "西野 太陽", "kana": "ニシノ タイヨウ", "position": "FW", "height": 180, "weight": 73, "apps": 14, "goals": 4, "assists": 1 }
+  ]
+}

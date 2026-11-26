@@ -1,0 +1,63 @@
+{
+  "id": "2023",
+  "label": "2023",
+  "competition": "J1リーグ",
+  "manager": "山口 智",
+  "note": "J1 15位（8勝10分16敗・勝点34・40得点56失点）。夏に町野修斗が欧州移籍するも、大橋祐紀（13得点）と終盤の粘りでJ1残留。",
+  "summary": {
+    "rank": 15,
+    "played": 34,
+    "won": 8,
+    "drawn": 10,
+    "lost": 16,
+    "gf": 40,
+    "ga": 56,
+    "gd": -16,
+    "points": 34
+  },
+  "standings": [
+    { "rank": 14, "team": "サガン鳥栖", "played": 34, "won": 9, "drawn": 11, "lost": 14, "gd": -4, "points": 38, "is_target": false },
+    { "rank": 15, "team": "湘南ベルマーレ", "played": 34, "won": 8, "drawn": 10, "lost": 16, "gd": -16, "points": 34, "is_target": true },
+    { "rank": 16, "team": "ガンバ大阪", "played": 34, "won": 9, "drawn": 7, "lost": 18, "gd": -23, "points": 34, "is_target": false },
+    { "rank": 17, "team": "柏レイソル", "played": 34, "won": 6, "drawn": 15, "lost": 13, "gd": -16, "points": 33, "is_target": false }
+  ],
+  "matches": [
+    {
+      "id": "2023-r32",
+      "round": "第32節",
+      "kickoff": "2023-11-11T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "名古屋グランパス",
+      "stadium": "レモンガススタジアム平塚",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 2, "opponent_score": 1, "scorers": ["大橋祐紀", "杉岡大暉"] },
+      "lineup": null,
+      "stats": null
+    },
+    {
+      "id": "2023-r1",
+      "round": "第1節",
+      "kickoff": "2023-02-18T15:00:00+09:00",
+      "is_home": false,
+      "opponent": "サガン鳥栖",
+      "stadium": "駅前不動産スタジアム",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 5, "opponent_score": 1, "scorers": ["大橋祐紀(3)", "小野瀬康介", "平岡大陽"] },
+      "lineup": null,
+      "stats": null
+    }
+  ],
+  "players": [
+    { "id": "song-bumkeun", "number": 1, "name": "ソン ボムグン", "kana": "ソン ボムグン", "position": "GK", "height": 194, "weight": 88, "apps": 24, "goals": 0, "assists": 0 },
+    { "id": "sugioka-daiki", "number": 2, "name": "杉岡 大暉", "kana": "スギオカ ダイキ", "position": "DF", "height": 182, "weight": 75, "apps": 33, "goals": 2, "assists": 4 },
+    { "id": "tachi-koki", "number": 4, "name": "舘 幸希", "kana": "タチ コウキ", "position": "DF", "height": 174, "weight": 70, "apps": 28, "goals": 0, "assists": 1 },
+    { "id": "abe-hiroyuki", "number": 7, "name": "阿部 浩之", "kana": "アベ ヒロユキ", "position": "MF", "height": 170, "weight": 69, "apps": 26, "goals": 3, "assists": 4 },
+    { "id": "hiraoka-taiyo", "number": 13, "name": "平岡 大陽", "kana": "ヒラオカ タイヨウ", "position": "MF", "height": 172, "weight": 66, "apps": 29, "goals": 3, "assists": 2 },
+    { "id": "ohashi-yuki", "number": 17, "name": "大橋 祐紀", "kana": "オオハシ ユウキ", "position": "FW", "height": 181, "weight": 75, "apps": 23, "goals": 13, "assists": 2 },
+    { "id": "machino-shuto", "number": 18, "name": "町野 修斗", "kana": "マチノ シュウト", "position": "FW", "height": 185, "weight": 77, "apps": 19, "goals": 9, "assists": 3 },
+    { "id": "suzuki-akito", "number": 29, "name": "鈴木 章斗", "kana": "スズキ アキト", "position": "FW", "height": 179, "weight": 72, "apps": 27, "goals": 3, "assists": 2 },
+    { "id": "onose-kosuke", "number": 88, "name": "小野瀬 康介", "kana": "オノセ コウスケ", "position": "MF", "height": 176, "weight": 71, "apps": 31, "goals": 3, "assists": 4 }
+  ]
+}

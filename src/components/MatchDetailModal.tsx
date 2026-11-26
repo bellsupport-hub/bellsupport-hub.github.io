@@ -7,7 +7,7 @@ import {
   Ticket,
   X,
 } from 'lucide-react';
-import type { Match, Player } from '../types';
+import type { Match, Player, VideoItem } from '../types';
 import {
   formatKickoffDate,
   formatKickoffTime,
@@ -18,8 +18,10 @@ import {
 interface MatchDetailModalProps {
   match: Match | null;
   players: Player[];
+  videos: VideoItem[];
   isAttended: boolean;
   onToggleAttended: (matchId: string) => void;
+  onJumpToPlayer?: (playerId: string) => void;
   onClose: () => void;
 }
 
@@ -51,8 +53,10 @@ function buildFormationRows(formation: string, totalStarters: number) {
 export function MatchDetailModal({
   match,
   players,
+  videos,
   isAttended,
   onToggleAttended,
+  onJumpToPlayer,
   onClose,
 }: MatchDetailModalProps) {
   const playerByNumber = useMemo(() => {
@@ -329,6 +333,57 @@ export function MatchDetailModal({
                     />
                   </div>
                 </div>
+              </div>
+            </section>
+          )}
+
+          {/* Linked Official Videos */}
+          {videos.length > 0 && (
+            <section className="detail-section">
+              <div className="detail-section-header">
+                <h3>関連公式動画（{videos.length}件）</h3>
+              </div>
+              <div className="modal-videos-list">
+                {videos.map((v) => (
+                  <div key={v.id} className="modal-video-card">
+                    <div className="video-embed-frame">
+                      <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${v.youtube_id}?rel=0`}
+                        title={v.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                    <div className="modal-video-meta">
+                      <p className="modal-video-title">{v.title}</p>
+                      <div className="modal-video-links">
+                        {onJumpToPlayer &&
+                          v.player_ids.map((pid) => {
+                            const found = players.find((p) => p.id === pid);
+                            if (!found) return null;
+                            return (
+                              <button
+                                key={pid}
+                                type="button"
+                                className="cross-link-btn is-player"
+                                onClick={() => onJumpToPlayer(pid)}
+                              >
+                                #{found.number} {found.name}
+                              </button>
+                            );
+                          })}
+                        <a
+                          href={`https://www.youtube.com/watch?v=${v.youtube_id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="modal-video-yt-link"
+                        >
+                          YouTube <ExternalLink size={12} />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </section>
           )}

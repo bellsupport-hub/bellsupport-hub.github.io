@@ -1,0 +1,78 @@
+{
+  "id": "2024",
+  "label": "2024",
+  "competition": "J1リーグ",
+  "manager": "山口 智",
+  "note": "J1 15位（12勝9分17敗・勝点45・53得点58失点）。ルキアン・福田翔生・鈴木章斗の3人が2桁得点を記録しJ1残留。",
+  "summary": {
+    "rank": 15,
+    "played": 38,
+    "won": 12,
+    "drawn": 9,
+    "lost": 17,
+    "gf": 53,
+    "ga": 58,
+    "gd": -5,
+    "points": 45
+  },
+  "standings": [
+    { "rank": 14, "team": "京都サンガF.C.", "played": 38, "won": 12, "drawn": 11, "lost": 15, "gd": -12, "points": 47, "is_target": false },
+    { "rank": 15, "team": "湘南ベルマーレ", "played": 38, "won": 12, "drawn": 9, "lost": 17, "gd": -5, "points": 45, "is_target": true },
+    { "rank": 16, "team": "アルビレックス新潟", "played": 38, "won": 10, "drawn": 12, "lost": 16, "gd": -15, "points": 42, "is_target": false },
+    { "rank": 17, "team": "柏レイソル", "played": 38, "won": 9, "drawn": 14, "lost": 15, "gd": -12, "points": 41, "is_target": false }
+  ],
+  "matches": [
+    {
+      "id": "2024-r35",
+      "round": "第35節",
+      "kickoff": "2024-11-03T15:00:00+09:00",
+      "is_home": false,
+      "opponent": "FC東京",
+      "stadium": "味の素スタジアム",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 2, "opponent_score": 0, "scorers": ["鈴木章斗", "福田翔生"] },
+      "lineup": null,
+      "stats": null
+    },
+    {
+      "id": "2024-r33",
+      "round": "第33節",
+      "kickoff": "2024-10-06T15:00:00+09:00",
+      "is_home": true,
+      "opponent": "東京ヴェルディ",
+      "stadium": "レモンガススタジアム平塚",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 2, "opponent_score": 0, "scorers": ["福田翔生", "畑大雅"] },
+      "lineup": null,
+      "stats": null
+    },
+    {
+      "id": "2024-r32",
+      "round": "第32節",
+      "kickoff": "2024-09-28T19:00:00+09:00",
+      "is_home": true,
+      "opponent": "鹿島アントラーズ",
+      "stadium": "レモンガススタジアム平塚",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 3, "opponent_score": 2, "scorers": ["福田翔生", "鈴木章斗", "田中聡"] },
+      "lineup": null,
+      "stats": null
+    }
+  ],
+  "players": [
+    { "id": "song-bumkeun", "number": 1, "name": "ソン ボムグン", "kana": "ソン ボムグン", "position": "GK", "height": 194, "weight": 88, "apps": 26, "goals": 0, "assists": 0 },
+    { "id": "hata-taiga", "number": 3, "name": "畑 大雅", "kana": "ハタ タイガ", "position": "DF", "height": 176, "weight": 70, "apps": 34, "goals": 4, "assists": 6 },
+    { "id": "tachi-koki", "number": 4, "name": "舘 幸希", "kana": "タチ コウキ", "position": "DF", "height": 174, "weight": 70, "apps": 30, "goals": 1, "assists": 1 },
+    { "id": "tanaka-satoshi", "number": 5, "name": "田中 聡", "kana": "タナカ サトシ", "position": "MF", "height": 174, "weight": 70, "apps": 33, "goals": 5, "assists": 3 },
+    { "id": "okamoto-takuya", "number": 6, "name": "岡本 拓也", "kana": "オカモト タクヤ", "position": "DF", "height": 175, "weight": 72, "apps": 24, "goals": 0, "assists": 2 },
+    { "id": "onose-kosuke", "number": 7, "name": "小野瀬 康介", "kana": "オノセ コウスケ", "position": "MF", "height": 176, "weight": 71, "apps": 22, "goals": 2, "assists": 4 },
+    { "id": "ohno-kazunari", "number": 8, "name": "大野 和成", "kana": "オオノ カズナリ", "position": "DF", "height": 180, "weight": 77, "apps": 20, "goals": 0, "assists": 0 },
+    { "id": "lukian", "number": 11, "name": "ルキアン", "kana": "ルキアン", "position": "FW", "height": 183, "weight": 81, "apps": 31, "goals": 11, "assists": 4 },
+    { "id": "hiraoka-taiyo", "number": 13, "name": "平岡 大陽", "kana": "ヒラオカ タイヨウ", "position": "MF", "height": 172, "weight": 66, "apps": 31, "goals": 3, "assists": 3 },
+    { "id": "fukuda-sho", "number": 19, "name": "福田 翔生", "kana": "フクダ ショウ", "position": "FW", "height": 173, "weight": 65, "apps": 34, "goals": 10, "assists": 5 },
+    { "id": "suzuki-akito", "number": 29, "name": "鈴木 章斗", "kana": "スズキ アキト", "position": "FW", "height": 179, "weight": 72, "apps": 34, "goals": 10, "assists": 4 }
+  ]
+}

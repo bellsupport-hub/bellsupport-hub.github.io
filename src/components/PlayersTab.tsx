@@ -1,12 +1,15 @@
 import { useMemo, useState } from 'react';
-import { Search, X } from 'lucide-react';
-import type { Player, PlayerPosition } from '../types';
+import { PlaySquare, Search, X } from 'lucide-react';
+import type { Player, PlayerPosition, VideoItem } from '../types';
 
 type PositionFilter = 'ALL' | PlayerPosition;
 
 interface PlayersTabProps {
   players: Player[];
-  season: string;
+  seasonLabel: string;
+  videos: VideoItem[];
+  highlightedPlayerId: string | null;
+  onViewPlayerVideos: (playerId: string) => void;
 }
 
 const POSITION_OPTIONS: { id: PositionFilter; label: string }[] = [
@@ -17,9 +20,25 @@ const POSITION_OPTIONS: { id: PositionFilter; label: string }[] = [
   { id: 'FW', label: 'FW' },
 ];
 
-export function PlayersTab({ players, season }: PlayersTabProps) {
+export function PlayersTab({
+  players,
+  seasonLabel,
+  videos,
+  highlightedPlayerId,
+  onViewPlayerVideos,
+}: PlayersTabProps) {
   const [posFilter, setPosFilter] = useState<PositionFilter>('ALL');
   const [query, setQuery] = useState('');
+
+  const videoCountByPlayerId = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const v of videos) {
+      for (const pid of v.player_ids) {
+        counts.set(pid, (counts.get(pid) ?? 0) + 1);
+      }
+    }
+    return counts;
+  }, [videos]);
 
   const filteredPlayers = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -41,7 +60,7 @@ export function PlayersTab({ players, season }: PlayersTabProps) {
       <section className="section-block" aria-labelledby="players-heading">
         <div className="section-header">
           <h2 id="players-heading" className="section-title">
-            選手名鑑（{season}）
+            選手名鑑（{seasonLabel}）
           </h2>
           <span className="section-meta num-font">{filteredPlayers.length}名表示</span>
         </div>
@@ -90,45 +109,62 @@ export function PlayersTab({ players, season }: PlayersTabProps) {
         {/* Player Cards Grid */}
         {filteredPlayers.length > 0 ? (
           <div className="players-list">
-            {filteredPlayers.map((player) => (
-              <article key={player.number} className="surface-card player-card">
-                <div className={`player-number-badge pos-${player.position.toLowerCase()}`}>
-                  <span className="player-pos-tag">{player.position}</span>
-                  <strong className="player-num num-font">{player.number}</strong>
-                </div>
+            {filteredPlayers.map((player) => {
+              const videoCount = videoCountByPlayerId.get(player.id) ?? 0;
+              const isHighlighted = highlightedPlayerId === player.id;
+              return (
+                <article
+                  key={`${player.id}-${player.number}`}
+                  className={`surface-card player-card ${isHighlighted ? 'is-highlighted' : ''}`}
+                >
+                  <div className={`player-number-badge pos-${player.position.toLowerCase()}`}>
+                    <span className="player-pos-tag">{player.position}</span>
+                    <strong className="player-num num-font">{player.number}</strong>
+                  </div>
 
-                <div className="player-info">
-                  <div className="player-name-block">
-                    <h3 className="player-name">{player.name}</h3>
-                    {player.kana && <p className="player-kana">{player.kana}</p>}
+                  <div className="player-info">
+                    <div className="player-name-block">
+                      <h3 className="player-name">{player.name}</h3>
+                      {player.kana && <p className="player-kana">{player.kana}</p>}
+                    </div>
+                    {(player.height > 0 || player.weight > 0) && (
+                      <p className="player-physical num-font">
+                        {player.height > 0 ? `${player.height}cm` : '-'} /{' '}
+                        {player.weight > 0 ? `${player.weight}kg` : '-'}
+                      </p>
+                    )}
+                    {videoCount > 0 && (
+                      <button
+                        type="button"
+                        className="player-video-link-btn"
+                        onClick={() => onViewPlayerVideos(player.id)}
+                      >
+                        <PlaySquare size={12} />
+                        <span>関連動画 {videoCount}件</span>
+                      </button>
+                    )}
                   </div>
-                  {(player.height > 0 || player.weight > 0) && (
-                    <p className="player-physical num-font">
-                      {player.height > 0 ? `${player.height}cm` : '-'} /{' '}
-                      {player.weight > 0 ? `${player.weight}kg` : '-'}
-                    </p>
-                  )}
-                </div>
 
-                <div className="player-stats" aria-label="シーズン成績">
-                  <div className="p-stat">
-                    <span className="p-stat-label">出場</span>
-                    <strong className="p-stat-val num-font">{player.apps}</strong>
+                  <div className="player-stats" aria-label="シーズン成績">
+                    <div className="p-stat">
+                      <span className="p-stat-label">出場</span>
+                      <strong className="p-stat-val num-font">{player.apps}</strong>
+                    </div>
+                    <div className="p-stat">
+                      <span className="p-stat-label">得点</span>
+                      <strong className="p-stat-val num-font is-accent">{player.goals}</strong>
+                    </div>
+                    <div className="p-stat">
+                      <span className="p-stat-label">アシスト</span>
+                      <strong className="p-stat-val num-font">{player.assists}</strong>
+                    </div>
                   </div>
-                  <div className="p-stat">
-                    <span className="p-stat-label">得点</span>
-                    <strong className="p-stat-val num-font is-accent">{player.goals}</strong>
-                  </div>
-                  <div className="p-stat">
-                    <span className="p-stat-label">A</span>
-                    <strong className="p-stat-val num-font">{player.assists}</strong>
-                  </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         ) : (
-          <div className="empty-card">条件に一致する選手が見つかりませんでした。</div>
+          <div className="empty-card">条件に一致する選手が見つかりません。</div>
         )}
       </section>
     </div>

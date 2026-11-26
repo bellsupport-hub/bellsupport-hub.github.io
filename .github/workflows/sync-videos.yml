@@ -1,0 +1,56 @@
+name: Sync Official YouTube Videos
+
+on:
+  schedule:
+    # Mon, Thu, Sun at 08:00 JST (Sun, Wed, Sat 23:00 UTC)
+    - cron: '0 23 * * 0,3,6'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-official-videos
+  cancel-in-progress: true
+
+jobs:
+  sync-videos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Sync & auto-tag official YouTube RSS feeds
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+        run: |
+          node scripts/sync-youtube-videos.mjs
+          npm run validate:data
+
+      - name: Open review PR for new videos (human-editable)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet public/api/v1/videos.json; then
+            echo "No new videos to propose."
+            exit 0
+          fi
+          BRANCH="chore/sync-videos-$(date -u +%Y%m%d-%H%M)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add public/api/v1/videos.json
+          git commit -m "chore(videos): add newly tagged official YouTube videos"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --base "${{ github.ref_name }}" \
+            --head "$BRANCH" \
+            --title "chore(videos): 新着公式動画の自動仕分け・タグ付け提案" \
+            --body "YouTube公式RSSフィードから新着の湘南ベルマーレ関連動画を自動仕分け・タグ付けしました。必要に応じてタグや match_id / player_ids を修正（manual_override: true にすると以後の自動上書きを防止）してからマージしてください。"

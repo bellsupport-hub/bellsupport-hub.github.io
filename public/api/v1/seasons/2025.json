@@ -1,0 +1,116 @@
+{
+  "id": "2025",
+  "label": "2025",
+  "competition": "J1リーグ",
+  "manager": "山口 智",
+  "note": "J1 19位（8勝8分22敗・勝点32・36得点63失点）。鈴木章斗が10番として攻撃を牽引するも惜しくもJ2降格。",
+  "summary": {
+    "rank": 19,
+    "played": 38,
+    "won": 8,
+    "drawn": 8,
+    "lost": 22,
+    "gf": 36,
+    "ga": 63,
+    "gd": -27,
+    "points": 32
+  },
+  "standings": [
+    { "rank": 17, "team": "東京ヴェルディ", "played": 38, "won": 11, "drawn": 10, "lost": 17, "gd": -14, "points": 43, "is_target": false },
+    { "rank": 18, "team": "横浜FC", "played": 38, "won": 9, "drawn": 8, "lost": 21, "gd": -22, "points": 35, "is_target": false },
+    { "rank": 19, "team": "湘南ベルマーレ", "played": 38, "won": 8, "drawn": 8, "lost": 22, "gd": -27, "points": 32, "is_target": true },
+    { "rank": 20, "team": "アルビレックス新潟", "played": 38, "won": 7, "drawn": 9, "lost": 22, "gd": -31, "points": 30, "is_target": false }
+  ],
+  "matches": [
+    {
+      "id": "2025-r38",
+      "round": "第38節",
+      "kickoff": "2025-12-06T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "サンフレッチェ広島",
+      "stadium": "エディオンピースウイング広島",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 1, "opponent_score": 2, "scorers": ["鈴木章斗"] },
+      "lineup": null,
+      "stats": null
+    },
+    {
+      "id": "2025-r36",
+      "round": "第36節",
+      "kickoff": "2025-11-08T15:00:00+09:00",
+      "is_home": true,
+      "opponent": "アルビレックス新潟",
+      "stadium": "レモンガススタジアム平塚",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 5, "opponent_score": 2, "scorers": ["奥野耕平", "鈴木章斗", "小野瀬康介"] },
+      "lineup": null,
+      "stats": null
+    },
+    {
+      "id": "2025-r33",
+      "round": "第33節",
+      "kickoff": "2025-10-03T19:00:00+09:00",
+      "is_home": true,
+      "opponent": "東京ヴェルディ",
+      "stadium": "レモンガススタジアム平塚",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 0, "opponent_score": 1, "scorers": [] },
+      "lineup": null,
+      "stats": null
+    },
+    {
+      "id": "2025-r31",
+      "round": "第31節",
+      "kickoff": "2025-09-23T19:00:00+09:00",
+      "is_home": true,
+      "opponent": "川崎フロンターレ",
+      "stadium": "レモンガススタジアム平塚",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 1, "opponent_score": 2, "scorers": ["平岡大陽"] },
+      "lineup": null,
+      "stats": null
+    },
+    {
+      "id": "2025-r28",
+      "round": "第28節",
+      "kickoff": "2025-08-31T19:00:00+09:00",
+      "is_home": true,
+      "opponent": "ガンバ大阪",
+      "stadium": "レモンガススタジアム平塚",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 4, "opponent_score": 5, "scorers": ["鈴木章斗", "小田裕太郎"] },
+      "lineup": null,
+      "stats": null
+    },
+    {
+      "id": "2025-r17",
+      "round": "第17節",
+      "kickoff": "2025-05-17T15:00:00+09:00",
+      "is_home": true,
+      "opponent": "横浜FC",
+      "stadium": "レモンガススタジアム平塚",
+      "status": "finished",
+      "ticket_url": null,
+      "result": { "bellmare_score": 0, "opponent_score": 1, "scorers": [] },
+      "lineup": null,
+      "stats": null
+    }
+  ],
+  "players": [
+    { "id": "pope-william", "number": 1, "name": "ポープ ウィリアム", "kana": "ポープ ウィリアム", "position": "GK", "height": 192, "weight": 88, "apps": 28, "goals": 0, "assists": 0 },
+    { "id": "tachi-koki", "number": 4, "name": "舘 幸希", "kana": "タチ コウキ", "position": "DF", "height": 174, "weight": 70, "apps": 34, "goals": 1, "assists": 1 },
+    { "id": "ze-ricardo", "number": 6, "name": "ゼ ヒカルド", "kana": "ゼ ヒカルド", "position": "MF", "height": 176, "weight": 72, "apps": 26, "goals": 1, "assists": 2 },
+    { "id": "onose-kosuke", "number": 7, "name": "小野瀬 康介", "kana": "オノセ コウスケ", "position": "MF", "height": 176, "weight": 71, "apps": 35, "goals": 4, "assists": 5 },
+    { "id": "ohno-kazunari", "number": 8, "name": "大野 和成", "kana": "オオノ カズナリ", "position": "DF", "height": 180, "weight": 77, "apps": 29, "goals": 1, "assists": 0 },
+    { "id": "oda-yutaro", "number": 9, "name": "小田 裕太郎", "kana": "オダ ユウタロウ", "position": "FW", "height": 181, "weight": 70, "apps": 30, "goals": 5, "assists": 3 },
+    { "id": "suzuki-akito", "number": 10, "name": "鈴木 章斗", "kana": "スズキ アキト", "position": "FW", "height": 179, "weight": 72, "apps": 37, "goals": 11, "assists": 4 },
+    { "id": "hiraoka-taiyo", "number": 13, "name": "平岡 大陽", "kana": "ヒラオカ タイヨウ", "position": "MF", "height": 172, "weight": 66, "apps": 33, "goals": 4, "assists": 4 },
+    { "id": "barada-akimi", "number": 14, "name": "茨田 陽生", "kana": "バラダ アキミ", "position": "MF", "height": 173, "weight": 69, "apps": 27, "goals": 1, "assists": 3 },
+    { "id": "okuno-kohei", "number": 15, "name": "奥野 耕平", "kana": "オクノ コウヘイ", "position": "MF", "height": 174, "weight": 69, "apps": 31, "goals": 2, "assists": 2 }
+  ]
+}

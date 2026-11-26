@@ -1,9 +1,11 @@
 import { RefreshCw, WifiOff } from 'lucide-react';
-import type { DataSource } from '../types';
+import type { DataSource, SeasonArchive, SeasonId } from '../types';
 import { formatUpdatedAt } from '../utils/format';
 
 interface HeaderProps {
-  season: string;
+  seasons: SeasonArchive[];
+  selectedSeasonId: SeasonId;
+  onSelectSeason: (seasonId: SeasonId) => void;
   updatedAt: string;
   source: DataSource;
   isLoading: boolean;
@@ -12,7 +14,9 @@ interface HeaderProps {
 }
 
 export function Header({
-  season,
+  seasons,
+  selectedSeasonId,
+  onSelectSeason,
   updatedAt,
   source,
   isLoading,
@@ -37,7 +41,6 @@ export function Header({
           <div className="brand-text">
             <div className="brand-title-row">
               <h1 className="brand-title">BellSupport Hub</h1>
-              <span className="season-chip num-font">{season}</span>
             </div>
             <p className="unofficial-label">※非公式サポーターアプリ</p>
           </div>
@@ -58,6 +61,26 @@ export function Header({
           )}
           <span className="refresh-text">{isLoading ? '更新中' : sourceLabel}</span>
         </button>
+      </div>
+
+      {/* 5-Season Selector Strip */}
+      <div className="season-strip" role="tablist" aria-label="シーズン切替">
+        {seasons.map((s) => {
+          const isActive = s.id === selectedSeasonId;
+          return (
+            <button
+              key={s.id}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              className={`season-strip-pill num-font ${isActive ? 'is-active' : ''}`}
+              onClick={() => onSelectSeason(s.id)}
+            >
+              <span>{s.label}</span>
+              <span className="season-strip-rank">{s.summary.rank}位</span>
+            </button>
+          );
+        })}
       </div>
     </header>
   );
