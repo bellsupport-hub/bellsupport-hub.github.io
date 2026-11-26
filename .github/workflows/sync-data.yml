@@ -2,11 +2,15 @@ name: Sync J.League Data
 
 on:
   schedule:
-    # Daily at 00:00 JST (15:00 UTC)
-    - cron: '0 15 * * *'
-    # Matchdays (Wed/Sat/Sun) at 22:00 JST (13:00 UTC)
-    - cron: '0 13 * * 0,3,6'
+    # Sun, Mon, Thu at 07:00 JST (Sat, Sun, Wed 22:00 UTC) — after matchdays with time-lag tolerance
+    - cron: '0 22 * * 0,3,6'
   workflow_dispatch:
+    inputs:
+      sync_players:
+        description: '選手名鑑（players.json）も強制更新する'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -27,13 +31,14 @@ jobs:
         with:
           node-version: 22
 
-      - name: Sync data from API-Football
+      - name: Sync data via Gemini API (Google Search Grounding)
         env:
-          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
-          API_FOOTBALL_TEAM_ID: ${{ vars.API_FOOTBALL_TEAM_ID }}
-          API_FOOTBALL_LEAGUE_ID: ${{ vars.API_FOOTBALL_LEAGUE_ID }}
-          API_FOOTBALL_SEASON: ${{ vars.API_FOOTBALL_SEASON }}
-        run: node scripts/sync-api-football.mjs
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          SEASON_LABEL: ${{ vars.SEASON_LABEL }}
+          COMPETITION_NAME: ${{ vars.COMPETITION_NAME }}
+          SYNC_PLAYERS: ${{ inputs.sync_players }}
+        run: node scripts/sync-gemini-search.mjs
 
       - name: Commit updated JSON files
         run: |
@@ -44,5 +49,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add public/api/v1/meta.json public/api/v1/standings.json public/api/v1/matches.json public/api/v1/players.json
-          git commit -m "chore(data): sync latest J.League data"
+          git commit -m "chore(data): sync latest J.League data via Gemini Search Grounding"
           git push

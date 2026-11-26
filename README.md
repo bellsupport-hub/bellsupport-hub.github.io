@@ -28,19 +28,19 @@ npm run dev
 npm run build
 ```
 
-## 実データ自動連携（API-Football + GitHub Actions）
+## 実データ自動連携（Gemini API + Google Search Grounding + GitHub Actions）
 
-[scripts/sync-api-football.mjs](scripts/sync-api-football.mjs) と [.github/workflows/sync-data.yml](.github/workflows/sync-data.yml) により、API-Football（無料枠：1日100リクエスト）から湘南ベルマーレの順位表・試合日程＆結果・フォーメーション・スタッツ・選手名鑑を取得し、`public/api/v1/*.json` を自動更新して GitHub Pages に反映します。
+[scripts/sync-gemini-search.mjs](scripts/sync-gemini-search.mjs) と [.github/workflows/sync-data.yml](.github/workflows/sync-data.yml) により、Google 公式の Gemini API（Google Search Grounding 有効）を使って湘南ベルマーレの順位表・試合日程＆結果・選手名鑑を取得し、数値検算などの自動バリデーションを通したうえで `public/api/v1/*.json` を更新・GitHub Pages に反映します。
 
 ### 設定手順（3ステップ）
 
-1. [API-Football Dashboard](https://dashboard.api-football.com/) で無料アカウントを作成し、APIキーを取得します。
+1. [Google AI Studio](https://aistudio.google.com/apikey) で無料 API キーを取得します。
 2. このリポジトリの **Settings → Secrets and variables → Actions → New repository secret** で以下を登録します。
-   - Name: `API_FOOTBALL_KEY`
-   - Secret: 取得したAPIキー
-3. **Actions → Sync J.League Data → Run workflow** を実行すると、即座に実データが取得され、自動的に GitHub Pages へ再デプロイされます（以降は毎日 0:00 JST および水・土・日の 22:00 JST に自動実行）。
+   - Name: `GEMINI_API_KEY`
+   - Secret: 取得した Gemini API キー
+3. **Actions → Sync J.League Data → Run workflow** を実行すると、実データが取得され自動的に GitHub Pages へ再デプロイされます（以降は試合翌朝の月・木・日 07:00 JST に自動実行）。
 
 ## 公開URL（GitHub Pages）
 
-- アプリ本体：`https://kei333naka.github.io/BellSupport-Hub/`
-- JSON配信例：`https://kei333naka.github.io/BellSupport-Hub/api/v1/meta.json`
+- アプリ本体：`https://bellsupport-hub.github.io/`
+- JSON配信例：`https://bellsupport-hub.github.io/api/v1/meta.json`
