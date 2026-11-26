@@ -5,7 +5,7 @@
  *
  * Environment variables:
  *   GEMINI_API_KEY   (required) API key from https://aistudio.google.com/apikey
- *   GEMINI_MODEL     (optional) Default: 'gemini-3.8-flash'
+ *   GEMINI_MODEL     (optional) Default: 'gemini-3.5-flash-lite'
  *   SEASON_LABEL     (optional) Default: auto-computed (e.g., '2026-27')
  *   COMPETITION_NAME (optional) Default: 'J2リーグ'
  *   SYNC_PLAYERS     (optional) 'true' to force refreshing players.json
@@ -20,7 +20,7 @@ const API_OUT_DIR = path.resolve(__dirname, '../public/api/v1');
 const TICKET_URL = 'https://www.jleague-ticket.jp/club/sb/';
 
 const API_KEY = process.env.GEMINI_API_KEY?.trim();
-const MODEL = process.env.GEMINI_MODEL?.trim() || 'gemini-3.8-flash';
+const MODEL = process.env.GEMINI_MODEL?.trim() || 'gemini-3.5-flash-lite';
 const COMPETITION_NAME = process.env.COMPETITION_NAME?.trim() || 'J2リーグ';
 const FORCE_SYNC_PLAYERS = String(process.env.SYNC_PLAYERS ?? '').toLowerCase() === 'true';
 
