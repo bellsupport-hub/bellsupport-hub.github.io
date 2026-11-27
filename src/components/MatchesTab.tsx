@@ -14,6 +14,7 @@ import {
   getMatchOutcome,
   getOutcomeLabel,
 } from '../utils/format';
+import { getTeamFullName } from '../utils/clubMeta';
 import { TeamFlag, VenuePin } from './TeamFlag';
 
 type MatchFilter = 'all' | 'scheduled' | 'finished' | 'stadium' | 'online' | 'watched';
@@ -198,7 +199,9 @@ export function MatchesTab({
                       <div className="match-opponent-row">
                         <span className="vs-prefix">VS</span>
                         <TeamFlag team={match.opponent} size={15} />
-                        <strong className="match-opponent-name">{match.opponent}</strong>
+                        <strong className="match-opponent-name">
+                          {getTeamFullName(match.opponent)}
+                        </strong>
                         {outcome && (
                           <span className={`outcome-tag outcome-${outcome.toLowerCase()}`}>
                             {getOutcomeLabel(outcome)}

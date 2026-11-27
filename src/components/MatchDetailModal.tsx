@@ -15,6 +15,7 @@ import {
   getMatchOutcome,
   getOutcomeLabel,
 } from '../utils/format';
+import { getTeamFullName } from '../utils/clubMeta';
 import { TeamFlag, VenuePin } from './TeamFlag';
 
 interface MatchDetailModalProps {
@@ -119,7 +120,7 @@ export function MatchDetailModal({
               <span>湘南ベルマーレ</span>
               <span className="vs-prefix">VS</span>
               <TeamFlag team={match.opponent} size={16} />
-              <span>{match.opponent}</span>
+              <span>{getTeamFullName(match.opponent)}</span>
             </h2>
           </div>
           <button

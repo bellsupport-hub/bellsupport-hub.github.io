@@ -16,6 +16,7 @@ import {
   getMatchOutcome,
   getOutcomeLabel,
 } from '../utils/format';
+import { getTeamFullName } from '../utils/clubMeta';
 import { TeamFlag, VenuePin } from './TeamFlag';
 
 interface HomeTabProps {
@@ -107,7 +108,7 @@ export function HomeTab({
                 <span className="team-label">{nextMatch.is_home ? 'AWAY' : 'HOME'}</span>
                 <strong className="team-name team-with-flag team-with-flag-right">
                   <TeamFlag team={nextMatch.opponent} size={16} />
-                  <span>{nextMatch.opponent}</span>
+                  <span>{getTeamFullName(nextMatch.opponent)}</span>
                 </strong>
               </div>
             </div>
@@ -175,7 +176,7 @@ export function HomeTab({
                       type="button"
                       className={`form-badge-btn outcome-${outcome.toLowerCase()}`}
                       onClick={() => onSelectMatch(match)}
-                      title={`${match.round} VS ${match.opponent} (${getOutcomeLabel(outcome)})`}
+                      title={`${match.round} VS ${getTeamFullName(match.opponent)} (${getOutcomeLabel(outcome)})`}
                     >
                       <span className="form-letter num-font">{outcome}</span>
                       <span className="form-opponent">{match.opponent}</span>
@@ -200,7 +201,7 @@ export function HomeTab({
                     <span className="team-with-flag">
                       <span>{finishedMatches[0].round} VS</span>
                       <TeamFlag team={finishedMatches[0].opponent} size={14} />
-                      <span>{finishedMatches[0].opponent}</span>
+                      <span>{getTeamFullName(finishedMatches[0].opponent)}</span>
                     </span>
                   </div>
                   <div className="latest-result-score-wrap">

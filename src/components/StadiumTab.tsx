@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { ExternalLink, Map as MapIcon, MapPin, Search, Ticket, X } from 'lucide-react';
 import type { Match, SeasonArchive, StadiumGuideData, WatchStatus } from '../types';
-import { getGoogleMapsUrl, getStadiumInfo } from '../utils/clubMeta';
+import { getGoogleMapsUrl, getStadiumInfo, getTeamFullName } from '../utils/clubMeta';
 import { formatKickoffDate, formatKickoffTime, getMatchOutcome } from '../utils/format';
 import { TeamFlag, VenuePin } from './TeamFlag';
 
@@ -269,7 +269,9 @@ export function StadiumTab({
                       <div className="match-opponent-row">
                         <span className="vs-prefix">VS</span>
                         <TeamFlag team={m.opponent} size={16} />
-                        <strong className="match-opponent-name">{m.opponent}</strong>
+                        <strong className="match-opponent-name">
+                          {getTeamFullName(m.opponent)}
+                        </strong>
                       </div>
                       {m.ticket_url && (
                         <a
