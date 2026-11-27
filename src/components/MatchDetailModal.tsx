@@ -1,13 +1,14 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   CheckCircle2,
   Circle,
   ExternalLink,
   MonitorPlay,
+  Play,
   Ticket,
   X,
 } from 'lucide-react';
-import type { Match, Player, VideoItem, WatchMode, WatchStatus } from '../types';
+import type { Match, Player, PlayerPosition, VideoItem, WatchMode, WatchStatus } from '../types';
 import {
   formatKickoffDate,
   formatKickoffTime,
@@ -26,30 +27,12 @@ interface MatchDetailModalProps {
   onClose: () => void;
 }
 
-function buildFormationRows(formation: string, totalStarters: number) {
-  const parts = formation
-    .split('-')
-    .map((n) => Number.parseInt(n.trim(), 10))
-    .filter((n) => Number.isFinite(n) && n > 0);
-
-  const outfieldSum = parts.reduce((acc, n) => acc + n, 0);
-  const effectiveParts =
-    parts.length >= 2 && outfieldSum + 1 === totalStarters ? parts : [3, 1, 4, 2];
-
-  // Build from GK (index 0) upward, then reverse so FW is at top of pitch
-  const rows: { label: string; indices: number[] }[] = [{ label: 'GK', indices: [0] }];
-  let cursor = 1;
-  effectiveParts.forEach((count, rowIdx) => {
-    const indices: number[] = [];
-    for (let i = 0; i < count && cursor < totalStarters; i += 1) {
-      indices.push(cursor);
-      cursor += 1;
-    }
-    rows.push({ label: `LINE-${rowIdx + 1}`, indices });
-  });
-
-  return rows.reverse();
-}
+const POSITION_RANK: Record<PlayerPosition, number> = {
+  GK: 0,
+  DF: 1,
+  MF: 2,
+  FW: 3,
+};
 
 export function MatchDetailModal({
   match,
@@ -60,6 +43,8 @@ export function MatchDetailModal({
   onJumpToPlayer,
   onClose,
 }: MatchDetailModalProps) {
+  const [playingVideoIds, setPlayingVideoIds] = useState<Set<string>>(() => new Set());
+
   const playerByNumber = useMemo(() => {
     const map = new Map<number, Player>();
     for (const p of players) {
@@ -67,6 +52,10 @@ export function MatchDetailModal({
     }
     return map;
   }, [players]);
+
+  useEffect(() => {
+    setPlayingVideoIds(new Set());
+  }, [match?.id]);
 
   useEffect(() => {
     if (!match) return;
@@ -77,6 +66,18 @@ export function MatchDetailModal({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [match, onClose]);
 
+  const sortedStarters = useMemo(() => {
+    if (!match?.lineup) return [];
+    return [...match.lineup.starters].sort((a, b) => {
+      const pa = playerByNumber.get(a);
+      const pb = playerByNumber.get(b);
+      const ra = pa ? POSITION_RANK[pa.position] : 9;
+      const rb = pb ? POSITION_RANK[pb.position] : 9;
+      if (ra !== rb) return ra - rb;
+      return a - b;
+    });
+  }, [match, playerByNumber]);
+
   if (!match) return null;
 
   const outcome = getMatchOutcome(match);
@@ -85,6 +86,14 @@ export function MatchDetailModal({
     const found = playerByNumber.get(num);
     if (!found) return `#${num}`;
     return found.name.replace(/（.*?）/g, '').trim();
+  };
+
+  const handlePlayVideo = (videoId: string) => {
+    setPlayingVideoIds((prev) => {
+      const next = new Set(prev);
+      next.add(videoId);
+      return next;
+    });
   };
 
   return (
@@ -214,67 +223,63 @@ export function MatchDetailModal({
             )}
           </div>
 
-          {/* 3-1-4-2 Formation Pitch */}
+          {/* Verified Lineup List (Starters & Substitutes) */}
           {match.lineup ? (
             <section className="detail-section">
               <div className="detail-section-header">
-                <h3>フォーメーション</h3>
-                <span className="formation-badge num-font">{match.lineup.formation}</span>
+                <h3>先発メンバー（{sortedStarters.length}名）</h3>
+                <span className="section-meta">タップで選手名鑑へ</span>
               </div>
 
-              <div className="pitch-container" aria-label={`フォーメーション ${match.lineup.formation}`}>
-                <svg
-                  className="pitch-markings"
-                  viewBox="0 0 320 420"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
-                  <rect x="8" y="8" width="304" height="404" rx="6" fill="none" stroke="rgba(255,255,255,0.28)" strokeWidth="2" />
-                  <line x1="8" y1="210" x2="312" y2="210" stroke="rgba(255,255,255,0.28)" strokeWidth="2" />
-                  <circle cx="160" cy="210" r="42" fill="none" stroke="rgba(255,255,255,0.28)" strokeWidth="2" />
-                  <circle cx="160" cy="210" r="3" fill="rgba(255,255,255,0.45)" />
-                  <rect x="75" y="8" width="170" height="58" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-                  <rect x="115" y="8" width="90" height="22" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-                  <rect x="75" y="354" width="170" height="58" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-                  <rect x="115" y="390" width="90" height="22" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-                </svg>
-
-                <div className="pitch-rows">
-                  {buildFormationRows(
-                    match.lineup.formation,
-                    match.lineup.starters.length
-                  ).map((row) => (
-                    <div key={row.label} className={`pitch-row pitch-row-${row.indices.length}`}>
-                      {row.indices.map((idx) => {
-                        const num = match.lineup?.starters[idx];
-                        if (num === undefined) return null;
-                        const isGk = row.label === 'GK';
-                        return (
-                          <div key={`${row.label}-${num}`} className="pitch-player">
-                            <span
-                              className={`pitch-dot num-font ${isGk ? 'is-gk' : ''}`}
-                            >
-                              {num}
-                            </span>
-                            <span className="pitch-name">{getShortName(num)}</span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ))}
-                </div>
+              <div className="lineup-grid">
+                {sortedStarters.map((num) => {
+                  const p = playerByNumber.get(num);
+                  const pos = p?.position ?? '';
+                  return (
+                    <button
+                      key={`starter-${num}`}
+                      type="button"
+                      className="lineup-player-chip"
+                      disabled={!p || !onJumpToPlayer}
+                      onClick={() => {
+                        if (p && onJumpToPlayer) onJumpToPlayer(p.id);
+                      }}
+                    >
+                      {pos && (
+                        <span className={`lineup-pos-tag pos-${pos.toLowerCase()}`}>
+                          {pos}
+                        </span>
+                      )}
+                      <strong className="lineup-num num-font">#{num}</strong>
+                      <span className="lineup-name">{getShortName(num)}</span>
+                    </button>
+                  );
+                })}
               </div>
 
               {match.lineup.substitutes.length > 0 && (
                 <div className="subs-box">
-                  <span className="subs-label">控えメンバー</span>
+                  <span className="subs-label">
+                    途中出場（{match.lineup.substitutes.length}名）
+                  </span>
                   <div className="subs-chips">
-                    {match.lineup.substitutes.map((num) => (
-                      <span key={num} className="sub-chip">
-                        <strong className="num-font">#{num}</strong>
-                        <span>{getShortName(num)}</span>
-                      </span>
-                    ))}
+                    {match.lineup.substitutes.map((num) => {
+                      const p = playerByNumber.get(num);
+                      return (
+                        <button
+                          key={`sub-${num}`}
+                          type="button"
+                          className="sub-chip sub-chip-btn"
+                          disabled={!p || !onJumpToPlayer}
+                          onClick={() => {
+                            if (p && onJumpToPlayer) onJumpToPlayer(p.id);
+                          }}
+                        >
+                          <strong className="num-font">#{num}</strong>
+                          <span>{getShortName(num)}</span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -282,7 +287,7 @@ export function MatchDetailModal({
           ) : (
             <section className="detail-section">
               <div className="detail-placeholder">
-                スターティングメンバー・フォーメーションは試合当日に公開されます。
+                出場メンバーは試合結果の反映後に表示されます。
               </div>
             </section>
           )}
@@ -356,53 +361,76 @@ export function MatchDetailModal({
             </section>
           )}
 
-          {/* Linked Official Videos */}
+          {/* Linked Official Videos (with YouTube Thumbnails) */}
           {videos.length > 0 && (
             <section className="detail-section">
               <div className="detail-section-header">
                 <h3>関連公式動画（{videos.length}件）</h3>
               </div>
               <div className="modal-videos-list">
-                {videos.map((v) => (
-                  <div key={v.id} className="modal-video-card">
-                    <div className="video-embed-frame">
-                      <iframe
-                        src={`https://www.youtube-nocookie.com/embed/${v.youtube_id}?rel=0`}
-                        title={v.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
-                    <div className="modal-video-meta">
-                      <p className="modal-video-title">{v.title}</p>
-                      <div className="modal-video-links">
-                        {onJumpToPlayer &&
-                          v.player_ids.map((pid) => {
-                            const found = players.find((p) => p.id === pid);
-                            if (!found) return null;
-                            return (
+                {videos.map((v) => {
+                  const isPlaying = playingVideoIds.has(v.id);
+                  return (
+                    <div key={v.id} className="modal-video-card">
+                      <div className="video-embed-frame">
+                        {isPlaying ? (
+                          <iframe
+                            src={`https://www.youtube-nocookie.com/embed/${v.youtube_id}?autoplay=1&rel=0`}
+                            title={v.title}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        ) : (
+                          <div className="video-poster has-thumb">
+                            <img
+                              src={`https://i.ytimg.com/vi/${v.youtube_id}/hqdefault.jpg`}
+                              alt={v.title}
+                              loading="lazy"
+                              className="video-poster-thumb"
+                            />
+                            <div className="video-poster-overlay">
                               <button
-                                key={pid}
                                 type="button"
-                                className="cross-link-btn is-player"
-                                onClick={() => onJumpToPlayer(pid)}
+                                className="video-play-btn"
+                                onClick={() => handlePlayVideo(v.id)}
                               >
-                                #{found.number} {found.name}
+                                <Play size={14} /> 埋め込み再生
                               </button>
-                            );
-                          })}
-                        <a
-                          href={`https://www.youtube.com/watch?v=${v.youtube_id}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="modal-video-yt-link"
-                        >
-                          YouTube <ExternalLink size={12} />
-                        </a>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      <div className="modal-video-meta">
+                        <p className="modal-video-title">{v.title}</p>
+                        <div className="modal-video-links">
+                          {onJumpToPlayer &&
+                            v.player_ids.map((pid) => {
+                              const found = players.find((p) => p.id === pid);
+                              if (!found) return null;
+                              return (
+                                <button
+                                  key={pid}
+                                  type="button"
+                                  className="cross-link-btn is-player"
+                                  onClick={() => onJumpToPlayer(pid)}
+                                >
+                                  #{found.number} {found.name}
+                                </button>
+                              );
+                            })}
+                          <a
+                            href={`https://www.youtube.com/watch?v=${v.youtube_id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="modal-video-yt-link"
+                          >
+                            YouTube <ExternalLink size={12} />
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </section>
           )}

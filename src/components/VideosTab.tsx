@@ -222,27 +222,35 @@ export function VideosTab({
                         allowFullScreen
                       />
                     ) : (
-                      <div className="video-poster">
-                        <span className="video-poster-channel">
-                          {v.channel_name} · {v.published_at}
-                        </span>
-                        <p className="video-poster-title">{v.title}</p>
-                        <div className="video-poster-actions">
-                          <button
-                            type="button"
-                            className="video-play-btn"
-                            onClick={() => handlePlay(v.id)}
-                          >
-                            <Play size={14} /> 埋め込み再生
-                          </button>
-                          <a
-                            href={`https://www.youtube.com/watch?v=${v.youtube_id}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="video-yt-link"
-                          >
-                            YouTube <ExternalLink size={13} />
-                          </a>
+                      <div className="video-poster has-thumb">
+                        <img
+                          src={`https://i.ytimg.com/vi/${v.youtube_id}/hqdefault.jpg`}
+                          alt={v.title}
+                          loading="lazy"
+                          className="video-poster-thumb"
+                        />
+                        <div className="video-poster-overlay">
+                          <span className="video-poster-channel">
+                            {v.channel_name} · {v.published_at}
+                          </span>
+                          <p className="video-poster-title">{v.title}</p>
+                          <div className="video-poster-actions">
+                            <button
+                              type="button"
+                              className="video-play-btn"
+                              onClick={() => handlePlay(v.id)}
+                            >
+                              <Play size={14} /> 埋め込み再生
+                            </button>
+                            <a
+                              href={`https://www.youtube.com/watch?v=${v.youtube_id}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="video-yt-link"
+                            >
+                              YouTube <ExternalLink size={13} />
+                            </a>
+                          </div>
                         </div>
                       </div>
                     )}
