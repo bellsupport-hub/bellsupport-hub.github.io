@@ -11,7 +11,7 @@
       "published_at": "2026-11-25",
       "tags": ["ハイライト", "勝利試合", "ホーム"],
       "match_id": "2026-27-r19",
-      "player_ids": ["kozuki-soichiro", "pope-william"],
+      "player_ids": ["kozuki-soichiro", "sanada-kota"],
       "manual_override": true
     },
     {
@@ -22,9 +22,9 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2026-27",
       "published_at": "2026-11-22",
-      "tags": ["ハイライト", "アウェイ"],
+      "tags": ["ハイライト", "勝利試合", "アウェイ"],
       "match_id": "2026-27-r18",
-      "player_ids": ["suzuki-akito"],
+      "player_ids": ["yamada-hiroto", "nishino-taiyo"],
       "manual_override": true
     },
     {
@@ -37,7 +37,7 @@
       "published_at": "2026-11-14",
       "tags": ["ハイライト", "勝利試合", "ホーム", "ダービー"],
       "match_id": "2026-27-r17",
-      "player_ids": ["nishino-taiyo", "yamada-hiroto"],
+      "player_ids": ["nishino-taiyo", "yamada-hiroto", "tamura-sohki"],
       "manual_override": true
     },
     {
@@ -50,7 +50,7 @@
       "published_at": "2026-11-08",
       "tags": ["ハイライト", "アウェイ"],
       "match_id": "2026-27-r16",
-      "player_ids": ["oda-yutaro"],
+      "player_ids": [],
       "manual_override": true
     },
     {
@@ -61,9 +61,9 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2026-27",
       "published_at": "2026-11-03",
-      "tags": ["ハイライト", "勝利試合", "ホーム"],
+      "tags": ["ハイライト", "ホーム"],
       "match_id": "2026-27-r15",
-      "player_ids": ["suzuki-akito", "onose-kosuke"],
+      "player_ids": [],
       "manual_override": true
     },
     {
@@ -74,9 +74,9 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2026-27",
       "published_at": "2026-10-31",
-      "tags": ["ハイライト", "勝利試合", "アウェイ"],
+      "tags": ["ハイライト", "アウェイ"],
       "match_id": "2026-27-r14",
-      "player_ids": ["kozuki-soichiro"],
+      "player_ids": [],
       "manual_override": true
     },
     {
@@ -89,7 +89,7 @@
       "published_at": "2026-10-25",
       "tags": ["ハイライト", "勝利試合", "ホーム"],
       "match_id": "2026-27-r13",
-      "player_ids": ["nishino-taiyo", "hiraoka-taiyo"],
+      "player_ids": [],
       "manual_override": true
     },
     {
@@ -102,7 +102,7 @@
       "published_at": "2026-10-03",
       "tags": ["ハイライト", "アウェイ"],
       "match_id": "2026-27-r9",
-      "player_ids": ["suzuki-akito"],
+      "player_ids": [],
       "manual_override": true
     },
     {
@@ -115,7 +115,7 @@
       "published_at": "2026-07-12",
       "tags": ["新体制・イベント", "密着・INSIDE"],
       "match_id": null,
-      "player_ids": ["suzuki-akito", "tachi-koki", "ohno-kazunari"],
+      "player_ids": ["tachi-koki", "ohno-kazunari", "onose-kosuke"],
       "manual_override": true
     },
     {
