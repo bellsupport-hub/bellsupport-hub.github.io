@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ExternalLink, Map, MapPin, Search, Ticket, X } from 'lucide-react';
+import { ExternalLink, Map as MapIcon, MapPin, Search, Ticket, X } from 'lucide-react';
 import type { Match, SeasonArchive, StadiumGuideData, WatchStatus } from '../types';
 import { getGoogleMapsUrl, getStadiumInfo } from '../utils/clubMeta';
 import { formatKickoffDate, formatKickoffTime, getMatchOutcome } from '../utils/format';
@@ -161,7 +161,7 @@ export function StadiumTab({
           className={`segment-btn ${subTab === 'venues' ? 'is-active' : ''}`}
           onClick={() => setSubTab('venues')}
         >
-          <Map size={15} />
+          <MapIcon size={15} />
           <span>全会場 ({venueDirectory.length})</span>
         </button>
         <button
