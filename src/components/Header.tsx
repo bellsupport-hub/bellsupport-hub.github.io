@@ -1,4 +1,4 @@
-import { Mail, RefreshCw, WifiOff } from 'lucide-react';
+import { ExternalLink, Mail, RefreshCw, WifiOff } from 'lucide-react';
 import type { DataSource, SeasonArchive, SeasonId } from '../types';
 import { formatUpdatedAt } from '../utils/format';
 
@@ -44,7 +44,18 @@ export function Header({
             <div className="brand-title-row">
               <h1 className="brand-title">BellSupport Hub</h1>
             </div>
-            <p className="unofficial-label">※非公式サポーターアプリ</p>
+            <div className="brand-sub-row">
+              <p className="unofficial-label">※非公式サポーターアプリ</p>
+              <a
+                href="https://www.bellmare.co.jp/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="official-site-link"
+              >
+                <span>ベルマーレ公式</span>
+                <ExternalLink size={11} />
+              </a>
+            </div>
           </div>
         </div>
 

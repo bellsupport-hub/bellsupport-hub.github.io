@@ -170,7 +170,6 @@ export function MatchDetailModal({
                 isHome={match.is_home}
                 stadium={match.stadium}
                 clickable
-                darkBg
                 showFull
               />
             </div>
@@ -187,6 +186,16 @@ export function MatchDetailModal({
                 </div>
               </div>
             )}
+
+            <a
+              href="https://www.jleague.jp/club/shonan/day/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="jleague-stats-link"
+            >
+              <span>Jリーグ公式で詳細・スタッツを見る</span>
+              <ExternalLink size={12} />
+            </a>
           </div>
 
           {/* Dual Watch Toggles & Ticket Action */}

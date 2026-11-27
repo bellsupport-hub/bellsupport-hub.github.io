@@ -2,8 +2,8 @@ name: Sync Official YouTube Videos
 
 on:
   schedule:
-    # Mon, Thu, Sun at 08:00 JST (Sun, Wed, Sat 23:00 UTC)
-    - cron: '0 23 * * 0,3,6'
+    # Twice a week: Mon & Thu at 08:00 JST (Sun & Wed 23:00 UTC)
+    - cron: '0 23 * * 0,3'
   workflow_dispatch:
 
 permissions:
