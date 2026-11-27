@@ -115,10 +115,59 @@ export const STADIUM_MASTER: Record<string, StadiumMasterEntry> = {
   'ＮＤスタ': { name: 'NDソフトスタジアム山形' },
 };
 
+export const TEAM_FULL_NAMES: Record<string, string> = {
+  '湘南ベルマーレ': '湘南ベルマーレ',
+  '湘南': '湘南ベルマーレ',
+  'C大阪': 'セレッソ大阪',
+  'FC東京': 'FC東京',
+  'G大阪': 'ガンバ大阪',
+  'いわき': 'いわきFC',
+  '京都': '京都サンガF.C.',
+  '今治': 'FC今治',
+  '仙台': 'ベガルタ仙台',
+  '八戸': 'ヴァンラーレ八戸',
+  '名古屋': '名古屋グランパス',
+  '大分': '大分トリニータ',
+  '大宮': 'RB大宮アルディージャ',
+  '宮崎': 'テゲバジャーロ宮崎',
+  '富山': 'カターレ富山',
+  '山形': 'モンテディオ山形',
+  '岡山': 'ファジアーノ岡山',
+  '川崎F': '川崎フロンターレ',
+  '広島': 'サンフレッチェ広島',
+  '徳島': '徳島ヴォルティス',
+  '新潟': 'アルビレックス新潟',
+  '札幌': '北海道コンサドーレ札幌',
+  '東京V': '東京ヴェルディ',
+  '柏': '柏レイソル',
+  '栃木C': '栃木シティ',
+  '栃木SC': '栃木SC',
+  '横浜FC': '横浜FC',
+  '横浜FM': '横浜F・マリノス',
+  '浦和': '浦和レッズ',
+  '清水': '清水エスパルス',
+  '甲府': 'ヴァンフォーレ甲府',
+  '町田': 'FC町田ゼルビア',
+  '相模原': 'SC相模原',
+  '磐田': 'ジュビロ磐田',
+  '神戸': 'ヴィッセル神戸',
+  '福岡': 'アビスパ福岡',
+  '秋田': 'ブラウブリッツ秋田',
+  '群馬': 'ザスパ群馬',
+  '藤枝': '藤枝MYFC',
+  '鳥栖': 'サガン鳥栖',
+  '鹿島': '鹿島アントラーズ',
+};
+
 export function normalizeTeamKey(name: string): string {
   return String(name || '')
     .replace(/[Ａ-Ｚａ-ｚ０-９]/g, (s) => String.fromCharCode(s.charCodeAt(0) - 0xfee0))
     .trim();
+}
+
+export function getTeamFullName(shortName: string): string {
+  const key = normalizeTeamKey(shortName);
+  return TEAM_FULL_NAMES[key] ?? shortName;
 }
 
 export function getTeamColors(teamName: string): [string, string] {

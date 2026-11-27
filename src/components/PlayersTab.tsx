@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { PlaySquare, Search, X } from 'lucide-react';
+import { ExternalLink, PlaySquare, Search, X } from 'lucide-react';
 import type { Player, PlayerPosition, VideoItem } from '../types';
+import { getPlayerRomaji, getPlayerWikipediaUrl } from '../utils/playerRomaji';
 
 type PositionFilter = 'ALL' | PlayerPosition;
 
@@ -60,10 +61,12 @@ export function PlayersTab({
       .filter((p) => {
         if (posFilter !== 'ALL' && p.position !== posFilter) return false;
         if (!normalized) return true;
+        const romaji = getPlayerRomaji(p.id, p.name).toLowerCase();
         return (
           String(p.number).includes(normalized) ||
           p.name.toLowerCase().includes(normalized) ||
-          p.kana.toLowerCase().includes(normalized)
+          p.kana.toLowerCase().includes(normalized) ||
+          romaji.includes(normalized)
         );
       });
   }, [players, posFilter, query]);
@@ -87,7 +90,7 @@ export function PlayersTab({
             className="search-input"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="背番号・選手名・カナで検索"
+            placeholder="背番号・選手名・ローマ字で検索"
             aria-label="選手を検索"
           />
           {query && (
@@ -125,6 +128,7 @@ export function PlayersTab({
             {filteredPlayers.map((player) => {
               const videoCount = videoCountByPlayerId.get(player.id) ?? 0;
               const isHighlighted = highlightedPlayerId === player.id;
+              const romaji = getPlayerRomaji(player.id, player.name);
               return (
                 <article
                   key={`${player.id}-${player.number}`}
@@ -139,7 +143,7 @@ export function PlayersTab({
                   <div className="player-info">
                     <div className="player-name-block">
                       <h3 className="player-name">{player.name}</h3>
-                      {player.kana && <p className="player-kana">{player.kana}</p>}
+                      {romaji && <p className="player-romaji">{romaji}</p>}
                     </div>
                     {(player.height > 0 || player.weight > 0) && (
                       <p className="player-physical num-font">
@@ -147,16 +151,27 @@ export function PlayersTab({
                         {player.weight > 0 ? `${player.weight}kg` : '-'}
                       </p>
                     )}
-                    {videoCount > 0 && (
-                      <button
-                        type="button"
-                        className="player-video-link-btn"
-                        onClick={() => onViewPlayerVideos(player.id)}
+                    <div className="player-action-links">
+                      {videoCount > 0 && (
+                        <button
+                          type="button"
+                          className="player-video-link-btn"
+                          onClick={() => onViewPlayerVideos(player.id)}
+                        >
+                          <PlaySquare size={12} />
+                          <span>関連動画 {videoCount}件</span>
+                        </button>
+                      )}
+                      <a
+                        href={getPlayerWikipediaUrl(player.name)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="player-wiki-link"
                       >
-                        <PlaySquare size={12} />
-                        <span>関連動画 {videoCount}件</span>
-                      </button>
-                    )}
+                        <span>Wikipedia</span>
+                        <ExternalLink size={11} />
+                      </a>
+                    </div>
                   </div>
 
                   <div className="player-stats" aria-label="シーズン成績">

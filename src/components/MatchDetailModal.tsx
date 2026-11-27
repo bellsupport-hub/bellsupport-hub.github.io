@@ -15,6 +15,7 @@ import {
   getMatchOutcome,
   getOutcomeLabel,
 } from '../utils/format';
+import { getTeamFullName } from '../utils/clubMeta';
 import { TeamFlag, VenuePin } from './TeamFlag';
 
 interface MatchDetailModalProps {
@@ -119,7 +120,7 @@ export function MatchDetailModal({
               <span>湘南ベルマーレ</span>
               <span className="vs-prefix">VS</span>
               <TeamFlag team={match.opponent} size={16} />
-              <span>{match.opponent}</span>
+              <span>{getTeamFullName(match.opponent)}</span>
             </h2>
           </div>
           <button
@@ -170,7 +171,6 @@ export function MatchDetailModal({
                 isHome={match.is_home}
                 stadium={match.stadium}
                 clickable
-                darkBg
                 showFull
               />
             </div>
@@ -187,6 +187,16 @@ export function MatchDetailModal({
                 </div>
               </div>
             )}
+
+            <a
+              href="https://www.jleague.jp/club/shonan/day/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="jleague-stats-link"
+            >
+              <span>Jリーグ公式で詳細・スタッツを見る</span>
+              <ExternalLink size={12} />
+            </a>
           </div>
 
           {/* Dual Watch Toggles & Ticket Action */}

@@ -2986,3 +2986,92 @@ a {
 .sub-chip-btn:hover:not(:disabled) {
   border-color: #7bc143;
 }
+
+/* ==========================================================================
+   Night Polish v2: Official Site Link, Light VenuePin Contrast, Romaji & Wiki
+   ========================================================================== */
+.brand-sub-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.official-site-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #9ee067;
+  text-decoration: none;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgba(123, 193, 67, 0.16);
+}
+
+.official-site-link:hover {
+  background: rgba(123, 193, 67, 0.28);
+}
+
+.detail-score-banner .venue-pin-link {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+.detail-score-banner .venue-pin-link:hover {
+  border-color: #7bc143;
+}
+
+.jleague-stats-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #005bac;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(0, 91, 172, 0.08);
+}
+
+.jleague-stats-link:hover {
+  background: rgba(0, 91, 172, 0.15);
+}
+
+.player-romaji {
+  margin: 1px 0 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted, #64748b);
+}
+
+.player-action-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.player-wiki-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border, #cbd5e1);
+  background: var(--color-bg, #f8fafc);
+  color: var(--color-text-muted, #475569);
+  text-decoration: none;
+}
+
+.player-wiki-link:hover {
+  border-color: #005bac;
+  color: #005bac;
+}
