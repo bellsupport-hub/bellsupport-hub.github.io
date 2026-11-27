@@ -5,11 +5,10 @@ import {
   ChevronUp,
   Clock,
   ExternalLink,
-  MapPin,
   Ticket,
   Trophy,
 } from 'lucide-react';
-import type { Match, StandingsData } from '../types';
+import type { ClubHistoryRecord, Match, StandingsData } from '../types';
 import {
   formatKickoffDate,
   formatKickoffTime,
@@ -17,10 +16,12 @@ import {
   getMatchOutcome,
   getOutcomeLabel,
 } from '../utils/format';
+import { TeamFlag, VenuePin } from './TeamFlag';
 
 interface HomeTabProps {
   matches: Match[];
   standings: StandingsData;
+  clubHistory: ClubHistoryRecord[];
   updatedAt: string;
   onSelectMatch: (match: Match) => void;
   onGoToMatches: () => void;
@@ -29,6 +30,7 @@ interface HomeTabProps {
 export function HomeTab({
   matches,
   standings,
+  clubHistory,
   updatedAt,
   onSelectMatch,
   onGoToMatches,
@@ -93,20 +95,31 @@ export function HomeTab({
             <div className="matchup-box">
               <div className="team-side">
                 <span className="team-label">{nextMatch.is_home ? 'HOME' : 'AWAY'}</span>
-                <strong className="team-name is-bellmare">湘南ベルマーレ</strong>
+                <strong className="team-name is-bellmare team-with-flag">
+                  <TeamFlag team="湘南ベルマーレ" size={16} />
+                  <span>湘南ベルマーレ</span>
+                </strong>
               </div>
               <div className="vs-divider num-font" aria-hidden="true">
                 VS
               </div>
               <div className="team-side team-side-right">
                 <span className="team-label">{nextMatch.is_home ? 'AWAY' : 'HOME'}</span>
-                <strong className="team-name">{nextMatch.opponent}</strong>
+                <strong className="team-name team-with-flag team-with-flag-right">
+                  <TeamFlag team={nextMatch.opponent} size={16} />
+                  <span>{nextMatch.opponent}</span>
+                </strong>
               </div>
             </div>
 
             <div className="next-match-venue">
-              <MapPin size={15} />
-              <span>{nextMatch.stadium}</span>
+              <VenuePin
+                isHome={nextMatch.is_home}
+                stadium={nextMatch.stadium}
+                clickable
+                darkBg
+                showFull
+              />
             </div>
 
             <div className="next-match-actions">
@@ -133,7 +146,7 @@ export function HomeTab({
             </div>
           </article>
         ) : (
-          <div className="empty-card">現在予定されている試合データはありません。</div>
+          <div className="empty-card">このシーズンに予定されている試合はありません。</div>
         )}
       </section>
 
@@ -162,7 +175,7 @@ export function HomeTab({
                       type="button"
                       className={`form-badge-btn outcome-${outcome.toLowerCase()}`}
                       onClick={() => onSelectMatch(match)}
-                      title={`${match.round} vs ${match.opponent} (${getOutcomeLabel(outcome)})`}
+                      title={`${match.round} VS ${match.opponent} (${getOutcomeLabel(outcome)})`}
                     >
                       <span className="form-letter num-font">{outcome}</span>
                       <span className="form-opponent">{match.opponent}</span>
@@ -184,8 +197,10 @@ export function HomeTab({
                 >
                   <div className="latest-result-meta">
                     <span className="latest-tag">直近結果</span>
-                    <span>
-                      {finishedMatches[0].round} vs {finishedMatches[0].opponent}
+                    <span className="team-with-flag">
+                      <span>{finishedMatches[0].round} VS</span>
+                      <TeamFlag team={finishedMatches[0].opponent} size={14} />
+                      <span>{finishedMatches[0].opponent}</span>
                     </span>
                   </div>
                   <div className="latest-result-score-wrap">
@@ -204,18 +219,18 @@ export function HomeTab({
         </div>
       </section>
 
-      {/* Mini Standings Table */}
+      {/* Standings Summary */}
       <section className="section-block" aria-labelledby="standings-heading">
         <div className="section-header">
           <div className="section-title-group">
             <Trophy size={16} className="section-icon" />
             <h2 id="standings-heading" className="section-title">
-              {standings.competition} 順位表
+              {standings.competition} 戦績
             </h2>
           </div>
           {targetStanding && (
             <span className="rank-summary-chip num-font">
-              現在 <strong>{targetStanding.rank}位</strong> / 勝点{' '}
+              <strong>{targetStanding.rank}位</strong> / 勝点{' '}
               <strong>{targetStanding.points}</strong>
             </span>
           )}
@@ -226,30 +241,14 @@ export function HomeTab({
             <table className="standings-table">
               <thead>
                 <tr>
-                  <th scope="col" className="col-rank">
-                    順位
-                  </th>
-                  <th scope="col" className="col-team">
-                    チーム
-                  </th>
-                  <th scope="col" className="col-num">
-                    試合
-                  </th>
-                  <th scope="col" className="col-num">
-                    勝
-                  </th>
-                  <th scope="col" className="col-num">
-                    分
-                  </th>
-                  <th scope="col" className="col-num">
-                    敗
-                  </th>
-                  <th scope="col" className="col-num">
-                    得失
-                  </th>
-                  <th scope="col" className="col-pts">
-                    勝点
-                  </th>
+                  <th scope="col" className="col-rank">順位</th>
+                  <th scope="col" className="col-team">チーム</th>
+                  <th scope="col" className="col-num">試合</th>
+                  <th scope="col" className="col-num">勝</th>
+                  <th scope="col" className="col-num">分</th>
+                  <th scope="col" className="col-num">敗</th>
+                  <th scope="col" className="col-num">得失</th>
+                  <th scope="col" className="col-pts">勝点</th>
                 </tr>
               </thead>
               <tbody>
@@ -265,8 +264,8 @@ export function HomeTab({
                     </td>
                     <td className="col-team">
                       <span className="team-cell-name">
-                        {row.is_target && <span className="target-dot" aria-hidden="true" />}
-                        {row.team}
+                        <TeamFlag team={row.team} size={14} />
+                        <span>{row.team}</span>
                       </span>
                     </td>
                     <td className="col-num num-font">{row.played}</td>
@@ -305,6 +304,47 @@ export function HomeTab({
           )}
         </div>
       </section>
+
+      {/* Club All-Time Record */}
+      {clubHistory.length > 0 && (
+        <section className="section-block" aria-labelledby="club-history-heading">
+          <div className="section-header">
+            <h2 id="club-history-heading" className="section-title">
+              Jリーグ通算クラブ記録
+            </h2>
+          </div>
+          <div className="surface-card standings-card">
+            <div className="table-scroll">
+              <table className="standings-table">
+                <thead>
+                  <tr>
+                    <th scope="col" className="col-team">大会</th>
+                    <th scope="col" className="col-num">勝</th>
+                    <th scope="col" className="col-num">分</th>
+                    <th scope="col" className="col-num">敗</th>
+                    <th scope="col" className="col-pts">得点/失点</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {clubHistory.map((r) => (
+                    <tr key={r.competition}>
+                      <td className="col-team">
+                        <strong>{r.competition}</strong>
+                      </td>
+                      <td className="col-num num-font">{r.total_wins}</td>
+                      <td className="col-num num-font">{r.draws}</td>
+                      <td className="col-num num-font">{r.total_losses}</td>
+                      <td className="col-pts num-font">
+                        {r.goals_for}/{r.goals_against}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

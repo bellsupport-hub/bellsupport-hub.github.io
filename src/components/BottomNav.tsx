@@ -1,4 +1,4 @@
-import { CalendarDays, Home, MapPin, Users } from 'lucide-react';
+import { CalendarDays, Home, MapPin, PlaySquare, Users } from 'lucide-react';
 import type { TabId } from '../types';
 
 interface BottomNavProps {
@@ -8,8 +8,9 @@ interface BottomNavProps {
 
 const NAV_ITEMS: { id: TabId; label: string; icon: typeof Home }[] = [
   { id: 'home', label: 'ホーム', icon: Home },
-  { id: 'matches', label: '試合・観戦', icon: CalendarDays },
+  { id: 'matches', label: '試合', icon: CalendarDays },
   { id: 'players', label: '選手名鑑', icon: Users },
+  { id: 'videos', label: '動画', icon: PlaySquare },
   { id: 'stadium', label: 'スタジアム', icon: MapPin },
 ];
 

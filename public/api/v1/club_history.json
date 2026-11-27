@@ -1,0 +1,50 @@
+{
+  "updated_at": "2026-11-27T05:25:42.285Z",
+  "records": [
+    {
+      "team": "湘南",
+      "competition": "J1",
+      "total_wins": 194,
+      "wins_90": 176,
+      "wins_et": 13,
+      "wins_pk": 5,
+      "draws": 110,
+      "total_losses": 338,
+      "losses_90": 319,
+      "losses_et": 16,
+      "losses_pk": 3,
+      "goals_for": 792,
+      "goals_against": 1085
+    },
+    {
+      "team": "湘南",
+      "competition": "J2",
+      "total_wins": 261,
+      "wins_90": 254,
+      "wins_et": 7,
+      "wins_pk": 0,
+      "draws": 151,
+      "total_losses": 220,
+      "losses_90": 211,
+      "losses_et": 9,
+      "losses_pk": 0,
+      "goals_for": 849,
+      "goals_against": 761
+    },
+    {
+      "team": "湘南",
+      "competition": "明治安田J2・J3百年構想",
+      "total_wins": 11,
+      "wins_90": 8,
+      "wins_et": 0,
+      "wins_pk": 3,
+      "draws": 0,
+      "total_losses": 7,
+      "losses_90": 6,
+      "losses_et": 0,
+      "losses_pk": 1,
+      "goals_for": 25,
+      "goals_against": 19
+    }
+  ]
+}

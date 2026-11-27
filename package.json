@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "import:raw": "node scripts/parse-raw-seasons.mjs && node scripts/validate-data.mjs",
+    "import:html": "node scripts/import-jleague-html.mjs && node scripts/validate-data.mjs",
+    "validate:data": "node scripts/validate-data.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.469.0",

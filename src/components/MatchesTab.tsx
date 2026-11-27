@@ -2,41 +2,34 @@ import { useMemo, useState } from 'react';
 import {
   CheckCircle2,
   ChevronRight,
-  Circle,
   ExternalLink,
-  MapPin,
+  MonitorPlay,
   Ticket,
 } from 'lucide-react';
 import type { AttendanceSummary } from '../hooks/useAttendance';
-import type { Match } from '../types';
+import type { Match, WatchMode, WatchStatus } from '../types';
 import {
   formatKickoffDate,
   formatKickoffTime,
   getMatchOutcome,
   getOutcomeLabel,
 } from '../utils/format';
+import { TeamFlag, VenuePin } from './TeamFlag';
 
-type MatchFilter = 'all' | 'scheduled' | 'finished' | 'attended';
+type MatchFilter = 'all' | 'scheduled' | 'finished' | 'stadium' | 'online' | 'watched';
 
 interface MatchesTabProps {
   matches: Match[];
-  isAttended: (matchId: string) => boolean;
-  onToggleAttended: (matchId: string) => void;
+  getWatchStatus: (matchId: string) => WatchStatus;
+  onToggleWatch: (matchId: string, mode: WatchMode) => void;
   attendanceSummary: AttendanceSummary;
   onSelectMatch: (match: Match) => void;
 }
 
-const FILTER_OPTIONS: { id: MatchFilter; label: string }[] = [
-  { id: 'all', label: 'すべて' },
-  { id: 'scheduled', label: '予定' },
-  { id: 'finished', label: '結果' },
-  { id: 'attended', label: '観戦済' },
-];
-
 export function MatchesTab({
   matches,
-  isAttended,
-  onToggleAttended,
+  getWatchStatus,
+  onToggleWatch,
   attendanceSummary,
   onSelectMatch,
 }: MatchesTabProps) {
@@ -48,14 +41,39 @@ export function MatchesTab({
     );
   }, [matches]);
 
+  const seasonWatchCounts = useMemo(() => {
+    let stadium = 0;
+    let online = 0;
+    let any = 0;
+    for (const m of matches) {
+      const w = getWatchStatus(m.id);
+      if (w.stadium) stadium += 1;
+      if (w.online) online += 1;
+      if (w.stadium || w.online) any += 1;
+    }
+    return { stadium, online, any };
+  }, [matches, getWatchStatus]);
+
+  const filterOptions: { id: MatchFilter; label: string }[] = [
+    { id: 'all', label: `すべて (${matches.length})` },
+    { id: 'scheduled', label: '予定' },
+    { id: 'finished', label: '結果' },
+    { id: 'stadium', label: `現地 (${seasonWatchCounts.stadium})` },
+    { id: 'online', label: `オンライン (${seasonWatchCounts.online})` },
+    { id: 'watched', label: `観戦済 (${seasonWatchCounts.any})` },
+  ];
+
   const filteredMatches = useMemo(() => {
     return sortedMatches.filter((m) => {
+      const w = getWatchStatus(m.id);
       if (filter === 'scheduled') return m.status === 'scheduled';
       if (filter === 'finished') return m.status === 'finished';
-      if (filter === 'attended') return isAttended(m.id);
+      if (filter === 'stadium') return w.stadium;
+      if (filter === 'online') return w.online;
+      if (filter === 'watched') return w.stadium || w.online;
       return true;
     });
-  }, [sortedMatches, filter, isAttended]);
+  }, [sortedMatches, filter, getWatchStatus]);
 
   return (
     <div className="tab-content">
@@ -65,29 +83,35 @@ export function MatchesTab({
           <div className="attendance-summary-top">
             <div>
               <h2 id="attendance-summary-heading" className="attendance-title">
-                MY 現地観戦レコード
+                MY 観戦レコード（通算）
               </h2>
               <p className="attendance-sub">
-                観戦済トグルで勝敗・勝率を自動集計（端末に保存）
+                現地・オンライン観戦を記録（端末に自動保存）
               </p>
             </div>
             <div className="win-rate-pill">
-              <span className="win-rate-label">勝率</span>
+              <span className="win-rate-label">現地勝率</span>
               <strong className="win-rate-value num-font">
                 {attendanceSummary.winRate}%
               </strong>
             </div>
           </div>
 
-          <div className="attendance-stats-row">
+          <div className="attendance-stats-row attendance-stats-5">
             <div className="att-stat">
-              <span className="att-stat-label">観戦数</span>
+              <span className="att-stat-label">現地</span>
               <strong className="att-stat-num num-font">
-                {attendanceSummary.totalAttended}
+                {attendanceSummary.stadiumTotal}
+              </strong>
+            </div>
+            <div className="att-stat is-online">
+              <span className="att-stat-label">オンライン</span>
+              <strong className="att-stat-num num-font">
+                {attendanceSummary.onlineTotal}
               </strong>
             </div>
             <div className="att-stat is-win">
-              <span className="att-stat-label">勝</span>
+              <span className="att-stat-label">現地勝</span>
               <strong className="att-stat-num num-font">
                 {attendanceSummary.wins}
               </strong>
@@ -111,7 +135,7 @@ export function MatchesTab({
       {/* Filter Pills */}
       <section className="section-block" aria-label="試合一覧">
         <div className="filter-pills" role="tablist" aria-label="試合フィルタ">
-          {FILTER_OPTIONS.map((opt) => (
+          {filterOptions.map((opt) => (
             <button
               key={opt.id}
               type="button"
@@ -130,7 +154,7 @@ export function MatchesTab({
         {filteredMatches.length > 0 ? (
           <div className="match-list">
             {filteredMatches.map((match) => {
-              const attended = isAttended(match.id);
+              const watch = getWatchStatus(match.id);
               const outcome = getMatchOutcome(match);
 
               return (
@@ -138,23 +162,31 @@ export function MatchesTab({
                   <div className="match-card-head">
                     <div className="match-card-meta">
                       <span className="round-chip">{match.round}</span>
-                      <span className={`ha-pill-sm ${match.is_home ? 'is-home' : 'is-away'}`}>
-                        {match.is_home ? 'HOME' : 'AWAY'}
-                      </span>
                       <span className="match-date num-font">
                         {formatKickoffDate(match.kickoff)} {formatKickoffTime(match.kickoff)}
                       </span>
                     </div>
 
-                    <button
-                      type="button"
-                      className={`attend-toggle-btn ${attended ? 'is-attended' : ''}`}
-                      onClick={() => onToggleAttended(match.id)}
-                      aria-pressed={attended}
-                    >
-                      {attended ? <CheckCircle2 size={15} /> : <Circle size={15} />}
-                      <span>{attended ? '観戦済' : '観戦記録'}</span>
-                    </button>
+                    <div className="watch-toggle-group">
+                      <button
+                        type="button"
+                        className={`attend-toggle-btn ${watch.stadium ? 'is-attended' : ''}`}
+                        onClick={() => onToggleWatch(match.id, 'stadium')}
+                        aria-pressed={watch.stadium}
+                      >
+                        <CheckCircle2 size={13} />
+                        <span>現地</span>
+                      </button>
+                      <button
+                        type="button"
+                        className={`attend-toggle-btn is-online-btn ${watch.online ? 'is-online-active' : ''}`}
+                        onClick={() => onToggleWatch(match.id, 'online')}
+                        aria-pressed={watch.online}
+                      >
+                        <MonitorPlay size={13} />
+                        <span>オンライン</span>
+                      </button>
+                    </div>
                   </div>
 
                   <button
@@ -164,7 +196,8 @@ export function MatchesTab({
                   >
                     <div className="match-card-teams">
                       <div className="match-opponent-row">
-                        <span className="vs-prefix">vs</span>
+                        <span className="vs-prefix">VS</span>
+                        <TeamFlag team={match.opponent} size={15} />
                         <strong className="match-opponent-name">{match.opponent}</strong>
                         {outcome && (
                           <span className={`outcome-tag outcome-${outcome.toLowerCase()}`}>
@@ -173,8 +206,7 @@ export function MatchesTab({
                         )}
                       </div>
                       <div className="match-venue-line">
-                        <MapPin size={13} />
-                        <span>{match.stadium}</span>
+                        <VenuePin isHome={match.is_home} stadium={match.stadium} />
                       </div>
                     </div>
 
@@ -209,11 +241,7 @@ export function MatchesTab({
             })}
           </div>
         ) : (
-          <div className="empty-card">
-            {filter === 'attended'
-              ? 'まだ「観戦済」の試合がありません。試合カードの「観戦記録」ボタンをタップして記録しましょう。'
-              : '該当する試合がありません。'}
-          </div>
+          <div className="empty-card">該当する試合がありません。</div>
         )}
       </section>
     </div>

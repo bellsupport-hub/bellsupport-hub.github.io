@@ -2,36 +2,13 @@
   "stadium": {
     "name": "レモンガススタジアム平塚",
     "address": "神奈川県平塚市大原1-1（平塚市総合公園内）",
-    "walk_info": "JR平塚駅北口より徒歩約25〜30分（大通りを直進・平坦ルート）",
-    "bus_boarding": "JR平塚駅北口 11番乗り場（直行シャトルバス / 約10分）",
+    "walk_info": "",
+    "bus_boarding": "",
     "bus_official_url": "https://www.kanachu.co.jp/",
     "bus_schedules": {
-      "weekend": [
-        { "note": "キックオフ3時間前〜1時間前", "interval": "約10〜15分間隔で臨時直行便運行" },
-        { "note": "キックオフ1時間前〜直前", "interval": "満員になり次第順次発車" },
-        { "note": "試合終了後（復路）", "interval": "総合公園西側乗り場より平塚駅行き随時運行" }
-      ],
-      "weekday": [
-        { "note": "キックオフ2時間半前〜直前", "interval": "約15〜20分間隔で直行便運行（帰宅ラッシュ時間帯は余裕をもって移動推奨）" },
-        { "note": "路線バス併用", "interval": "平塚駅北口4番乗り場「平塚駅北口行（循環）」等も利用可能" }
-      ]
+      "weekend": [],
+      "weekday": []
     }
   },
-  "chants": [
-    {
-      "id": "chant-victory",
-      "category": "チーム",
-      "title": "勝利へのチャント（サンプル）",
-      "timing": "試合開始前・チャンス時",
-      "lyrics": "オーオー 湘南ベルマーレ\n勝利を掴み取れ\n緑と青の誇りを胸に\n最後まで走り抜け"
-    },
-    {
-      "id": "chant-suzuki",
-      "category": "選手",
-      "player_number": 29,
-      "title": "鈴木章斗 チャント（サンプル）",
-      "timing": "出場時・ゴール時",
-      "lyrics": "アキト ゴールを決めろ\n湘南のストライカー 鈴木章斗"
-    }
-  ]
+  "chants": []
 }

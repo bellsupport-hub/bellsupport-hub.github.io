@@ -1,6 +1,24 @@
+export type SeasonId =
+  | '2026-27'
+  | '2026-special'
+  | '2025'
+  | '2024'
+  | '2023'
+  | '2022'
+  | '2021'
+  | '2020';
+
+export interface SeasonIndexItem {
+  id: SeasonId;
+  label: string;
+  competition: string;
+}
+
 export interface MetaData {
   updated_at: string;
   schema_version: number;
+  default_season?: SeasonId;
+  seasons?: SeasonIndexItem[];
 }
 
 export interface StandingRow {
@@ -62,6 +80,8 @@ export interface MatchesData {
 export type PlayerPosition = 'GK' | 'DF' | 'MF' | 'FW';
 
 export interface Player {
+  /** Cross-season stable player ID (e.g., "suzuki-akito") */
+  id: string;
   number: number;
   name: string;
   kana: string;
@@ -76,6 +96,51 @@ export interface Player {
 export interface PlayersData {
   season: string;
   players: Player[];
+}
+
+export interface SeasonSummary {
+  rank: number;
+  played: number;
+  won: number;
+  drawn: number;
+  lost: number;
+  gf: number;
+  ga: number;
+  gd: number;
+  points: number;
+}
+
+export interface SeasonArchive {
+  id: SeasonId;
+  label: string;
+  competition: string;
+  manager: string;
+  note: string;
+  summary: SeasonSummary;
+  standings: StandingRow[];
+  matches: Match[];
+  players: Player[];
+}
+
+export type VideoSource = 'bellmare' | 'jleague';
+
+export interface VideoItem {
+  id: string;
+  youtube_id: string;
+  title: string;
+  source: VideoSource;
+  channel_name: string;
+  season: SeasonId;
+  published_at: string;
+  tags: string[];
+  match_id: string | null;
+  player_ids: string[];
+  manual_override: boolean;
+}
+
+export interface VideosData {
+  updated_at: string;
+  videos: VideoItem[];
 }
 
 export interface BusScheduleItem {
@@ -109,14 +174,37 @@ export interface StadiumGuideData {
   chants: Chant[];
 }
 
+export interface ClubHistoryRecord {
+  team: string;
+  competition: string;
+  total_wins: number;
+  wins_90: number;
+  wins_et: number;
+  wins_pk: number;
+  draws: number;
+  total_losses: number;
+  losses_90: number;
+  losses_et: number;
+  losses_pk: number;
+  goals_for: number;
+  goals_against: number;
+}
+
+export interface WatchStatus {
+  stadium: boolean;
+  online: boolean;
+}
+
+export type WatchMode = 'stadium' | 'online';
+
 export interface HubDataBundle {
   meta: MetaData;
-  standings: StandingsData;
-  matches: MatchesData;
-  players: PlayersData;
+  seasons: Record<SeasonId, SeasonArchive>;
+  videos: VideosData;
   stadiumGuide: StadiumGuideData;
+  clubHistory?: ClubHistoryRecord[];
 }
 
 export type DataSource = 'live' | 'cache' | 'fallback';
-export type TabId = 'home' | 'matches' | 'players' | 'stadium';
+export type TabId = 'home' | 'matches' | 'players' | 'videos' | 'stadium';
 export type MatchOutcome = 'W' | 'D' | 'L';

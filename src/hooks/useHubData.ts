@@ -3,14 +3,24 @@ import { FALLBACK_DATA } from '../data/fallbackData';
 import type {
   DataSource,
   HubDataBundle,
-  MatchesData,
   MetaData,
-  PlayersData,
+  SeasonArchive,
+  SeasonId,
   StadiumGuideData,
-  StandingsData,
+  VideosData,
 } from '../types';
 
-const CACHE_KEY = 'bellsupport_hub_api_cache_v1';
+const CACHE_KEY = 'bellsupport_hub_api_cache_v2';
+const SEASON_IDS: SeasonId[] = [
+  '2026-27',
+  '2026-special',
+  '2025',
+  '2024',
+  '2023',
+  '2022',
+  '2021',
+  '2020',
+];
 
 function readCachedBundle(): HubDataBundle | null {
   try {
@@ -20,9 +30,9 @@ function readCachedBundle(): HubDataBundle | null {
     if (
       parsed &&
       parsed.meta &&
-      parsed.standings &&
-      parsed.matches &&
-      parsed.players &&
+      parsed.seasons &&
+      parsed.seasons['2026-27'] &&
+      parsed.videos &&
       parsed.stadiumGuide
     ) {
       return parsed;
@@ -63,20 +73,27 @@ export function useHubData() {
       const base = import.meta.env.BASE_URL || './';
       const prefix = base.endsWith('/') ? `${base}api/v1/` : `${base}/api/v1/`;
 
-      const [meta, standings, matches, players, stadiumGuide] = await Promise.all([
+      const [meta, videos, stadiumGuide, clubHistoryRaw, ...seasonArchives] = await Promise.all([
         fetchJson<MetaData>(`${prefix}meta.json`),
-        fetchJson<StandingsData>(`${prefix}standings.json`),
-        fetchJson<MatchesData>(`${prefix}matches.json`),
-        fetchJson<PlayersData>(`${prefix}players.json`),
+        fetchJson<VideosData>(`${prefix}videos.json`),
         fetchJson<StadiumGuideData>(`${prefix}stadium_guide.json`),
+        fetchJson<{ records?: HubDataBundle['clubHistory'] }>(`${prefix}club_history.json`).catch(
+          () => ({ records: [] })
+        ),
+        ...SEASON_IDS.map((id) => fetchJson<SeasonArchive>(`${prefix}seasons/${id}.json`)),
       ]);
+
+      const seasons = {} as Record<SeasonId, SeasonArchive>;
+      SEASON_IDS.forEach((id, idx) => {
+        seasons[id] = seasonArchives[idx];
+      });
 
       const freshBundle: HubDataBundle = {
         meta,
-        standings,
-        matches,
-        players,
+        seasons,
+        videos,
         stadiumGuide,
+        clubHistory: clubHistoryRaw.records ?? [],
       };
 
       setData(freshBundle);
