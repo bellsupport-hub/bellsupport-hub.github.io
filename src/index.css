@@ -2870,3 +2870,119 @@ a {
   font-size: 13px;
   line-height: 1.7;
 }
+
+/* ==========================================================================
+   YouTube Thumbnail Poster & Verified Lineup List
+   ========================================================================== */
+.video-poster.has-thumb {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+
+.video-poster-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-poster-overlay {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 14px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 21, 34, 0.55) 0%,
+    rgba(11, 21, 34, 0.72) 100%
+  );
+}
+
+.lineup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.lineup-player-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border, #e2e8f0);
+  background: var(--bg-soft, #f8fafc);
+  color: inherit;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.lineup-player-chip:hover:not(:disabled) {
+  border-color: #7bc143;
+}
+
+.lineup-player-chip:disabled {
+  cursor: default;
+}
+
+.lineup-pos-tag {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 5px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.lineup-pos-tag.pos-gk {
+  background: rgba(245, 158, 11, 0.2);
+  color: #b45309;
+}
+
+.lineup-pos-tag.pos-df {
+  background: rgba(0, 91, 172, 0.16);
+  color: #005bac;
+}
+
+.lineup-pos-tag.pos-mf {
+  background: rgba(123, 193, 67, 0.2);
+  color: #3f7515;
+}
+
+.lineup-pos-tag.pos-fw {
+  background: rgba(225, 29, 72, 0.16);
+  color: #be123c;
+}
+
+.lineup-num {
+  font-weight: 800;
+  color: #4f8b1f;
+  flex-shrink: 0;
+}
+
+.lineup-name {
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sub-chip-btn {
+  cursor: pointer;
+  color: inherit;
+}
+
+.sub-chip-btn:hover:not(:disabled) {
+  border-color: #7bc143;
+}
