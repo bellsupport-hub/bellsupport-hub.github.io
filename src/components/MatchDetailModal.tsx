@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import {
   CheckCircle2,
   Circle,
   ExternalLink,
   MonitorPlay,
-  Play,
   Ticket,
   X,
 } from 'lucide-react';
@@ -44,8 +43,6 @@ export function MatchDetailModal({
   onJumpToPlayer,
   onClose,
 }: MatchDetailModalProps) {
-  const [playingVideoIds, setPlayingVideoIds] = useState<Set<string>>(() => new Set());
-
   const playerByNumber = useMemo(() => {
     const map = new Map<number, Player>();
     for (const p of players) {
@@ -53,10 +50,6 @@ export function MatchDetailModal({
     }
     return map;
   }, [players]);
-
-  useEffect(() => {
-    setPlayingVideoIds(new Set());
-  }, [match?.id]);
 
   useEffect(() => {
     if (!match) return;
@@ -87,14 +80,6 @@ export function MatchDetailModal({
     const found = playerByNumber.get(num);
     if (!found) return `#${num}`;
     return found.name.replace(/（.*?）/g, '').trim();
-  };
-
-  const handlePlayVideo = (videoId: string) => {
-    setPlayingVideoIds((prev) => {
-      const next = new Set(prev);
-      next.add(videoId);
-      return next;
-    });
   };
 
   return (
@@ -371,76 +356,54 @@ export function MatchDetailModal({
             </section>
           )}
 
-          {/* Linked Official Videos (with YouTube Thumbnails) */}
+          {/* Linked Official Videos (1-tap lazy YouTube embeds) */}
           {videos.length > 0 && (
             <section className="detail-section">
               <div className="detail-section-header">
                 <h3>関連公式動画（{videos.length}件）</h3>
               </div>
               <div className="modal-videos-list">
-                {videos.map((v) => {
-                  const isPlaying = playingVideoIds.has(v.id);
-                  return (
-                    <div key={v.id} className="modal-video-card">
-                      <div className="video-embed-frame">
-                        {isPlaying ? (
-                          <iframe
-                            src={`https://www.youtube-nocookie.com/embed/${v.youtube_id}?autoplay=1&rel=0`}
-                            title={v.title}
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
-                        ) : (
-                          <div className="video-poster has-thumb">
-                            <img
-                              src={`https://i.ytimg.com/vi/${v.youtube_id}/hqdefault.jpg`}
-                              alt={v.title}
-                              loading="lazy"
-                              className="video-poster-thumb"
-                            />
-                            <div className="video-poster-overlay">
+                {videos.map((v) => (
+                  <div key={v.id} className="modal-video-card">
+                    <div className="video-embed-frame">
+                      <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${v.youtube_id}?rel=0&playsinline=1`}
+                        title={v.title}
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                    <div className="modal-video-meta">
+                      <p className="modal-video-title">{v.title}</p>
+                      <div className="modal-video-links">
+                        {onJumpToPlayer &&
+                          v.player_ids.map((pid) => {
+                            const found = players.find((p) => p.id === pid);
+                            if (!found) return null;
+                            return (
                               <button
+                                key={pid}
                                 type="button"
-                                className="video-play-btn"
-                                onClick={() => handlePlayVideo(v.id)}
+                                className="cross-link-btn is-player"
+                                onClick={() => onJumpToPlayer(pid)}
                               >
-                                <Play size={14} /> 埋め込み再生
+                                #{found.number} {found.name}
                               </button>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                      <div className="modal-video-meta">
-                        <p className="modal-video-title">{v.title}</p>
-                        <div className="modal-video-links">
-                          {onJumpToPlayer &&
-                            v.player_ids.map((pid) => {
-                              const found = players.find((p) => p.id === pid);
-                              if (!found) return null;
-                              return (
-                                <button
-                                  key={pid}
-                                  type="button"
-                                  className="cross-link-btn is-player"
-                                  onClick={() => onJumpToPlayer(pid)}
-                                >
-                                  #{found.number} {found.name}
-                                </button>
-                              );
-                            })}
-                          <a
-                            href={`https://www.youtube.com/watch?v=${v.youtube_id}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="modal-video-yt-link"
-                          >
-                            YouTube <ExternalLink size={12} />
-                          </a>
-                        </div>
+                            );
+                          })}
+                        <a
+                          href={`https://www.youtube.com/watch?v=${v.youtube_id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="modal-video-yt-link"
+                        >
+                          YouTube <ExternalLink size={12} />
+                        </a>
                       </div>
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             </section>
           )}

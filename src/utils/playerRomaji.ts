@@ -86,8 +86,36 @@ export function getPlayerRomaji(id: string, name: string): string {
   return '';
 }
 
+const WIKIPEDIA_TITLE_OVERRIDES: Record<string, string> = {
+  'ウェリントン': 'ウェリントン_(サッカー選手)',
+  'タリク': 'タリク・エルユヌシ',
+  'オリベイラ': 'オリベイラ_(サッカー選手)',
+  'ファビアン ゴンザレス': 'ファビアン・ゴンザレス',
+  'アルトゥール シルバ': 'アルトゥール・シルバ',
+  'ポープ ウィリアム': 'ポープ・ウィリアム',
+  'キム ミンテ': 'キム・ミンテ',
+  'ソン ボムグン': 'ソン・ボムグン',
+  'ルイス フェリッピ': 'ルイス・フェリッピ',
+  'ミケル アグ': 'ミケル・アグ',
+  'ウェリントン ジュニオール': 'ウェリントン・ジュニオール',
+  'ディサロ 燦シルヴァーノ': 'ディサロ燦シルヴァーノ',
+  'ルキアン': 'ルキアン・アラウージョ・デ・アルメイダ',
+  '高橋 諒': '高橋諒_(サッカー選手)',
+  '髙橋 直也': '高橋直也_(サッカー選手)',
+  '中村 駿': '中村駿_(サッカー選手)',
+  '鈴木 雄斗': '鈴木雄斗',
+};
+
 export function getPlayerWikipediaUrl(name: string): string {
-  return `https://ja.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(
-    `${name.replace(/\s+/g, '')} サッカー`
-  )}`;
+  const normalized = name.replace(/\s+/g, ' ').trim();
+  const override = WIKIPEDIA_TITLE_OVERRIDES[normalized];
+  if (override) {
+    return `https://ja.wikipedia.org/wiki/${encodeURIComponent(override)}`;
+  }
+  // カタカナ2語名（外国人選手）は中黒繋ぎ、日本人選手はスペース除去で直接記事URLへ
+  const parts = normalized.split(' ');
+  const isKatakanaForeign =
+    parts.length >= 2 && parts.every((part) => /^[ァ-ヶー・]+$/.test(part));
+  const articleTitle = isKatakanaForeign ? parts.join('・') : parts.join('');
+  return `https://ja.wikipedia.org/wiki/${encodeURIComponent(articleTitle)}`;
 }

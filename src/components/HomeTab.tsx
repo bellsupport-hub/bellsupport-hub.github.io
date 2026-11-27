@@ -166,18 +166,23 @@ export function HomeTab({
         <div className="surface-card recent-form-card">
           {finishedMatches.length > 0 ? (
             <>
-              <div className="form-badges-row" role="list" aria-label="直近試合の勝敗">
-                {finishedMatches.slice(0, 5).map((match) => {
+              <div className="form-direction-bar" aria-hidden="true">
+                <span className="form-dir-latest">← 最新</span>
+                <span className="form-dir-past">過去 →</span>
+              </div>
+              <div className="form-badges-row" role="list" aria-label="直近5試合の勝敗（左が最新）">
+                {finishedMatches.slice(0, 5).map((match, idx) => {
                   const outcome = getMatchOutcome(match);
                   if (!outcome) return null;
                   return (
                     <button
                       key={match.id}
                       type="button"
-                      className={`form-badge-btn outcome-${outcome.toLowerCase()}`}
+                      className={`form-badge-btn outcome-${outcome.toLowerCase()} ${idx === 0 ? 'is-latest' : ''}`}
                       onClick={() => onSelectMatch(match)}
                       title={`${match.round} VS ${getTeamFullName(match.opponent)} (${getOutcomeLabel(outcome)})`}
                     >
+                      <span className="form-round-mini">{idx === 0 ? '最新' : match.round.replace('第', '').replace('節', '節')}</span>
                       <span className="form-letter num-font">{outcome}</span>
                       <span className="form-opponent">{match.opponent}</span>
                       {match.result && (

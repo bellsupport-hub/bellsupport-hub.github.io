@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { CalendarDays, ExternalLink, Play, Search, User, X } from 'lucide-react';
+import { CalendarDays, ExternalLink, Search, User, X } from 'lucide-react';
 import type { Match, Player, SeasonArchive, SeasonId, VideoItem, VideoSource } from '../types';
 import { TeamFlag } from './TeamFlag';
 
@@ -32,7 +32,6 @@ export function VideosTab({
   const [tagFilter, setTagFilter] = useState<string>('ALL');
   const [query, setQuery] = useState('');
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
-  const [playingIds, setPlayingIds] = useState<Set<string>>(() => new Set());
 
   const playerDirectory = useMemo(() => {
     const map = new Map<string, { player: Player; seasonId: SeasonId }>();
@@ -91,14 +90,6 @@ export function VideosTab({
         return haystack.includes(normalized);
       });
   }, [videos, sourceFilter, seasonFilter, tagFilter, initialPlayerIdFilter, query, playerDirectory]);
-
-  const handlePlay = (id: string) => {
-    setPlayingIds((prev) => {
-      const next = new Set(prev);
-      next.add(id);
-      return next;
-    });
-  };
 
   return (
     <div className="tab-content">
@@ -209,51 +200,17 @@ export function VideosTab({
           <>
           <div className="videos-list">
             {filteredVideos.slice(0, visibleCount).map((v) => {
-              const isPlaying = playingIds.has(v.id);
               const linkedMatch = v.match_id ? matchDirectory.get(v.match_id) : null;
               return (
                 <article key={v.id} className="surface-card video-card">
                   <div className="video-embed-frame">
-                    {isPlaying ? (
-                      <iframe
-                        src={`https://www.youtube-nocookie.com/embed/${v.youtube_id}?autoplay=1&rel=0`}
-                        title={v.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    ) : (
-                      <div className="video-poster has-thumb">
-                        <img
-                          src={`https://i.ytimg.com/vi/${v.youtube_id}/hqdefault.jpg`}
-                          alt={v.title}
-                          loading="lazy"
-                          className="video-poster-thumb"
-                        />
-                        <div className="video-poster-overlay">
-                          <span className="video-poster-channel">
-                            {v.channel_name} · {v.published_at}
-                          </span>
-                          <p className="video-poster-title">{v.title}</p>
-                          <div className="video-poster-actions">
-                            <button
-                              type="button"
-                              className="video-play-btn"
-                              onClick={() => handlePlay(v.id)}
-                            >
-                              <Play size={14} /> 埋め込み再生
-                            </button>
-                            <a
-                              href={`https://www.youtube.com/watch?v=${v.youtube_id}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="video-yt-link"
-                            >
-                              YouTube <ExternalLink size={13} />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    )}
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${v.youtube_id}?rel=0&playsinline=1`}
+                      title={v.title}
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
                   </div>
 
                   <div className="video-card-body">
@@ -265,6 +222,14 @@ export function VideosTab({
                         {seasons[v.season]?.label ?? v.season}
                       </span>
                       <span className="video-date num-font">{v.published_at}</span>
+                      <a
+                        href={`https://www.youtube.com/watch?v=${v.youtube_id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="video-card-yt-inline"
+                      >
+                        YouTube <ExternalLink size={11} />
+                      </a>
                     </div>
 
                     <h3 className="video-card-title">{v.title}</h3>
