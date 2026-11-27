@@ -9,9 +9,17 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2026-27",
       "published_at": "2026-11-25",
-      "tags": ["ハイライト", "勝利試合", "ホーム"],
+      "tags": [
+        "ハイライト",
+        "勝利試合",
+        "ホーム",
+        "クリーンシート"
+      ],
       "match_id": "2026-27-r19",
-      "player_ids": ["kozuki-soichiro", "sanada-kota"],
+      "player_ids": [
+        "kozuki-soichiro",
+        "sanada-kota"
+      ],
       "manual_override": true
     },
     {
@@ -22,9 +30,17 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2026-27",
       "published_at": "2026-11-22",
-      "tags": ["ハイライト", "勝利試合", "アウェイ"],
+      "tags": [
+        "ハイライト",
+        "勝利試合",
+        "アウェイ"
+      ],
       "match_id": "2026-27-r18",
-      "player_ids": ["yamada-hiroto", "nishino-taiyo"],
+      "player_ids": [
+        "yamada-hiroto",
+        "nishino-taiyo",
+        "suzuki-yuto"
+      ],
       "manual_override": true
     },
     {
@@ -35,9 +51,19 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2026-27",
       "published_at": "2026-11-14",
-      "tags": ["ハイライト", "勝利試合", "ホーム", "ダービー"],
+      "tags": [
+        "ハイライト",
+        "勝利試合",
+        "ホーム",
+        "ダービー",
+        "クリーンシート"
+      ],
       "match_id": "2026-27-r17",
-      "player_ids": ["nishino-taiyo", "yamada-hiroto", "tamura-sohki"],
+      "player_ids": [
+        "nishino-taiyo",
+        "yamada-hiroto",
+        "tamura-sohki"
+      ],
       "manual_override": true
     },
     {
@@ -48,9 +74,14 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2026-27",
       "published_at": "2026-11-08",
-      "tags": ["ハイライト", "アウェイ"],
+      "tags": [
+        "ハイライト",
+        "アウェイ"
+      ],
       "match_id": "2026-27-r16",
-      "player_ids": [],
+      "player_ids": [
+        "suzuki-yuto"
+      ],
       "manual_override": true
     },
     {
@@ -61,7 +92,10 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2026-27",
       "published_at": "2026-11-03",
-      "tags": ["ハイライト", "ホーム"],
+      "tags": [
+        "ハイライト",
+        "ホーム"
+      ],
       "match_id": "2026-27-r15",
       "player_ids": [],
       "manual_override": true
@@ -74,7 +108,10 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2026-27",
       "published_at": "2026-10-31",
-      "tags": ["ハイライト", "アウェイ"],
+      "tags": [
+        "ハイライト",
+        "アウェイ"
+      ],
       "match_id": "2026-27-r14",
       "player_ids": [],
       "manual_override": true
@@ -87,9 +124,16 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2026-27",
       "published_at": "2026-10-25",
-      "tags": ["ハイライト", "勝利試合", "ホーム"],
+      "tags": [
+        "ハイライト",
+        "勝利試合",
+        "ホーム"
+      ],
       "match_id": "2026-27-r13",
-      "player_ids": [],
+      "player_ids": [
+        "matsumura-sere",
+        "nishino-taiyo"
+      ],
       "manual_override": true
     },
     {
@@ -100,9 +144,14 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2026-27",
       "published_at": "2026-10-03",
-      "tags": ["ハイライト", "アウェイ"],
+      "tags": [
+        "ハイライト",
+        "アウェイ"
+      ],
       "match_id": "2026-27-r9",
-      "player_ids": [],
+      "player_ids": [
+        "fukazawa-yuta"
+      ],
       "manual_override": true
     },
     {
@@ -113,9 +162,16 @@
       "channel_name": "湘南ベルマーレ公式チャンネル",
       "season": "2026-27",
       "published_at": "2026-07-12",
-      "tags": ["新体制・イベント", "密着・INSIDE"],
+      "tags": [
+        "新体制・イベント",
+        "密着・INSIDE"
+      ],
       "match_id": null,
-      "player_ids": ["tachi-koki", "ohno-kazunari", "onose-kosuke"],
+      "player_ids": [
+        "tachi-koki",
+        "ohno-kazunari",
+        "onose-kosuke"
+      ],
       "manual_override": true
     },
     {
@@ -126,9 +182,17 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2026-special",
       "published_at": "2026-05-24",
-      "tags": ["ハイライト", "勝利試合", "アウェイ"],
+      "tags": [
+        "ハイライト",
+        "勝利試合",
+        "アウェイ"
+      ],
       "match_id": "2026-special-r18",
-      "player_ids": ["suzuki-akito", "nishino-taiyo"],
+      "player_ids": [
+        "suzuki-akito",
+        "nishino-taiyo",
+        "watanabe-keigo"
+      ],
       "manual_override": true
     },
     {
@@ -139,9 +203,16 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2026-special",
       "published_at": "2026-05-16",
-      "tags": ["ハイライト", "勝利試合", "ホーム"],
+      "tags": [
+        "ハイライト",
+        "勝利試合",
+        "ホーム"
+      ],
       "match_id": "2026-special-r17",
-      "player_ids": ["oda-yutaro", "hiraoka-taiyo"],
+      "player_ids": [
+        "oda-yutaro",
+        "hiraoka-taiyo"
+      ],
       "manual_override": true
     },
     {
@@ -152,9 +223,19 @@
       "channel_name": "湘南ベルマーレ公式チャンネル",
       "season": "2026-special",
       "published_at": "2026-04-11",
-      "tags": ["密着・INSIDE", "勝利試合", "ダービー", "アウェイ"],
+      "tags": [
+        "密着・INSIDE",
+        "勝利試合",
+        "ダービー",
+        "アウェイ",
+        "クリーンシート"
+      ],
       "match_id": "2026-special-r10",
-      "player_ids": ["suzuki-akito", "onose-kosuke"],
+      "player_ids": [
+        "suzuki-akito",
+        "onose-kosuke",
+        "hakamata-yutaro"
+      ],
       "manual_override": true
     },
     {
@@ -165,9 +246,16 @@
       "channel_name": "湘南ベルマーレ公式チャンネル",
       "season": "2025",
       "published_at": "2025-12-14",
-      "tags": ["ゴール集"],
+      "tags": [
+        "ゴール集"
+      ],
       "match_id": null,
-      "player_ids": ["suzuki-akito", "oda-yutaro", "hiraoka-taiyo", "onose-kosuke"],
+      "player_ids": [
+        "suzuki-akito",
+        "oda-yutaro",
+        "hiraoka-taiyo",
+        "onose-kosuke"
+      ],
       "manual_override": true
     },
     {
@@ -178,9 +266,14 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2025",
       "published_at": "2025-12-06",
-      "tags": ["ハイライト", "アウェイ"],
+      "tags": [
+        "ハイライト",
+        "アウェイ"
+      ],
       "match_id": "2025-r38",
-      "player_ids": ["suzuki-akito"],
+      "player_ids": [
+        "suzuki-akito"
+      ],
       "manual_override": true
     },
     {
@@ -191,9 +284,19 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2025",
       "published_at": "2025-11-08",
-      "tags": ["ハイライト", "勝利試合", "ホーム", "劇的勝利・逆転"],
+      "tags": [
+        "ハイライト",
+        "勝利試合",
+        "ホーム",
+        "劇的勝利・逆転"
+      ],
       "match_id": "2025-r36",
-      "player_ids": ["okuno-kohei", "suzuki-akito", "onose-kosuke"],
+      "player_ids": [
+        "okuno-kohei",
+        "suzuki-akito",
+        "onose-kosuke",
+        "hiraoka-taiyo"
+      ],
       "manual_override": true
     },
     {
@@ -204,9 +307,16 @@
       "channel_name": "Jリーグ公式チャンネル",
       "season": "2025",
       "published_at": "2025-09-23",
-      "tags": ["ハイライト", "ホーム", "ダービー"],
+      "tags": [
+        "ハイライト",
+        "ホーム",
+        "ダービー"
+      ],
       "match_id": "2025-r31",
-      "player_ids": ["hiraoka-taiyo"],
+      "player_ids": [
+        "hiraoka-taiyo",
+        "tachi-koki"
+      ],
       "manual_override": true
     },
     {
@@ -217,9 +327,14 @@
       "channel_name": "湘南ベルマーレ公式チャンネル",
       "season": "2025",
       "published_at": "2025-08-26",
-      "tags": ["インタビュー", "密着・INSIDE"],
+      "tags": [
+        "インタビュー",
+        "密着・INSIDE"
+      ],
       "match_id": null,
-      "player_ids": ["okuno-kohei"],
+      "player_ids": [
+        "okuno-kohei"
+      ],
       "manual_override": true
     }
   ]
