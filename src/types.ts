@@ -1,4 +1,12 @@
-export type SeasonId = '2026-27' | '2026-special' | '2025' | '2024' | '2023';
+export type SeasonId =
+  | '2026-27'
+  | '2026-special'
+  | '2025'
+  | '2024'
+  | '2023'
+  | '2022'
+  | '2021'
+  | '2020';
 
 export interface SeasonIndexItem {
   id: SeasonId;

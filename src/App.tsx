@@ -11,7 +11,16 @@ import { useAttendance } from './hooks/useAttendance';
 import { useHubData } from './hooks/useHubData';
 import type { Match, SeasonId, StandingsData, TabId } from './types';
 
-const SEASON_ORDER: SeasonId[] = ['2026-27', '2026-special', '2025', '2024', '2023'];
+const SEASON_ORDER: SeasonId[] = [
+  '2026-27',
+  '2026-special',
+  '2025',
+  '2024',
+  '2023',
+  '2022',
+  '2021',
+  '2020',
+];
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabId>('home');

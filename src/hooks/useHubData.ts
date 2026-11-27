@@ -11,7 +11,16 @@ import type {
 } from '../types';
 
 const CACHE_KEY = 'bellsupport_hub_api_cache_v2';
-const SEASON_IDS: SeasonId[] = ['2026-27', '2026-special', '2025', '2024', '2023'];
+const SEASON_IDS: SeasonId[] = [
+  '2026-27',
+  '2026-special',
+  '2025',
+  '2024',
+  '2023',
+  '2022',
+  '2021',
+  '2020',
+];
 
 function readCachedBundle(): HubDataBundle | null {
   try {

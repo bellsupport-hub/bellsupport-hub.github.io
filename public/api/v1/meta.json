@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-26T23:50:00+09:00",
+  "updated_at": "2026-11-27T14:20:00+09:00",
   "schema_version": 2,
   "default_season": "2026-27",
   "seasons": [
@@ -7,6 +7,9 @@
     { "id": "2026-special", "label": "2026特別大会", "competition": "J2・J3百年構想リーグ" },
     { "id": "2025", "label": "2025", "competition": "J1リーグ" },
     { "id": "2024", "label": "2024", "competition": "J1リーグ" },
-    { "id": "2023", "label": "2023", "competition": "J1リーグ" }
+    { "id": "2023", "label": "2023", "competition": "J1リーグ" },
+    { "id": "2022", "label": "2022", "competition": "J1リーグ" },
+    { "id": "2021", "label": "2021", "competition": "J1リーグ" },
+    { "id": "2020", "label": "2020", "competition": "J1リーグ" }
   ]
 }

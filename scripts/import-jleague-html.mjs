@@ -1,16 +1,20 @@
 #!/usr/bin/env node
 /**
  * Parse saved J.League Data Site HTML files in data/raw/ into public/api/v1/ JSON:
- *   - *_日程.html     -> Full season match schedule & results (kickoff, score, H/A, stadium)
- *   - *_出場記録.html -> Per-match exact starters (11), substitutes, scorers (①/②/③), and player apps/goals
+ *   - *_日程.html     -> Full season match schedule & results (exact kickoff time, score, H/A, stadium)
+ *   - *_出場記録.html -> Builds full season matches (if no 日程.html) + exact starters (11),
+ *                        substitutes, scorers (①/②/③), and player apps/goals
  *   - *通算記録*.html -> All-time club record (public/api/v1/club_history.json)
  *
  * File prefix -> SeasonId mapping:
- *   26_27_*   -> 2026-27
+ *   26_27_* / 2026_27_*      -> 2026-27
  *   26_sp_* / 2026_special_* -> 2026-special
- *   2025_* / 25_* -> 2025
- *   2024_* / 24_* -> 2024
- *   2023_* / 23_* -> 2023
+ *   25_* / 2025*             -> 2025
+ *   24_* / 2024*             -> 2024
+ *   23_* / 2023*             -> 2023
+ *   22_* / 2022*             -> 2022
+ *   21_* / 2021*             -> 2021
+ *   20_* / 2020*             -> 2020
  */
 
 import fs from 'node:fs/promises';
@@ -24,6 +28,17 @@ const API_DIR = path.join(ROOT_DIR, 'public/api/v1');
 const SEASONS_DIR = path.join(API_DIR, 'seasons');
 const PLAYER_IDS_PATH = path.join(ROOT_DIR, 'data/player-ids.json');
 const TICKET_URL = 'https://www.jleague-ticket.jp/club/sb/';
+
+const SEASON_DEFAULTS = {
+  '2026-27': { label: '2026-27', competition: 'J2リーグ', manager: '長澤 徹', rank: 8 },
+  '2026-special': { label: '2026特別大会', competition: 'J2・J3百年構想リーグ', manager: '長澤 徹', rank: 12 },
+  '2025': { label: '2025', competition: 'J1リーグ', manager: '山口 智', rank: 19 },
+  '2024': { label: '2024', competition: 'J1リーグ', manager: '山口 智', rank: 15 },
+  '2023': { label: '2023', competition: 'J1リーグ', manager: '山口 智', rank: 15 },
+  '2022': { label: '2022', competition: 'J1リーグ', manager: '山口 智', rank: 12 },
+  '2021': { label: '2021', competition: 'J1リーグ', manager: '浮嶋 敏 / 山口 智', rank: 16 },
+  '2020': { label: '2020', competition: 'J1リーグ', manager: '浮嶋 敏', rank: 18 },
+};
 
 const CIRCLED_NUMS = {
   '①': 1, '②': 2, '③': 3, '④': 4, '⑤': 5,
@@ -77,6 +92,9 @@ function detectSeasonId(filename) {
   if (/^(25_|2025)/i.test(base)) return '2025';
   if (/^(24_|2024)/i.test(base)) return '2024';
   if (/^(23_|2023)/i.test(base)) return '2023';
+  if (/^(22_|2022)/i.test(base)) return '2022';
+  if (/^(21_|2021)/i.test(base)) return '2021';
+  if (/^(20_|2020)/i.test(base)) return '2020';
   return null;
 }
 
@@ -96,6 +114,11 @@ function parseJDate(dateRaw, timeRaw) {
   return `${year}-${month}-${day}T${hh}:${mm}:00+09:00`;
 }
 
+function isBellmareHomeStadium(stadium) {
+  const s = toHalfWidth(stadium);
+  return /レモン|BMW|平塚|国立/.test(s);
+}
+
 function parseScheduleHtml(html, seasonId) {
   const tables = extractTables(html);
   const matches = [];
@@ -103,7 +126,6 @@ function parseScheduleHtml(html, seasonId) {
   for (const rows of tables) {
     for (const cells of rows) {
       if (cells.length < 9) continue;
-      // [season, comp, round, date, time, home, scoreOrVs, away, stadium, attendance?, tv?]
       const roundText = toHalfWidth(cells[2]);
       const roundMatch = roundText.match(/第(\d+)節/);
       if (!roundMatch) continue;
@@ -159,9 +181,10 @@ function countGoalsInCell(cellText) {
   return total;
 }
 
-function parseAppearanceHtml(html) {
+function parseAppearanceHtml(html, seasonId) {
   const tables = extractTables(html);
-  const roundDetails = new Map(); // roundNum -> { starters: number[], substitutes: number[], scorers: string[] }
+  const roundDetails = new Map(); // roundNum -> { starters, substitutes, scorers }
+  const roundMeta = new Map(); // roundNum -> { roundNum, kickoff, stadium, opponent, bellmare_score, opponent_score, finished }
   const playerStats = new Map(); // number -> { number, name, apps, goals }
 
   for (const rows of tables) {
@@ -169,18 +192,42 @@ function parseAppearanceHtml(html) {
     const headerRow = rows[0];
     if (!headerRow || headerRow[1] !== '節') continue;
 
-    // Map column index (in player rows, offset +3 compared to headerRow:
+    const dateRow = rows[1] ?? [];
+    const venueRow = rows[2] ?? [];
+    const vsRow = rows[3] ?? [];
+
     // headerRow: [0:team, 1:'節', 2:'第１節', 3:'第２節', ...]
-    // playerRow: [0:No, 1:選手, 2:出場, 3:時間, 4:得点, 5:roundCol0, 6:roundCol1, ...]
+    // dateRow/venueRow/vsRow: [0:'日'/'会場'/'対', 1:col0, 2:col1, ...]  -> index = c - 1
+    // playerRow: [0:No, 1:選手, 2:出場, 3:時間, 4:得点, 5:col0, ...] -> index = c + 3
     const roundCols = [];
     for (let c = 2; c < headerRow.length; c += 1) {
       const m = toHalfWidth(headerRow[c]).match(/第(\d+)節/);
-      if (m) {
-        roundCols.push({ roundNum: Number(m[1]), playerColIdx: c + 3 });
+      if (!m) continue;
+      const roundNum = Number(m[1]);
+      roundCols.push({ roundNum, playerColIdx: c + 3 });
+
+      const metaIdx = c - 1;
+      const dateText = dateRow[metaIdx] ?? '';
+      const venueText = venueRow[metaIdx] ?? '';
+      const vsText = toHalfWidth(vsRow[metaIdx] ?? '');
+      const kickoff = parseJDate(dateText, '');
+
+      // vsText format: "大分 ○ 1 - 0" or "仙台 ● 1 - 3" or "宮崎 △ 0 - 0"
+      const vsMatch = vsText.match(/^(.+?)\s+[○●△]\s*(\d+)\s*-\s*(\d+)/);
+      if (kickoff && vsMatch) {
+        roundMeta.set(roundNum, {
+          roundNum,
+          kickoff,
+          stadium: venueText || '未定',
+          opponent: vsMatch[1].trim(),
+          bellmare_score: Number(vsMatch[2]),
+          opponent_score: Number(vsMatch[3]),
+          finished: true,
+        });
       }
     }
 
-    // Player rows start at row 6 (row 5 is No. / 選手 / 出場 / 時間 / 得点)
+    // Player rows start at row 6
     for (let r = 6; r < rows.length; r += 1) {
       const cells = rows[r];
       if (cells.length < 5) continue;
@@ -204,7 +251,6 @@ function parseAppearanceHtml(html) {
         }
         const rd = roundDetails.get(roundNum);
 
-        // ○ or ▽ = Starter; ▲ or ◆ or SUB = Substitute
         if (val.includes('○') || val.includes('▽')) {
           if (!rd.starters.includes(num)) rd.starters.push(num);
         } else if (val.includes('▲') || val.includes('◆') || val.includes('SUB')) {
@@ -220,7 +266,28 @@ function parseAppearanceHtml(html) {
     }
   }
 
-  return { roundDetails, playerStats };
+  // Build matches array from roundMeta (used when *_日程.html is absent)
+  const matchesFromAppearance = [...roundMeta.values()]
+    .map((rm) => ({
+      id: `${seasonId}-r${rm.roundNum}`,
+      round: `第${rm.roundNum}節`,
+      kickoff: rm.kickoff,
+      is_home: isBellmareHomeStadium(rm.stadium),
+      opponent: rm.opponent,
+      stadium: rm.stadium,
+      status: 'finished',
+      ticket_url: null,
+      result: {
+        bellmare_score: rm.bellmare_score,
+        opponent_score: rm.opponent_score,
+        scorers: [],
+      },
+      lineup: null,
+      stats: null,
+    }))
+    .sort((a, b) => new Date(b.kickoff).getTime() - new Date(a.kickoff).getTime());
+
+  return { roundDetails, playerStats, matchesFromAppearance };
 }
 
 function parseClubHistoryHtml(html) {
@@ -301,13 +368,20 @@ async function main() {
   // 2. Per-season schedule + appearances
   for (const [seasonId, group] of bySeason.entries()) {
     const outPath = path.join(SEASONS_DIR, `${seasonId}.json`);
+    const def = SEASON_DEFAULTS[seasonId] ?? {
+      label: seasonId,
+      competition: 'J1リーグ',
+      manager: '',
+      rank: 0,
+    };
+
     let existing = {
       id: seasonId,
-      label: seasonId,
-      competition: seasonId === '2026-27' ? 'J2リーグ' : 'J1リーグ',
-      manager: '',
+      label: def.label,
+      competition: def.competition,
+      manager: def.manager,
       note: '',
-      summary: { rank: 0, played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, gd: 0, points: 0 },
+      summary: { rank: def.rank, played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, gd: 0, points: 0 },
       standings: [],
       matches: [],
       players: [],
@@ -315,7 +389,7 @@ async function main() {
     try {
       existing = JSON.parse(await fs.readFile(outPath, 'utf8'));
     } catch {
-      // Use default skeleton
+      // New season file (e.g., 2020, 2021, 2022)
     }
 
     let matches = existing.matches;
@@ -327,41 +401,52 @@ async function main() {
 
     if (group.appearance) {
       const appHtml = await fs.readFile(path.join(RAW_DIR, group.appearance), 'utf8');
-      const { roundDetails, playerStats } = parseAppearanceHtml(appHtml);
+      const { roundDetails, playerStats, matchesFromAppearance } = parseAppearanceHtml(
+        appHtml,
+        seasonId
+      );
 
-      // Update player apps/goals from official appearance matrix
+      // If no separate *_日程.html exists, use the full match list extracted from 出場記録.html!
+      if (!group.schedule && matchesFromAppearance.length > 0) {
+        matches = matchesFromAppearance;
+      }
+
+      // Build/update players list (keeping existing position/height/weight/kana if already known)
       const existingPlayerByNum = new Map((existing.players ?? []).map((p) => [p.number, p]));
+      const nextPlayers = [];
       for (const [num, st] of playerStats.entries()) {
         const prev = existingPlayerByNum.get(num);
-        if (prev) {
-          prev.apps = st.apps;
-          prev.goals = st.goals;
-        } else {
-          const key = normalizeNameKey(st.name);
-          const id = playerIdMap[key] || `player-${seasonId}-${num}`;
-          playerIdMap[key] = id;
-          existingPlayerByNum.set(num, {
-            id,
-            number: num,
-            name: st.name,
-            kana: '',
-            position: 'MF',
-            height: 0,
-            weight: 0,
-            apps: st.apps,
-            goals: st.goals,
-            assists: 0,
-          });
+        const key = normalizeNameKey(st.name);
+        const id = prev?.id || playerIdMap[key] || `player-${seasonId}-${num}`;
+        playerIdMap[key] = id;
+
+        nextPlayers.push({
+          id,
+          number: num,
+          name: st.name,
+          kana: prev?.kana ?? '',
+          position: prev?.position ?? (num === 1 || num === 21 || num === 31 || num === 99 ? 'GK' : 'MF'),
+          height: prev?.height ?? 0,
+          weight: prev?.weight ?? 0,
+          apps: st.apps,
+          goals: st.goals,
+          assists: prev?.assists ?? 0,
+        });
+      }
+      // Keep any extra registered players (0 apps) that were already in existing.players
+      for (const [num, prev] of existingPlayerByNum.entries()) {
+        if (!playerStats.has(num)) {
+          nextPlayers.push(prev);
         }
       }
-      existing.players = [...existingPlayerByNum.values()].sort((a, b) => a.number - b.number);
+      existing.players = nextPlayers.sort((a, b) => a.number - b.number);
 
-      // Position sort helper so GK is always index 0 in starters array (for formation pitch UI)
+      const playerByNum = new Map(existing.players.map((p) => [p.number, p]));
       const posOrder = { GK: 0, DF: 1, MF: 2, FW: 3 };
       const sortByPosition = (nums) =>
         [...nums].sort((a, b) => {
-          const pa = posOrder[existingPlayerByNum.get(a)?.position ?? 'MF'] ?? 2;
-          const pb = posOrder[existingPlayerByNum.get(b)?.position ?? 'MF'] ?? 2;
+          const pa = posOrder[playerByNum.get(a)?.position ?? 'MF'] ?? 2;
+          const pb = posOrder[playerByNum.get(b)?.position ?? 'MF'] ?? 2;
           return pa !== pb ? pa - pb : a - b;
         });
 
@@ -386,7 +471,7 @@ async function main() {
       }
 
       console.log(
-        `[import:html] ${group.appearance}: enriched ${enrichedMatches} matches with exact starters/subs/scorers & ${playerStats.size} players`
+        `[import:html] ${group.appearance}: ${matches.length} matches (${enrichedMatches} with starters/subs/scorers), ${existing.players.length} players`
       );
     }
 
@@ -400,7 +485,7 @@ async function main() {
 
     existing.matches = matches;
     existing.summary = {
-      ...existing.summary,
+      rank: existing.summary?.rank || def.rank,
       played: finished.length,
       won,
       drawn,
@@ -411,10 +496,24 @@ async function main() {
       points: won * 3 + drawn,
     };
 
+    // Ensure standings always has at least Shonan Bellmare's accurate target row
+    if (!Array.isArray(existing.standings) || !existing.standings.some((r) => r.is_target)) {
+      existing.standings = [
+        {
+          rank: existing.summary.rank,
+          team: '湘南ベルマーレ',
+          played: existing.summary.played,
+          won: existing.summary.won,
+          drawn: existing.summary.drawn,
+          lost: existing.summary.lost,
+          gd: existing.summary.gd,
+          points: existing.summary.points,
+          is_target: true,
+        },
+      ];
+    }
+
     await fs.writeFile(outPath, `${JSON.stringify(existing, null, 2)}\n`, 'utf8');
-    console.log(
-      `[import:html] Wrote seasons/${seasonId}.json (${finished.length} finished / ${matches.length} total matches, ${existing.players.length} players)`
-    );
   }
 
   await fs.writeFile(PLAYER_IDS_PATH, `${JSON.stringify(playerIdMap, null, 2)}\n`, 'utf8');
