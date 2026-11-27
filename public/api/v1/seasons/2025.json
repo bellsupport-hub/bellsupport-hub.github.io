@@ -1,0 +1,2167 @@
+{
+  "id": "2025",
+  "label": "2025",
+  "competition": "J1リーグ",
+  "manager": "山口 智",
+  "note": "J1 19位（8勝8分22敗・勝点32・36得点63失点）。鈴木章斗が10番として攻撃を牽引するも惜しくもJ2降格。",
+  "summary": {
+    "rank": 19,
+    "played": 38,
+    "won": 8,
+    "drawn": 8,
+    "lost": 22,
+    "gf": 36,
+    "ga": 63,
+    "gd": -27,
+    "points": 32
+  },
+  "standings": [
+    {
+      "rank": 19,
+      "team": "湘南ベルマーレ",
+      "played": 38,
+      "won": 8,
+      "drawn": 8,
+      "lost": 22,
+      "gd": -27,
+      "points": 32,
+      "is_target": true
+    }
+  ],
+  "matches": [
+    {
+      "id": "2025-r38",
+      "round": "第38節",
+      "kickoff": "2025-12-06T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "広島",
+      "stadium": "Ｅピース",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 2,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          31,
+          4,
+          14,
+          17,
+          18,
+          28,
+          32,
+          37,
+          47,
+          72,
+          10
+        ],
+        "substitutes": [
+          8,
+          15,
+          20,
+          22,
+          25,
+          29,
+          33,
+          50,
+          81
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r37",
+      "round": "第37節",
+      "kickoff": "2025-11-30T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "清水",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 0,
+        "scorers": [
+          "小野瀬康介"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          31,
+          4,
+          7,
+          14,
+          17,
+          28,
+          32,
+          47,
+          66,
+          72,
+          10
+        ],
+        "substitutes": [
+          8,
+          15,
+          18,
+          20,
+          22,
+          33,
+          37,
+          77,
+          81
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r36",
+      "round": "第36節",
+      "kickoff": "2025-11-08T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "新潟",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 5,
+        "opponent_score": 2,
+        "scorers": [
+          "小野瀬康介",
+          "鈴木章斗(2)",
+          "平岡大陽",
+          "奥野耕平"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          31,
+          4,
+          7,
+          13,
+          14,
+          28,
+          32,
+          47,
+          66,
+          72,
+          10
+        ],
+        "substitutes": [
+          8,
+          15,
+          17,
+          18,
+          27,
+          37,
+          50,
+          77,
+          81
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r35",
+      "round": "第35節",
+      "kickoff": "2025-10-26T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "福岡",
+      "stadium": "ベススタ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 1,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          31,
+          4,
+          8,
+          7,
+          13,
+          15,
+          37,
+          47,
+          66,
+          9,
+          10
+        ],
+        "substitutes": [
+          1,
+          6,
+          17,
+          18,
+          22,
+          32,
+          50,
+          72,
+          77
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r34",
+      "round": "第34節",
+      "kickoff": "2025-10-19T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "京都",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 1,
+        "scorers": [
+          "鈴木章斗"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          31,
+          4,
+          8,
+          7,
+          15,
+          25,
+          37,
+          47,
+          66,
+          9,
+          10
+        ],
+        "substitutes": [
+          1,
+          6,
+          13,
+          18,
+          22,
+          29,
+          50,
+          72,
+          77
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r33",
+      "round": "第33節",
+      "kickoff": "2025-10-03T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "東京V",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 1,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          31,
+          4,
+          8,
+          6,
+          7,
+          13,
+          22,
+          29,
+          32,
+          50,
+          10
+        ],
+        "substitutes": [
+          1,
+          15,
+          18,
+          25,
+          37,
+          47,
+          66,
+          72,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r32",
+      "round": "第32節",
+      "kickoff": "2025-09-28T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "横浜FC",
+      "stadium": "ニッパツ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 1,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          31,
+          4,
+          6,
+          7,
+          18,
+          27,
+          28,
+          37,
+          47,
+          66,
+          10
+        ],
+        "substitutes": [
+          1,
+          8,
+          13,
+          20,
+          22,
+          25,
+          29,
+          50,
+          72
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r31",
+      "round": "第31節",
+      "kickoff": "2025-09-23T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "川崎F",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 2,
+        "scorers": [
+          "舘幸希"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          31,
+          4,
+          7,
+          15,
+          18,
+          22,
+          37,
+          47,
+          66,
+          72,
+          10
+        ],
+        "substitutes": [
+          1,
+          8,
+          13,
+          14,
+          20,
+          27,
+          28,
+          29,
+          50
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r30",
+      "round": "第30節",
+      "kickoff": "2025-09-20T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "名古屋",
+      "stadium": "豊田ス",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 3,
+        "scorers": [
+          "鈴木章斗"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          8,
+          6,
+          7,
+          18,
+          25,
+          28,
+          47,
+          50,
+          66,
+          81,
+          10
+        ],
+        "substitutes": [
+          1,
+          13,
+          14,
+          15,
+          20,
+          22,
+          27,
+          37,
+          72
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r29",
+      "round": "第29節",
+      "kickoff": "2025-09-13T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "鹿島",
+      "stadium": "メルスタ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 3,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          8,
+          6,
+          7,
+          13,
+          28,
+          47,
+          50,
+          66,
+          81,
+          9,
+          10
+        ],
+        "substitutes": [
+          1,
+          14,
+          15,
+          18,
+          20,
+          25,
+          29,
+          37,
+          72
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r28",
+      "round": "第28節",
+      "kickoff": "2025-08-31T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "G大阪",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 4,
+        "opponent_score": 5,
+        "scorers": [
+          "小田裕太郎",
+          "平岡大陽",
+          "大岩一貴",
+          "二田理央"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          1,
+          4,
+          8,
+          6,
+          7,
+          13,
+          20,
+          37,
+          66,
+          72,
+          9
+        ],
+        "substitutes": [
+          14,
+          15,
+          18,
+          22,
+          25,
+          27,
+          50,
+          77,
+          81
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r27",
+      "round": "第27節",
+      "kickoff": "2025-08-23T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "岡山",
+      "stadium": "ＪＦＥス",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 1,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          1,
+          4,
+          8,
+          7,
+          13,
+          15,
+          32,
+          37,
+          66,
+          9,
+          10
+        ],
+        "substitutes": [
+          6,
+          14,
+          20,
+          22,
+          25,
+          27,
+          72,
+          77,
+          81
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r26",
+      "round": "第26節",
+      "kickoff": "2025-08-16T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "FC東京",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 2,
+        "opponent_score": 2,
+        "scorers": [
+          "鈴木章斗",
+          "鈴木雄斗"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          1,
+          4,
+          8,
+          13,
+          14,
+          15,
+          28,
+          37,
+          66,
+          9,
+          10
+        ],
+        "substitutes": [
+          6,
+          7,
+          20,
+          22,
+          27,
+          50,
+          72,
+          77,
+          81
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r25",
+      "round": "第25節",
+      "kickoff": "2025-08-10T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "柏",
+      "stadium": "三協Ｆ柏",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 2,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          1,
+          8,
+          7,
+          14,
+          18,
+          28,
+          37,
+          50,
+          66,
+          9,
+          10
+        ],
+        "substitutes": [
+          4,
+          6,
+          13,
+          15,
+          22,
+          27,
+          72,
+          77,
+          81
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r21",
+      "round": "第21節",
+      "kickoff": "2025-07-23T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "浦和",
+      "stadium": "埼玉",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 4,
+        "scorers": [
+          "太田修介"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          1,
+          8,
+          7,
+          13,
+          15,
+          25,
+          28,
+          32,
+          37,
+          50,
+          10
+        ],
+        "substitutes": [
+          31,
+          4,
+          14,
+          16,
+          18,
+          20,
+          27,
+          66,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r24",
+      "round": "第24節",
+      "kickoff": "2025-07-19T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "C大阪",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 3,
+        "opponent_score": 3,
+        "scorers": [
+          "鈴木章斗",
+          "平岡大陽",
+          "ルイスフェリッピ"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          1,
+          8,
+          7,
+          13,
+          15,
+          25,
+          28,
+          32,
+          37,
+          50,
+          10
+        ],
+        "substitutes": [
+          31,
+          4,
+          14,
+          18,
+          20,
+          27,
+          66,
+          72,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r23",
+      "round": "第23節",
+      "kickoff": "2025-07-05T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "神戸",
+      "stadium": "ノエスタ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 4,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          1,
+          8,
+          7,
+          13,
+          14,
+          19,
+          22,
+          32,
+          37,
+          47,
+          10
+        ],
+        "substitutes": [
+          31,
+          4,
+          6,
+          15,
+          25,
+          27,
+          72,
+          77,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r22",
+      "round": "第22節",
+      "kickoff": "2025-06-28T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "横浜FM",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 1,
+        "scorers": [
+          "平岡大陽"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          31,
+          8,
+          3,
+          5,
+          7,
+          13,
+          14,
+          19,
+          37,
+          50,
+          10
+        ],
+        "substitutes": [
+          15,
+          16,
+          18,
+          22,
+          25,
+          27,
+          41,
+          77,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r20",
+      "round": "第20節",
+      "kickoff": "2025-06-14T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "町田",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 2,
+        "scorers": [
+          "福田翔生"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          8,
+          5,
+          7,
+          13,
+          14,
+          25,
+          27,
+          32,
+          37,
+          50
+        ],
+        "substitutes": [
+          31,
+          4,
+          15,
+          16,
+          18,
+          19,
+          20,
+          22,
+          10
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r19",
+      "round": "第19節",
+      "kickoff": "2025-06-01T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "岡山",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 1,
+        "scorers": [
+          "ルイスフェリッピ"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          4,
+          3,
+          5,
+          13,
+          15,
+          18,
+          22,
+          27,
+          37,
+          10
+        ],
+        "substitutes": [
+          31,
+          8,
+          14,
+          16,
+          20,
+          25,
+          33,
+          50,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r18",
+      "round": "第18節",
+      "kickoff": "2025-05-25T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "新潟",
+      "stadium": "デンカＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 2,
+        "scorers": [
+          "ルイスフェリッピ"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          4,
+          3,
+          5,
+          13,
+          15,
+          18,
+          27,
+          37,
+          50,
+          10
+        ],
+        "substitutes": [
+          31,
+          8,
+          14,
+          16,
+          20,
+          22,
+          25,
+          32,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r17",
+      "round": "第17節",
+      "kickoff": "2025-05-17T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "横浜FC",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 1,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          5,
+          13,
+          15,
+          18,
+          19,
+          32,
+          37,
+          47,
+          50,
+          9
+        ],
+        "substitutes": [
+          31,
+          4,
+          8,
+          3,
+          14,
+          25,
+          27,
+          77,
+          10
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r16",
+      "round": "第16節",
+      "kickoff": "2025-05-11T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "東京V",
+      "stadium": "味スタ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 2,
+        "opponent_score": 0,
+        "scorers": [
+          "奥野耕平",
+          "ルイスフェリッピ"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          5,
+          13,
+          15,
+          18,
+          19,
+          32,
+          37,
+          47,
+          50,
+          9
+        ],
+        "substitutes": [
+          31,
+          4,
+          3,
+          14,
+          25,
+          27,
+          33,
+          77,
+          10
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r15",
+      "round": "第15節",
+      "kickoff": "2025-05-07T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "広島",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 1,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          3,
+          5,
+          14,
+          16,
+          19,
+          25,
+          37,
+          47,
+          50,
+          10
+        ],
+        "substitutes": [
+          31,
+          4,
+          15,
+          18,
+          27,
+          32,
+          33,
+          77,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r14",
+      "round": "第14節",
+      "kickoff": "2025-05-03T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "G大阪",
+      "stadium": "パナスタ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 4,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          8,
+          3,
+          5,
+          7,
+          15,
+          18,
+          19,
+          22,
+          37,
+          10
+        ],
+        "substitutes": [
+          31,
+          13,
+          14,
+          25,
+          27,
+          47,
+          50,
+          77,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r13",
+      "round": "第13節",
+      "kickoff": "2025-04-29T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "福岡",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 0,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          8,
+          3,
+          5,
+          15,
+          16,
+          18,
+          22,
+          25,
+          50,
+          9
+        ],
+        "substitutes": [
+          31,
+          7,
+          14,
+          19,
+          33,
+          37,
+          47,
+          77,
+          10
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r12",
+      "round": "第12節",
+      "kickoff": "2025-04-25T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "町田",
+      "stadium": "Ｇスタ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 0,
+        "scorers": [
+          "池田昌生"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          4,
+          8,
+          3,
+          5,
+          7,
+          15,
+          16,
+          25,
+          37,
+          9
+        ],
+        "substitutes": [
+          31,
+          14,
+          18,
+          19,
+          22,
+          47,
+          50,
+          77,
+          10
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r11",
+      "round": "第11節",
+      "kickoff": "2025-04-20T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "柏",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 1,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          4,
+          3,
+          5,
+          7,
+          15,
+          18,
+          19,
+          37,
+          50,
+          10
+        ],
+        "substitutes": [
+          31,
+          8,
+          14,
+          16,
+          22,
+          25,
+          47,
+          77,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r10",
+      "round": "第10節",
+      "kickoff": "2025-04-12T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "京都",
+      "stadium": "サンガＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 2,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          3,
+          5,
+          7,
+          15,
+          19,
+          25,
+          37,
+          47,
+          50,
+          10
+        ],
+        "substitutes": [
+          31,
+          4,
+          8,
+          14,
+          16,
+          18,
+          22,
+          27,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r9",
+      "round": "第9節",
+      "kickoff": "2025-04-06T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "名古屋",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 2,
+        "opponent_score": 1,
+        "scorers": [
+          "福田翔生",
+          "鈴木雄斗"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          3,
+          5,
+          7,
+          15,
+          19,
+          25,
+          37,
+          47,
+          50,
+          10
+        ],
+        "substitutes": [
+          31,
+          8,
+          14,
+          16,
+          18,
+          22,
+          27,
+          77,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r8",
+      "round": "第8節",
+      "kickoff": "2025-04-02T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "川崎F",
+      "stadium": "Ｕ等々力",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 2,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          4,
+          5,
+          7,
+          15,
+          18,
+          19,
+          32,
+          37,
+          47,
+          10
+        ],
+        "substitutes": [
+          31,
+          3,
+          14,
+          22,
+          25,
+          27,
+          50,
+          77,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r7",
+      "round": "第7節",
+      "kickoff": "2025-03-29T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "清水",
+      "stadium": "アイスタ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 3,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          3,
+          5,
+          7,
+          19,
+          25,
+          33,
+          37,
+          47,
+          50,
+          10
+        ],
+        "substitutes": [
+          31,
+          4,
+          14,
+          15,
+          18,
+          27,
+          32,
+          77,
+          9
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r6",
+      "round": "第6節",
+      "kickoff": "2025-03-16T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "神戸",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 2,
+        "scorers": [
+          "ルキアン"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          3,
+          5,
+          7,
+          11,
+          13,
+          15,
+          37,
+          47,
+          50,
+          10
+        ],
+        "substitutes": [
+          31,
+          8,
+          14,
+          16,
+          22,
+          27,
+          32,
+          33,
+          77
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r5",
+      "round": "第5節",
+      "kickoff": "2025-03-08T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "FC東京",
+      "stadium": "味スタ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 0,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          3,
+          5,
+          7,
+          13,
+          15,
+          19,
+          37,
+          47,
+          50,
+          10
+        ],
+        "substitutes": [
+          31,
+          8,
+          11,
+          14,
+          16,
+          22,
+          32,
+          33,
+          77
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r4",
+      "round": "第4節",
+      "kickoff": "2025-03-01T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "横浜FM",
+      "stadium": "日産ス",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 1,
+        "scorers": [
+          "石井久継"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          3,
+          5,
+          7,
+          13,
+          15,
+          16,
+          37,
+          47,
+          50,
+          10
+        ],
+        "substitutes": [
+          21,
+          8,
+          14,
+          17,
+          22,
+          27,
+          32,
+          33,
+          77
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r3",
+      "round": "第3節",
+      "kickoff": "2025-02-26T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "浦和",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 2,
+        "opponent_score": 1,
+        "scorers": [
+          "鈴木章斗",
+          "福田翔生"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          3,
+          5,
+          7,
+          13,
+          15,
+          19,
+          37,
+          47,
+          50,
+          10
+        ],
+        "substitutes": [
+          21,
+          8,
+          11,
+          16,
+          17,
+          22,
+          27,
+          32,
+          33
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r2",
+      "round": "第2節",
+      "kickoff": "2025-02-22T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "C大阪",
+      "stadium": "ヨドコウ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 2,
+        "opponent_score": 1,
+        "scorers": [
+          "鈴木章斗(2)"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          3,
+          5,
+          7,
+          13,
+          15,
+          19,
+          37,
+          47,
+          50,
+          10
+        ],
+        "substitutes": [
+          21,
+          8,
+          11,
+          14,
+          16,
+          17,
+          22,
+          27,
+          33
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r1",
+      "round": "第1節",
+      "kickoff": "2025-02-15T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "鹿島",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 1,
+        "opponent_score": 0,
+        "scorers": [
+          "福田翔生"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          99,
+          3,
+          5,
+          7,
+          13,
+          15,
+          19,
+          37,
+          47,
+          50,
+          10
+        ],
+        "substitutes": [
+          21,
+          8,
+          11,
+          14,
+          16,
+          17,
+          22,
+          32,
+          33
+        ]
+      },
+      "stats": null
+    }
+  ],
+  "players": [
+    {
+      "id": "pope-william",
+      "number": 1,
+      "name": "ポープ ウィリアム",
+      "kana": "ポープ ウィリアム",
+      "position": "GK",
+      "height": 192,
+      "weight": 88,
+      "apps": 7,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "hata-taiga",
+      "number": 3,
+      "name": "畑 大雅",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 20,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "tachi-koki",
+      "number": 4,
+      "name": "舘 幸希",
+      "kana": "タチ コウキ",
+      "position": "DF",
+      "height": 174,
+      "weight": 70,
+      "apps": 17,
+      "goals": 1,
+      "assists": 1
+    },
+    {
+      "id": "player-2022-30",
+      "number": 5,
+      "name": "鈴木 淳之介",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 21,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "ze-ricardo",
+      "number": 6,
+      "name": "ゼ ヒカルド",
+      "kana": "ゼ ヒカルド",
+      "position": "MF",
+      "height": 176,
+      "weight": 72,
+      "apps": 7,
+      "goals": 0,
+      "assists": 2
+    },
+    {
+      "id": "onose-kosuke",
+      "number": 7,
+      "name": "小野瀬 康介",
+      "kana": "オノセ コウスケ",
+      "position": "MF",
+      "height": 176,
+      "weight": 71,
+      "apps": 32,
+      "goals": 2,
+      "assists": 5
+    },
+    {
+      "id": "ohno-kazunari",
+      "number": 8,
+      "name": "大野 和成",
+      "kana": "オオノ カズナリ",
+      "position": "DF",
+      "height": 180,
+      "weight": 77,
+      "apps": 21,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "oda-yutaro",
+      "number": 9,
+      "name": "小田 裕太郎",
+      "kana": "オダ ユウタロウ",
+      "position": "FW",
+      "height": 181,
+      "weight": 70,
+      "apps": 22,
+      "goals": 1,
+      "assists": 3
+    },
+    {
+      "id": "suzuki-akito",
+      "number": 10,
+      "name": "鈴木 章斗",
+      "kana": "スズキ アキト",
+      "position": "FW",
+      "height": 179,
+      "weight": 72,
+      "apps": 37,
+      "goals": 9,
+      "assists": 4
+    },
+    {
+      "id": "lukian",
+      "number": 11,
+      "name": "ルキアン",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 5,
+      "goals": 1,
+      "assists": 0
+    },
+    {
+      "id": "hiraoka-taiyo",
+      "number": 13,
+      "name": "平岡 大陽",
+      "kana": "ヒラオカ タイヨウ",
+      "position": "MF",
+      "height": 172,
+      "weight": 66,
+      "apps": 28,
+      "goals": 4,
+      "assists": 4
+    },
+    {
+      "id": "barada-akimi",
+      "number": 14,
+      "name": "茨田 陽生",
+      "kana": "バラダ アキミ",
+      "position": "MF",
+      "height": 173,
+      "weight": 69,
+      "apps": 27,
+      "goals": 0,
+      "assists": 3
+    },
+    {
+      "id": "okuno-kohei",
+      "number": 15,
+      "name": "奥野 耕平",
+      "kana": "オクノ コウヘイ",
+      "position": "MF",
+      "height": 174,
+      "weight": 69,
+      "apps": 31,
+      "goals": 2,
+      "assists": 2
+    },
+    {
+      "id": "player-2020-37",
+      "number": 16,
+      "name": "根本 凌",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 10,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "tamura-sohki",
+      "number": 17,
+      "name": "田村 蒼生",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 5,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "ikeda-masaki",
+      "number": 18,
+      "name": "池田 昌生",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 24,
+      "goals": 1,
+      "assists": 0
+    },
+    {
+      "id": "fukuda-sho",
+      "number": 19,
+      "name": "福田 翔生",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 18,
+      "goals": 4,
+      "assists": 0
+    },
+    {
+      "id": "ishibashi-sena",
+      "number": 20,
+      "name": "石橋 瀬凪",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 10,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "nagai-tatsunari",
+      "number": 21,
+      "name": "永井 建成",
+      "kana": "",
+      "position": "GK",
+      "height": 0,
+      "weight": 0,
+      "apps": 0,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "player-2020-22",
+      "number": 22,
+      "name": "大岩 一貴",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 15,
+      "goals": 1,
+      "assists": 0
+    },
+    {
+      "id": "okuno-hiroaki",
+      "number": 25,
+      "name": "奥埜 博亮",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 21,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "player-2024-27",
+      "number": 27,
+      "name": "ルイス フェリッピ",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 20,
+      "goals": 4,
+      "assists": 0
+    },
+    {
+      "id": "ota-shusuke",
+      "number": 28,
+      "name": "太田 修介",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 10,
+      "goals": 1,
+      "assists": 0
+    },
+    {
+      "id": "watanabe-keigo",
+      "number": 29,
+      "name": "渡邊 啓吾",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 5,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "yamaguchi-gota",
+      "number": 30,
+      "name": "山口 豪太",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 0,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "sanada-kota",
+      "number": 31,
+      "name": "真田 幸太",
+      "kana": "",
+      "position": "GK",
+      "height": 0,
+      "weight": 0,
+      "apps": 9,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "matsumura-sere",
+      "number": 32,
+      "name": "松村 晟怜",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 15,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "takahashi-naoya",
+      "number": 33,
+      "name": "髙橋 直也",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 7,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "suzuki-yuto",
+      "number": 37,
+      "name": "鈴木 雄斗",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 36,
+      "goals": 2,
+      "assists": 0
+    },
+    {
+      "id": "player-2025-41",
+      "number": 41,
+      "name": "糸原 紘史郎",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 0,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "player-2023-47",
+      "number": 47,
+      "name": "キム ミンテ",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 15,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "player-2025-50",
+      "number": 50,
+      "name": "藤井 智也",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 30,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "matsumoto-hiroya",
+      "number": 66,
+      "name": "松本 大弥",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 14,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "player-2025-72",
+      "number": 72,
+      "name": "二田 理央",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 13,
+      "goals": 1,
+      "assists": 0
+    },
+    {
+      "id": "ishii-hisatsugu",
+      "number": 77,
+      "name": "石井 久継",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 13,
+      "goals": 1,
+      "assists": 0
+    },
+    {
+      "id": "player-2025-81",
+      "number": 81,
+      "name": "吉田 舜",
+      "kana": "",
+      "position": "MF",
+      "height": 0,
+      "weight": 0,
+      "apps": 2,
+      "goals": 0,
+      "assists": 0
+    },
+    {
+      "id": "kamifukumoto-naoto",
+      "number": 99,
+      "name": "上福元 直人",
+      "kana": "",
+      "position": "GK",
+      "height": 0,
+      "weight": 0,
+      "apps": 20,
+      "goals": 0,
+      "assists": 0
+    }
+  ]
+}

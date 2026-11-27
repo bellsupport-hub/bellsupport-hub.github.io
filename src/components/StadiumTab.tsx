@@ -1,194 +1,331 @@
-import { useEffect, useMemo, useState } from 'react';
-import {
-  Bus,
-  ExternalLink,
-  Footprints,
-  MapPin,
-  Maximize2,
-  Minus,
-  Music2,
-  Plus,
-  Search,
-  X,
-} from 'lucide-react';
-import type { Chant, StadiumGuideData } from '../types';
+import { useMemo, useState } from 'react';
+import { ExternalLink, Map as MapIcon, MapPin, Search, Ticket, X } from 'lucide-react';
+import type { Match, SeasonArchive, StadiumGuideData, WatchStatus } from '../types';
+import { getGoogleMapsUrl, getStadiumInfo } from '../utils/clubMeta';
+import { formatKickoffDate, formatKickoffTime, getMatchOutcome } from '../utils/format';
+import { TeamFlag, VenuePin } from './TeamFlag';
 
-type SubTab = 'access' | 'chants';
-type DayType = 'weekend' | 'weekday';
+type SubTab = 'guide' | 'venues' | 'pending';
+type VenueFilter = 'all' | 'home' | 'away' | 'visited';
 
 interface StadiumTabProps {
   stadiumGuide: StadiumGuideData;
+  allMatches: Match[];
+  currentSeason: SeasonArchive;
+  getWatchStatus: (matchId: string) => WatchStatus;
 }
 
-export function StadiumTab({ stadiumGuide }: StadiumTabProps) {
-  const [subTab, setSubTab] = useState<SubTab>('access');
-  const [dayType, setDayType] = useState<DayType>('weekend');
-  const [chantQuery, setChantQuery] = useState('');
-  const [chantCategory, setChantCategory] = useState<string>('すべて');
-  const [selectedChant, setSelectedChant] = useState<Chant | null>(null);
-  const [chantFontSize, setChantFontSize] = useState<number>(28);
+interface VenueStats {
+  key: string;
+  name: string;
+  shorts: string[];
+  isHome: boolean;
+  opponents: string[];
+  played: number;
+  won: number;
+  drawn: number;
+  lost: number;
+  gf: number;
+  ga: number;
+  scheduled: number;
+  visitedCount: number;
+}
 
-  const { stadium, chants } = stadiumGuide;
+export function StadiumTab({
+  stadiumGuide,
+  allMatches,
+  currentSeason,
+  getWatchStatus,
+}: StadiumTabProps) {
+  const [subTab, setSubTab] = useState<SubTab>('guide');
+  const [venueFilter, setVenueFilter] = useState<VenueFilter>('all');
+  const [venueQuery, setVenueQuery] = useState('');
 
-  const categories = useMemo(() => {
-    const unique = Array.from(new Set(chants.map((c) => c.category)));
-    return ['すべて', ...unique];
-  }, [chants]);
+  const { stadium } = stadiumGuide;
 
-  const filteredChants = useMemo(() => {
-    const q = chantQuery.trim().toLowerCase();
-    return chants.filter((c) => {
-      if (chantCategory !== 'すべて' && c.category !== chantCategory) return false;
+  const venueDirectory = useMemo<VenueStats[]>(() => {
+    const map = new Map<
+      string,
+      {
+        key: string;
+        name: string;
+        shorts: Set<string>;
+        isHome: boolean;
+        opponents: Set<string>;
+        played: number;
+        won: number;
+        drawn: number;
+        lost: number;
+        gf: number;
+        ga: number;
+        scheduled: number;
+        visitedCount: number;
+      }
+    >();
+
+    for (const m of allMatches) {
+      const info = getStadiumInfo(m.stadium);
+      const key = info.query;
+      let rec = map.get(key);
+      if (!rec) {
+        rec = {
+          key,
+          name: info.name,
+          shorts: new Set([m.stadium]),
+          isHome: m.is_home,
+          opponents: new Set(),
+          played: 0,
+          won: 0,
+          drawn: 0,
+          lost: 0,
+          gf: 0,
+          ga: 0,
+          scheduled: 0,
+          visitedCount: 0,
+        };
+        map.set(key, rec);
+      }
+      rec.shorts.add(m.stadium);
+      if (m.is_home) rec.isHome = true;
+      else rec.opponents.add(m.opponent);
+
+      if (getWatchStatus(m.id).stadium) {
+        rec.visitedCount += 1;
+      }
+
+      if (m.status === 'finished' && m.result) {
+        rec.played += 1;
+        rec.gf += m.result.bellmare_score;
+        rec.ga += m.result.opponent_score;
+        const outcome = getMatchOutcome(m);
+        if (outcome === 'W') rec.won += 1;
+        else if (outcome === 'D') rec.drawn += 1;
+        else if (outcome === 'L') rec.lost += 1;
+      } else {
+        rec.scheduled += 1;
+      }
+    }
+
+    return Array.from(map.values())
+      .map((r) => ({
+        ...r,
+        shorts: Array.from(r.shorts),
+        opponents: Array.from(r.opponents),
+      }))
+      .sort((a, b) => {
+        if (a.isHome !== b.isHome) return a.isHome ? -1 : 1;
+        return b.played + b.scheduled - (a.played + a.scheduled);
+      });
+  }, [allMatches, getWatchStatus]);
+
+  const homeRecord = venueDirectory.find((v) => v.key === 'レモンガススタジアム平塚');
+  const awayVenues = venueDirectory.filter((v) => !v.isHome);
+  const visitedAwayCount = awayVenues.filter((v) => v.visitedCount > 0).length;
+
+  const upcomingAwayMatches = useMemo(() => {
+    return currentSeason.matches
+      .filter((m) => m.status === 'scheduled' && !m.is_home)
+      .sort((a, b) => new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime());
+  }, [currentSeason.matches]);
+
+  const filteredVenues = useMemo(() => {
+    const q = venueQuery.trim().toLowerCase();
+    return venueDirectory.filter((v) => {
+      if (venueFilter === 'home' && !v.isHome) return false;
+      if (venueFilter === 'away' && v.isHome) return false;
+      if (venueFilter === 'visited' && v.visitedCount === 0) return false;
       if (!q) return true;
-      return (
-        c.title.toLowerCase().includes(q) ||
-        c.lyrics.toLowerCase().includes(q) ||
-        c.timing.toLowerCase().includes(q) ||
-        (c.player_number !== undefined && String(c.player_number).includes(q))
-      );
+      const hay = `${v.name} ${v.shorts.join(' ')} ${v.opponents.join(' ')}`.toLowerCase();
+      return hay.includes(q);
     });
-  }, [chants, chantCategory, chantQuery]);
-
-  useEffect(() => {
-    if (!selectedChant) return;
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSelectedChant(null);
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [selectedChant]);
-
-  const activeBusSchedules =
-    dayType === 'weekend' ? stadium.bus_schedules.weekend : stadium.bus_schedules.weekday;
+  }, [venueDirectory, venueFilter, venueQuery]);
 
   return (
     <div className="tab-content">
       {/* Sub-tab Segmented Control */}
-      <div className="segmented-control" role="tablist" aria-label="スタジアム・応援メニュー">
+      <div className="segmented-control segmented-control-3" role="tablist" aria-label="スタジアムメニュー">
         <button
           type="button"
-          id="stadium-subtab-access"
           role="tab"
-          aria-selected={subTab === 'access'}
-          className={`segment-btn ${subTab === 'access' ? 'is-active' : ''}`}
-          onClick={() => setSubTab('access')}
+          aria-selected={subTab === 'guide'}
+          className={`segment-btn ${subTab === 'guide' ? 'is-active' : ''}`}
+          onClick={() => setSubTab('guide')}
         >
-          <Bus size={16} />
-          <span>アクセス・バス</span>
+          <MapPin size={15} />
+          <span>ホーム＆遠征</span>
         </button>
         <button
           type="button"
-          id="stadium-subtab-chants"
           role="tab"
-          aria-selected={subTab === 'chants'}
-          className={`segment-btn ${subTab === 'chants' ? 'is-active' : ''}`}
-          onClick={() => setSubTab('chants')}
+          aria-selected={subTab === 'venues'}
+          className={`segment-btn ${subTab === 'venues' ? 'is-active' : ''}`}
+          onClick={() => setSubTab('venues')}
         >
-          <Music2 size={16} />
-          <span>チャント集</span>
+          <MapIcon size={15} />
+          <span>全会場 ({venueDirectory.length})</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={subTab === 'pending'}
+          className={`segment-btn ${subTab === 'pending' ? 'is-active' : ''}`}
+          onClick={() => setSubTab('pending')}
+        >
+          <span>情報提供枠</span>
         </button>
       </div>
 
-      {subTab === 'access' ? (
+      {subTab === 'guide' && (
         <div className="section-stack">
-          {/* Stadium Overview */}
+          {/* Verified Home Stadium Card */}
           <section className="stadium-hero-card">
-            <span className="stadium-kicker">HOME STADIUM</span>
-            <h2 className="stadium-name">{stadium.name}</h2>
-            <p className="stadium-address">
-              <MapPin size={15} />
-              <span>{stadium.address}</span>
-            </p>
+            <div className="stadium-hero-top">
+              <div>
+                <span className="stadium-kicker">HOME STADIUM</span>
+                <h2 className="stadium-name">{stadium.name}</h2>
+                <p className="stadium-address">
+                  <MapPin size={14} />
+                  <span>{stadium.address}</span>
+                </p>
+              </div>
+              <a
+                href={getGoogleMapsUrl('レモンＳ')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary-accent stadium-map-btn"
+              >
+                <span>マップ</span>
+                <ExternalLink size={13} />
+              </a>
+            </div>
+
+            {homeRecord && (
+              <div className="stadium-home-stats num-font">
+                <div className="stadium-home-stat-box">
+                  <span>2020〜試合</span>
+                  <strong>{homeRecord.played}</strong>
+                </div>
+                <div className="stadium-home-stat-box">
+                  <span>勝-分-敗</span>
+                  <strong>
+                    {homeRecord.won}-{homeRecord.drawn}-{homeRecord.lost}
+                  </strong>
+                </div>
+                <div className="stadium-home-stat-box">
+                  <span>得 / 失</span>
+                  <strong>
+                    {homeRecord.gf}/{homeRecord.ga}
+                  </strong>
+                </div>
+                <div className="stadium-home-stat-box is-accent">
+                  <span>現地観戦</span>
+                  <strong>{homeRecord.visitedCount}回</strong>
+                </div>
+              </div>
+            )}
+
+            <div className="stadium-official-links">
+              <a
+                href="https://www.bellmare.co.jp/stadium"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="stadium-ext-link"
+              >
+                <span>ベルマーレ公式 アクセス</span>
+                <ExternalLink size={13} />
+              </a>
+              <a
+                href={stadium.bus_official_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="stadium-ext-link"
+              >
+                <span>神奈中バス公式</span>
+                <ExternalLink size={13} />
+              </a>
+            </div>
           </section>
 
-          {/* Walk Info */}
-          <section className="surface-card guide-card">
-            <div className="guide-card-head">
-              <span className="guide-icon-badge is-green">
-                <Footprints size={18} />
-              </span>
-              <div>
-                <h3 className="guide-card-title">徒歩アクセス</h3>
-                <p className="guide-card-sub">JR平塚駅からのルート</p>
+          {/* Upcoming Away Trips */}
+          <section className="section-block">
+            <div className="section-header">
+              <h3 className="section-title">
+                {currentSeason.label} 今後のアウェイ遠征（{upcomingAwayMatches.length}試合）
+              </h3>
+              <span className="section-meta">会場タップで地図起動</span>
+            </div>
+
+            {upcomingAwayMatches.length > 0 ? (
+              <div className="match-list">
+                {upcomingAwayMatches.map((m) => (
+                  <article key={m.id} className="surface-card away-trip-card">
+                    <div className="match-card-head">
+                      <span className="round-chip">{m.round}</span>
+                      <span className="match-date num-font">
+                        {formatKickoffDate(m.kickoff)} {formatKickoffTime(m.kickoff)}
+                      </span>
+                    </div>
+                    <div className="away-trip-row">
+                      <div className="match-opponent-row">
+                        <span className="vs-prefix">VS</span>
+                        <TeamFlag team={m.opponent} size={16} />
+                        <strong className="match-opponent-name">{m.opponent}</strong>
+                      </div>
+                      {m.ticket_url && (
+                        <a
+                          href={m.ticket_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="match-ticket-link"
+                        >
+                          <Ticket size={13} />
+                          <span>チケット</span>
+                          <ExternalLink size={12} />
+                        </a>
+                      )}
+                    </div>
+                    <div className="away-trip-venue">
+                      <VenuePin isHome={false} stadium={m.stadium} clickable showFull />
+                    </div>
+                  </article>
+                ))}
               </div>
-            </div>
-            <p className="guide-body-text">{stadium.walk_info}</p>
-          </section>
-
-          {/* Bus Schedule Card */}
-          <section className="surface-card guide-card">
-            <div className="guide-card-head">
-              <span className="guide-icon-badge is-blue">
-                <Bus size={18} />
-              </span>
-              <div>
-                <h3 className="guide-card-title">シャトルバス・路線バス</h3>
-                <p className="guide-card-sub">{stadium.bus_boarding}</p>
-              </div>
-            </div>
-
-            <div className="day-toggle-row" role="tablist" aria-label="曜日切替">
-              <button
-                type="button"
-                id="bus-day-weekend"
-                role="tab"
-                aria-selected={dayType === 'weekend'}
-                className={`day-toggle-btn ${dayType === 'weekend' ? 'is-active' : ''}`}
-                onClick={() => setDayType('weekend')}
-              >
-                土日祝ダイヤ
-              </button>
-              <button
-                type="button"
-                id="bus-day-weekday"
-                role="tab"
-                aria-selected={dayType === 'weekday'}
-                className={`day-toggle-btn ${dayType === 'weekday' ? 'is-active' : ''}`}
-                onClick={() => setDayType('weekday')}
-              >
-                平日ナイター等
-              </button>
-            </div>
-
-            <ul className="bus-schedule-list">
-              {activeBusSchedules.map((item) => (
-                <li key={item.note} className="bus-schedule-item">
-                  <strong className="bus-time-note">{item.note}</strong>
-                  <span className="bus-interval">{item.interval}</span>
-                </li>
-              ))}
-            </ul>
-
-            <a
-              href={stadium.bus_official_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-brand-full"
-            >
-              <span>神奈中バス 公式サイトで最新時刻を確認</span>
-              <ExternalLink size={15} />
-            </a>
+            ) : (
+              <div className="empty-card">このシーズンに予定されているアウェイ戦はありません。</div>
+            )}
           </section>
         </div>
-      ) : (
+      )}
+
+      {subTab === 'venues' && (
         <div className="section-stack">
-          {/* Chant Search & Category Filter */}
+          <div className="surface-card guide-card away-conquest-card">
+            <div>
+              <p className="guide-card-sub">アウェイスタジアム現地制覇（2020〜2026-27）</p>
+              <strong className="conquest-num num-font">
+                {visitedAwayCount} <span>/ {awayVenues.length} 会場</span>
+              </strong>
+            </div>
+            <p className="guide-card-sub conquest-hint">
+              試合タブで「現地」を記録すると自動集計されます
+            </p>
+          </div>
+
           <div className="search-input-wrap">
             <Search size={17} className="search-icon" />
             <input
               type="search"
-              id="chant-search-input"
               className="search-input"
-              value={chantQuery}
-              onChange={(e) => setChantQuery(e.target.value)}
-              placeholder="チャント名・歌詞・背番号で検索"
-              aria-label="チャントを検索"
+              value={venueQuery}
+              onChange={(e) => setVenueQuery(e.target.value)}
+              placeholder="スタジアム名・略称・クラブ名で検索"
+              aria-label="スタジアムを検索"
             />
-            {chantQuery && (
+            {venueQuery && (
               <button
                 type="button"
                 className="search-clear-btn"
-                onClick={() => setChantQuery('')}
+                onClick={() => setVenueQuery('')}
                 aria-label="検索をクリア"
               >
                 <X size={15} />
@@ -196,128 +333,93 @@ export function StadiumTab({ stadiumGuide }: StadiumTabProps) {
             )}
           </div>
 
-          <div className="filter-pills" role="tablist" aria-label="チャントカテゴリ">
-            {categories.map((cat) => (
+          <div className="filter-pills" role="tablist" aria-label="会場フィルタ">
+            {(
+              [
+                { id: 'all', label: `すべて (${venueDirectory.length})` },
+                { id: 'home', label: 'HOME' },
+                { id: 'away', label: `AWAY (${awayVenues.length})` },
+                { id: 'visited', label: '現地訪問済' },
+              ] as { id: VenueFilter; label: string }[]
+            ).map((opt) => (
               <button
-                key={cat}
+                key={opt.id}
                 type="button"
                 role="tab"
-                aria-selected={chantCategory === cat}
-                className={`filter-pill ${chantCategory === cat ? 'is-active' : ''}`}
-                onClick={() => setChantCategory(cat)}
+                aria-selected={venueFilter === opt.id}
+                className={`filter-pill ${venueFilter === opt.id ? 'is-active' : ''}`}
+                onClick={() => setVenueFilter(opt.id)}
               >
-                {cat}
+                {opt.label}
               </button>
             ))}
           </div>
 
-          <p className="chant-tip-note">
-            カードをタップすると、スタンドで片手でも見やすい大文字モードで拡大表示します。
-          </p>
-
-          {filteredChants.length > 0 ? (
-            <div className="chants-list">
-              {filteredChants.map((chant) => (
-                <button
-                  key={chant.id}
-                  type="button"
-                  className="surface-card chant-card"
-                  onClick={() => setSelectedChant(chant)}
-                >
-                  <div className="chant-card-top">
-                    <div className="chant-badges">
-                      <span className="chant-cat-badge">{chant.category}</span>
-                      {chant.player_number !== undefined && (
-                        <span className="chant-num-badge num-font">
-                          #{chant.player_number}
-                        </span>
-                      )}
-                    </div>
-                    <span className="chant-expand-hint">
-                      <Maximize2 size={14} />
-                      <span>拡大表示</span>
+          <div className="match-list">
+            {filteredVenues.map((v) => (
+              <article key={v.key} className="surface-card venue-dir-card">
+                <div className="venue-dir-top">
+                  <div className="venue-dir-title-wrap">
+                    <span className={`venue-ha-badge ${v.isHome ? 'is-home' : 'is-away'}`}>
+                      {v.isHome ? 'HOME' : 'AWAY'}
                     </span>
+                    <h4 className="venue-dir-name">{v.name}</h4>
                   </div>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                      v.key
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="venue-dir-map-link"
+                  >
+                    <span>地図</span>
+                    <ExternalLink size={12} />
+                  </a>
+                </div>
 
-                  <h3 className="chant-title">{chant.title}</h3>
-                  <p className="chant-timing">タイミング：{chant.timing}</p>
-                  <p className="chant-preview">{chant.lyrics}</p>
-                </button>
-              ))}
-            </div>
-          ) : (
-            <div className="empty-card">該当するチャントが見つかりませんでした。</div>
-          )}
+                <div className="venue-dir-meta">
+                  <span>表記: {v.shorts.join(' / ')}</span>
+                  {v.opponents.length > 0 && (
+                    <span className="venue-dir-opponents">
+                      {v.opponents.map((op) => (
+                        <span key={op} className="team-with-flag">
+                          <TeamFlag team={op} size={11} />
+                          <span>{op}</span>
+                        </span>
+                      ))}
+                    </span>
+                  )}
+                </div>
+
+                <div className="venue-dir-record num-font">
+                  <span>
+                    戦績: <strong>{v.played}戦</strong> {v.won}勝{v.drawn}分{v.lost}敗（
+                    {v.gf}得点/{v.ga}失点）{v.scheduled > 0 ? ` + 予定${v.scheduled}` : ''}
+                  </span>
+                  {v.visitedCount > 0 && (
+                    <strong className="venue-visited-badge">現地 {v.visitedCount}回</strong>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       )}
 
-      {/* One-handed Large Text Chant Fullscreen Modal */}
-      {selectedChant && (
-        <div
-          className="chant-fullscreen-overlay"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="chant-modal-title"
-        >
-          <div className="chant-modal-top">
-            <div className="chant-modal-badges">
-              <span className="chant-modal-cat">{selectedChant.category}</span>
-              {selectedChant.player_number !== undefined && (
-                <span className="chant-modal-num num-font">
-                  #{selectedChant.player_number}
-                </span>
-              )}
-            </div>
-            <h2 id="chant-modal-title" className="chant-modal-title">
-              {selectedChant.title}
-            </h2>
-            <p className="chant-modal-timing">{selectedChant.timing}</p>
-          </div>
-
-          <div className="chant-modal-lyrics-area">
-            <p
-              className="chant-modal-lyrics"
-              style={{ fontSize: `${chantFontSize}px` }}
-            >
-              {selectedChant.lyrics}
-            </p>
-          </div>
-
-          {/* Thumb-reachable Bottom Controls */}
-          <div className="chant-modal-controls">
-            <div className="font-size-controls" aria-label="文字サイズ調整">
-              <button
-                type="button"
-                className="font-size-btn"
-                onClick={() => setChantFontSize((s) => Math.max(20, s - 4))}
-                aria-label="文字を小さくする"
-              >
-                <Minus size={18} />
-                <span>小</span>
-              </button>
-              <span className="font-size-readout num-font">{chantFontSize}px</span>
-              <button
-                type="button"
-                className="font-size-btn"
-                onClick={() => setChantFontSize((s) => Math.min(44, s + 4))}
-                aria-label="文字を大きくする"
-              >
-                <Plus size={18} />
-                <span>大</span>
-              </button>
-            </div>
-
-            <button
-              type="button"
-              id="close-chant-modal-btn"
-              className="chant-close-large-btn"
-              onClick={() => setSelectedChant(null)}
-            >
-              <X size={20} />
-              <span>閉じる</span>
-            </button>
-          </div>
-        </div>
+      {subTab === 'pending' && (
+        <section className="surface-card guide-card">
+          <h3 className="guide-card-title">事実確認済みデータの追加枠</h3>
+          <p className="guide-body-text">
+            真偽不明・未確認の仮情報は掲載しない方針のため、以下のコンテンツは公式・事実確認済みの情報が揃い次第、順次追加します。右上の「問合せ」から情報提供も可能です。
+          </p>
+          <ul className="pending-info-list">
+            <li>レモンガススタジアム平塚の最新アクセス・直行シャトルバス案内</li>
+            <li>スタジアムグルメ（フードパーク）公式出店情報</li>
+            <li>アウェイ各会場の最寄り駅・ビジターゲート・遠征メモ</li>
+            <li>事実確認済みの応援チャント集</li>
+          </ul>
+        </section>
       )}
     </div>
   );

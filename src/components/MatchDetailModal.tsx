@@ -3,23 +3,26 @@ import {
   CheckCircle2,
   Circle,
   ExternalLink,
-  MapPin,
+  MonitorPlay,
   Ticket,
   X,
 } from 'lucide-react';
-import type { Match, Player } from '../types';
+import type { Match, Player, VideoItem, WatchMode, WatchStatus } from '../types';
 import {
   formatKickoffDate,
   formatKickoffTime,
   getMatchOutcome,
   getOutcomeLabel,
 } from '../utils/format';
+import { TeamFlag, VenuePin } from './TeamFlag';
 
 interface MatchDetailModalProps {
   match: Match | null;
   players: Player[];
-  isAttended: boolean;
-  onToggleAttended: (matchId: string) => void;
+  videos: VideoItem[];
+  watchStatus: WatchStatus;
+  onToggleWatch: (matchId: string, mode: WatchMode) => void;
+  onJumpToPlayer?: (playerId: string) => void;
   onClose: () => void;
 }
 
@@ -51,8 +54,10 @@ function buildFormationRows(formation: string, totalStarters: number) {
 export function MatchDetailModal({
   match,
   players,
-  isAttended,
-  onToggleAttended,
+  videos,
+  watchStatus,
+  onToggleWatch,
+  onJumpToPlayer,
   onClose,
 }: MatchDetailModalProps) {
   const playerByNumber = useMemo(() => {
@@ -100,8 +105,12 @@ export function MatchDetailModal({
                 {formatKickoffDate(match.kickoff)} {formatKickoffTime(match.kickoff)}
               </span>
             </div>
-            <h2 id="match-detail-title" className="modal-title">
-              湘南ベルマーレ vs {match.opponent}
+            <h2 id="match-detail-title" className="modal-title team-with-flag">
+              <TeamFlag team="湘南ベルマーレ" size={16} />
+              <span>湘南ベルマーレ</span>
+              <span className="vs-prefix">VS</span>
+              <TeamFlag team={match.opponent} size={16} />
+              <span>{match.opponent}</span>
             </h2>
           </div>
           <button
@@ -148,8 +157,13 @@ export function MatchDetailModal({
             )}
 
             <div className="detail-stadium-line">
-              <MapPin size={14} />
-              <span>{match.stadium}</span>
+              <VenuePin
+                isHome={match.is_home}
+                stadium={match.stadium}
+                clickable
+                darkBg
+                showFull
+              />
             </div>
 
             {match.result && match.result.scorers.length > 0 && (
@@ -166,15 +180,24 @@ export function MatchDetailModal({
             )}
           </div>
 
-          {/* Attendance Toggle & Ticket Action */}
-          <div className="detail-action-row">
+          {/* Dual Watch Toggles & Ticket Action */}
+          <div className="detail-action-row detail-watch-grid">
             <button
               type="button"
-              className={`attend-toggle-lg ${isAttended ? 'is-attended' : ''}`}
-              onClick={() => onToggleAttended(match.id)}
+              className={`attend-toggle-lg ${watchStatus.stadium ? 'is-attended' : ''}`}
+              onClick={() => onToggleWatch(match.id, 'stadium')}
             >
-              {isAttended ? <CheckCircle2 size={18} /> : <Circle size={18} />}
-              <span>{isAttended ? '現地観戦済（記録中）' : '現地観戦済にする'}</span>
+              {watchStatus.stadium ? <CheckCircle2 size={17} /> : <Circle size={17} />}
+              <span>{watchStatus.stadium ? '現地観戦済' : '現地観戦を記録'}</span>
+            </button>
+
+            <button
+              type="button"
+              className={`attend-toggle-lg ${watchStatus.online ? 'is-online-active' : ''}`}
+              onClick={() => onToggleWatch(match.id, 'online')}
+            >
+              <MonitorPlay size={17} />
+              <span>{watchStatus.online ? 'オンライン観戦済' : 'オンライン観戦'}</span>
             </button>
 
             {match.ticket_url && (
@@ -329,6 +352,57 @@ export function MatchDetailModal({
                     />
                   </div>
                 </div>
+              </div>
+            </section>
+          )}
+
+          {/* Linked Official Videos */}
+          {videos.length > 0 && (
+            <section className="detail-section">
+              <div className="detail-section-header">
+                <h3>関連公式動画（{videos.length}件）</h3>
+              </div>
+              <div className="modal-videos-list">
+                {videos.map((v) => (
+                  <div key={v.id} className="modal-video-card">
+                    <div className="video-embed-frame">
+                      <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${v.youtube_id}?rel=0`}
+                        title={v.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                    <div className="modal-video-meta">
+                      <p className="modal-video-title">{v.title}</p>
+                      <div className="modal-video-links">
+                        {onJumpToPlayer &&
+                          v.player_ids.map((pid) => {
+                            const found = players.find((p) => p.id === pid);
+                            if (!found) return null;
+                            return (
+                              <button
+                                key={pid}
+                                type="button"
+                                className="cross-link-btn is-player"
+                                onClick={() => onJumpToPlayer(pid)}
+                              >
+                                #{found.number} {found.name}
+                              </button>
+                            );
+                          })}
+                        <a
+                          href={`https://www.youtube.com/watch?v=${v.youtube_id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="modal-video-yt-link"
+                        >
+                          YouTube <ExternalLink size={12} />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </section>
           )}
