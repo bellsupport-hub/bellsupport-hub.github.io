@@ -17,17 +17,6 @@
   },
   "standings": [
     {
-      "rank": 14,
-      "team": "サガン鳥栖",
-      "played": 34,
-      "won": 9,
-      "drawn": 11,
-      "lost": 14,
-      "gd": -4,
-      "points": 38,
-      "is_target": false
-    },
-    {
       "rank": 15,
       "team": "湘南ベルマーレ",
       "played": 34,
@@ -37,28 +26,6 @@
       "gd": -16,
       "points": 34,
       "is_target": true
-    },
-    {
-      "rank": 16,
-      "team": "ガンバ大阪",
-      "played": 34,
-      "won": 9,
-      "drawn": 7,
-      "lost": 18,
-      "gd": -23,
-      "points": 34,
-      "is_target": false
-    },
-    {
-      "rank": 17,
-      "team": "柏レイソル",
-      "played": 34,
-      "won": 6,
-      "drawn": 15,
-      "lost": 13,
-      "gd": -16,
-      "points": 33,
-      "is_target": false
     }
   ],
   "matches": [

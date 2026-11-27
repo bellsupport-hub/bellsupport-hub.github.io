@@ -17,17 +17,6 @@
   },
   "standings": [
     {
-      "rank": 14,
-      "team": "京都サンガF.C.",
-      "played": 38,
-      "won": 12,
-      "drawn": 11,
-      "lost": 15,
-      "gd": -12,
-      "points": 47,
-      "is_target": false
-    },
-    {
       "rank": 15,
       "team": "湘南ベルマーレ",
       "played": 38,
@@ -37,28 +26,6 @@
       "gd": -5,
       "points": 45,
       "is_target": true
-    },
-    {
-      "rank": 16,
-      "team": "アルビレックス新潟",
-      "played": 38,
-      "won": 10,
-      "drawn": 12,
-      "lost": 16,
-      "gd": -15,
-      "points": 42,
-      "is_target": false
-    },
-    {
-      "rank": 17,
-      "team": "柏レイソル",
-      "played": 38,
-      "won": 9,
-      "drawn": 14,
-      "lost": 15,
-      "gd": -12,
-      "points": 41,
-      "is_target": false
     }
   ],
   "matches": [

@@ -2454,3 +2454,419 @@ a {
     justify-content: space-around;
   }
 }
+
+/* ==========================================================================
+   Release v2 Additions: TeamFlag, VenuePin, Dual Watch, Contact Modal, Stadium
+   ========================================================================== */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.contact-header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.contact-header-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.team-flag-svg {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.team-with-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.team-with-flag-right {
+  justify-content: flex-end;
+}
+
+.venue-pin-inline,
+.venue-pin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  max-width: 100%;
+}
+
+.venue-pin-link {
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border, #e2e8f0);
+  background: var(--bg-soft, #f1f5f9);
+  color: inherit;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.venue-pin-link.is-dark {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.venue-pin-link.is-dark:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.venue-pin-icon.is-home {
+  color: #7bc143;
+  flex-shrink: 0;
+}
+
+.venue-pin-icon.is-away {
+  color: #f59e0b;
+  flex-shrink: 0;
+}
+
+.venue-ha-badge {
+  font-size: 10px;
+  font-weight: 900;
+  padding: 1px 5px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.venue-ha-badge.is-home {
+  background: rgba(123, 193, 67, 0.2);
+  color: #3f7515;
+}
+
+.venue-ha-badge.is-away {
+  background: rgba(245, 158, 11, 0.18);
+  color: #b45309;
+}
+
+.venue-pin-link.is-dark .venue-ha-badge.is-home {
+  background: rgba(123, 193, 67, 0.28);
+  color: #bbf7d0;
+}
+
+.venue-pin-link.is-dark .venue-ha-badge.is-away {
+  background: rgba(245, 158, 11, 0.26);
+  color: #fde68a;
+}
+
+.venue-name-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.venue-map-ext {
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.watch-toggle-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.attend-toggle-btn.is-online-active,
+.attend-toggle-lg.is-online-active {
+  background: #005bac;
+  border-color: #005bac;
+  color: #ffffff;
+}
+
+.attendance-stats-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.detail-watch-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.player-card {
+  scroll-margin-top: 112px;
+}
+
+.load-more-videos-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border, #e2e8f0);
+  background: var(--surface, #ffffff);
+  color: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.load-more-videos-btn:hover {
+  border-color: #7bc143;
+}
+
+/* Contact Modal */
+.contact-modal-sheet {
+  max-width: 460px;
+}
+
+.contact-modal-heading {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact-modal-sub {
+  margin: 2px 0 0;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contact-label {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.contact-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 11px;
+  border-radius: 10px;
+  border: 1px solid var(--border, #cbd5e1);
+  background: var(--bg-soft, #f8fafc);
+  color: inherit;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.contact-status-msg {
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(123, 193, 67, 0.16);
+  color: #3f7515;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.contact-submit-btn {
+  flex: 1;
+  justify-content: center;
+}
+
+.contact-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border, #cbd5e1);
+  background: transparent;
+  color: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Stadium Tab v2 */
+.segmented-control-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stadium-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.stadium-map-btn {
+  flex-shrink: 0;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.stadium-home-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.stadium-home-stat-box {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 8px 4px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stadium-home-stat-box span {
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+.stadium-home-stat-box strong {
+  font-size: 13px;
+}
+
+.stadium-home-stat-box.is-accent strong {
+  color: #7bc143;
+}
+
+.stadium-official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.stadium-ext-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.away-trip-card,
+.venue-dir-card {
+  padding: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.away-trip-row,
+.venue-dir-top,
+.venue-dir-record {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.venue-dir-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.venue-dir-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.venue-dir-map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border, #cbd5e1);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.venue-dir-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.venue-dir-opponents {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.venue-dir-record {
+  padding-top: 8px;
+  border-top: 1px solid var(--border, #e2e8f0);
+  font-size: 12px;
+}
+
+.venue-visited-badge {
+  color: #4f8b1f;
+}
+
+.away-conquest-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.conquest-num {
+  font-size: 20px;
+  color: #7bc143;
+}
+
+.conquest-num span {
+  font-size: 12px;
+  opacity: 0.75;
+  color: inherit;
+}
+
+.conquest-hint {
+  text-align: right;
+  max-width: 160px;
+}
+
+.pending-info-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.7;
+}

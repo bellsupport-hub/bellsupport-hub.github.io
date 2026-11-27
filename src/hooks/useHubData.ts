@@ -73,10 +73,13 @@ export function useHubData() {
       const base = import.meta.env.BASE_URL || './';
       const prefix = base.endsWith('/') ? `${base}api/v1/` : `${base}/api/v1/`;
 
-      const [meta, videos, stadiumGuide, ...seasonArchives] = await Promise.all([
+      const [meta, videos, stadiumGuide, clubHistoryRaw, ...seasonArchives] = await Promise.all([
         fetchJson<MetaData>(`${prefix}meta.json`),
         fetchJson<VideosData>(`${prefix}videos.json`),
         fetchJson<StadiumGuideData>(`${prefix}stadium_guide.json`),
+        fetchJson<{ records?: HubDataBundle['clubHistory'] }>(`${prefix}club_history.json`).catch(
+          () => ({ records: [] })
+        ),
         ...SEASON_IDS.map((id) => fetchJson<SeasonArchive>(`${prefix}seasons/${id}.json`)),
       ]);
 
@@ -90,6 +93,7 @@ export function useHubData() {
         seasons,
         videos,
         stadiumGuide,
+        clubHistory: clubHistoryRaw.records ?? [],
       };
 
       setData(freshBundle);

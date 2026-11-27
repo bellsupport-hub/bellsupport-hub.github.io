@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { CalendarDays, ExternalLink, Play, Search, User, X } from 'lucide-react';
 import type { Match, Player, SeasonArchive, SeasonId, VideoItem, VideoSource } from '../types';
+import { TeamFlag } from './TeamFlag';
 
 interface VideosTabProps {
   videos: VideoItem[];
@@ -15,6 +16,8 @@ interface VideosTabProps {
 type SourceFilter = 'all' | VideoSource;
 type SeasonFilter = 'all' | SeasonId;
 
+const PAGE_SIZE = 24;
+
 export function VideosTab({
   videos,
   seasons,
@@ -28,6 +31,7 @@ export function VideosTab({
   const [seasonFilter, setSeasonFilter] = useState<SeasonFilter>('all');
   const [tagFilter, setTagFilter] = useState<string>('ALL');
   const [query, setQuery] = useState('');
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [playingIds, setPlayingIds] = useState<Set<string>>(() => new Set());
 
   const playerDirectory = useMemo(() => {
@@ -57,11 +61,11 @@ export function VideosTab({
   }, [seasons, seasonOrder]);
 
   const allTags = useMemo(() => {
-    const set = new Set<string>();
+    const freq = new Map<string, number>();
     for (const v of videos) {
-      for (const t of v.tags) set.add(t);
+      for (const t of v.tags) freq.set(t, (freq.get(t) ?? 0) + 1);
     }
-    return ['ALL', ...Array.from(set)];
+    return ['ALL', ...Array.from(freq.entries()).sort((a, b) => b[1] - a[1]).map(([t]) => t)];
   }, [videos]);
 
   const activePlayerEntry = initialPlayerIdFilter
@@ -202,8 +206,9 @@ export function VideosTab({
 
         {/* Video Cards */}
         {filteredVideos.length > 0 ? (
+          <>
           <div className="videos-list">
-            {filteredVideos.map((v) => {
+            {filteredVideos.slice(0, visibleCount).map((v) => {
               const isPlaying = playingIds.has(v.id);
               const linkedMatch = v.match_id ? matchDirectory.get(v.match_id) : null;
               return (
@@ -262,7 +267,10 @@ export function VideosTab({
                           key={tag}
                           type="button"
                           className="video-tag-chip"
-                          onClick={() => setTagFilter(tagFilter === tag ? 'ALL' : tag)}
+                          onClick={() => {
+                            setTagFilter(tagFilter === tag ? 'ALL' : tag);
+                            setVisibleCount(PAGE_SIZE);
+                          }}
                         >
                           #{tag}
                         </button>
@@ -281,9 +289,10 @@ export function VideosTab({
                           >
                             <CalendarDays size={13} />
                             <span>
-                              {linkedMatch.season.label} {linkedMatch.match.round} vs{' '}
-                              {linkedMatch.match.opponent}
+                              {linkedMatch.season.label} {linkedMatch.match.round} VS
                             </span>
+                            <TeamFlag team={linkedMatch.match.opponent} size={12} />
+                            <span>{linkedMatch.match.opponent}</span>
                           </button>
                         )}
                         {v.player_ids.map((pid) => {
@@ -308,6 +317,16 @@ export function VideosTab({
               );
             })}
           </div>
+          {filteredVideos.length > visibleCount && (
+            <button
+              type="button"
+              className="load-more-videos-btn"
+              onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+            >
+              もっと見る（残り {filteredVideos.length - visibleCount}件）
+            </button>
+          )}
+          </>
         ) : (
           <div className="empty-card">条件に一致する動画がありません。</div>
         )}

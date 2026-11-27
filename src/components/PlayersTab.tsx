@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { PlaySquare, Search, X } from 'lucide-react';
 import type { Player, PlayerPosition, VideoItem } from '../types';
 
@@ -29,6 +29,19 @@ export function PlayersTab({
 }: PlayersTabProps) {
   const [posFilter, setPosFilter] = useState<PositionFilter>('ALL');
   const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    if (!highlightedPlayerId) return;
+    setPosFilter('ALL');
+    setQuery('');
+    const raf = window.requestAnimationFrame(() => {
+      const el = document.getElementById(`player-card-${highlightedPlayerId}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+    return () => window.cancelAnimationFrame(raf);
+  }, [highlightedPlayerId, seasonLabel]);
 
   const videoCountByPlayerId = useMemo(() => {
     const counts = new Map<string, number>();
@@ -115,6 +128,7 @@ export function PlayersTab({
               return (
                 <article
                   key={`${player.id}-${player.number}`}
+                  id={`player-card-${player.id}`}
                   className={`surface-card player-card ${isHighlighted ? 'is-highlighted' : ''}`}
                 >
                   <div className={`player-number-badge pos-${player.position.toLowerCase()}`}>

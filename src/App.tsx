@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { BottomNav } from './components/BottomNav';
+import { ContactModal } from './components/ContactModal';
 import { Header } from './components/Header';
 import { HomeTab } from './components/HomeTab';
 import { MatchDetailModal } from './components/MatchDetailModal';
@@ -31,6 +32,7 @@ export default function App() {
   } | null>(null);
   const [videoPlayerIdFilter, setVideoPlayerIdFilter] = useState<string | null>(null);
   const [highlightedPlayerId, setHighlightedPlayerId] = useState<string | null>(null);
+  const [isContactOpen, setIsContactOpen] = useState<boolean>(false);
 
   const { data, source, isLoading, isOfflineError, refresh } = useHubData();
 
@@ -46,7 +48,7 @@ export default function App() {
     [seasonList]
   );
 
-  const { isAttended, toggleAttended, summary } = useAttendance(allMatchesAcrossSeasons);
+  const { getWatchStatus, toggleWatch, summary } = useAttendance(allMatchesAcrossSeasons);
 
   const currentStandingsData: StandingsData = useMemo(
     () => ({
@@ -93,7 +95,6 @@ export default function App() {
     setSelectedSeasonId(targetSeason);
     setHighlightedPlayerId(playerId);
     setActiveTab('players');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -107,6 +108,7 @@ export default function App() {
         isLoading={isLoading}
         isOfflineError={isOfflineError}
         onRefresh={refresh}
+        onOpenContact={() => setIsContactOpen(true)}
       />
 
       <main className="app-main">
@@ -123,6 +125,7 @@ export default function App() {
           <HomeTab
             matches={currentSeason.matches}
             standings={currentStandingsData}
+            clubHistory={data.clubHistory ?? []}
             updatedAt={data.meta.updated_at}
             onSelectMatch={(m) => handleOpenMatch(m, selectedSeasonId)}
             onGoToMatches={() => setActiveTab('matches')}
@@ -132,8 +135,8 @@ export default function App() {
         {activeTab === 'matches' && (
           <MatchesTab
             matches={currentSeason.matches}
-            isAttended={isAttended}
-            onToggleAttended={toggleAttended}
+            getWatchStatus={getWatchStatus}
+            onToggleWatch={toggleWatch}
             attendanceSummary={summary}
             onSelectMatch={(m) => handleOpenMatch(m, selectedSeasonId)}
           />
@@ -162,14 +165,19 @@ export default function App() {
         )}
 
         {activeTab === 'stadium' && (
-          <StadiumTab stadiumGuide={data.stadiumGuide} />
+          <StadiumTab
+            stadiumGuide={data.stadiumGuide}
+            allMatches={allMatchesAcrossSeasons}
+            currentSeason={currentSeason}
+            getWatchStatus={getWatchStatus}
+          />
         )}
 
         <footer className="app-footer">
           <p className="footer-disclaimer">
             <strong>※非公式サポーターアプリ</strong>
             <br />
-            本アプリは湘南ベルマーレおよびJリーグとは一切関係のない個人の非公式アプリです。掲載しているデータ・チャント等は独自編集データを含み、動画は公式YouTubeチャンネルの埋め込みリンクを使用しています。最新・正確な情報は公式サイトをご確認ください。
+            本サイトは湘南ベルマーレおよびJリーグとは一切関係のない個人の非公式ファンサイトです。掲載している試合結果・出場記録は公表されている公式記録に基づき、動画は公式YouTubeチャンネルの公式埋め込み機能を使用しています。各クラブ・大会等の名称・商標・著作権はそれぞれの権利者に帰属します。最新・正確な情報は公式サイトをご確認ください。
           </p>
         </footer>
       </main>
@@ -180,11 +188,17 @@ export default function App() {
         match={selectedMatch?.match ?? null}
         players={modalSeason.players}
         videos={modalVideos}
-        isAttended={selectedMatch ? isAttended(selectedMatch.match.id) : false}
-        onToggleAttended={toggleAttended}
+        watchStatus={
+          selectedMatch
+            ? getWatchStatus(selectedMatch.match.id)
+            : { stadium: false, online: false }
+        }
+        onToggleWatch={toggleWatch}
         onJumpToPlayer={(pid) => handleJumpToPlayer(pid, modalSeason.id)}
         onClose={() => setSelectedMatch(null)}
       />
+
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </div>
   );
 }

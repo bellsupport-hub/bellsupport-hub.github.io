@@ -174,11 +174,35 @@ export interface StadiumGuideData {
   chants: Chant[];
 }
 
+export interface ClubHistoryRecord {
+  team: string;
+  competition: string;
+  total_wins: number;
+  wins_90: number;
+  wins_et: number;
+  wins_pk: number;
+  draws: number;
+  total_losses: number;
+  losses_90: number;
+  losses_et: number;
+  losses_pk: number;
+  goals_for: number;
+  goals_against: number;
+}
+
+export interface WatchStatus {
+  stadium: boolean;
+  online: boolean;
+}
+
+export type WatchMode = 'stadium' | 'online';
+
 export interface HubDataBundle {
   meta: MetaData;
   seasons: Record<SeasonId, SeasonArchive>;
   videos: VideosData;
   stadiumGuide: StadiumGuideData;
+  clubHistory?: ClubHistoryRecord[];
 }
 
 export type DataSource = 'live' | 'cache' | 'fallback';

@@ -17,83 +17,6 @@
   },
   "standings": [
     {
-      "rank": 1,
-      "team": "ベガルタ仙台",
-      "played": 19,
-      "won": 12,
-      "drawn": 4,
-      "lost": 3,
-      "gd": 16,
-      "points": 40,
-      "is_target": false
-    },
-    {
-      "rank": 2,
-      "team": "RB大宮アルディージャ",
-      "played": 19,
-      "won": 11,
-      "drawn": 5,
-      "lost": 3,
-      "gd": 13,
-      "points": 38,
-      "is_target": false
-    },
-    {
-      "rank": 3,
-      "team": "アルビレックス新潟",
-      "played": 19,
-      "won": 11,
-      "drawn": 4,
-      "lost": 4,
-      "gd": 11,
-      "points": 37,
-      "is_target": false
-    },
-    {
-      "rank": 4,
-      "team": "横浜FC",
-      "played": 19,
-      "won": 10,
-      "drawn": 4,
-      "lost": 5,
-      "gd": 12,
-      "points": 34,
-      "is_target": false
-    },
-    {
-      "rank": 5,
-      "team": "カターレ富山",
-      "played": 19,
-      "won": 10,
-      "drawn": 4,
-      "lost": 5,
-      "gd": 7,
-      "points": 34,
-      "is_target": false
-    },
-    {
-      "rank": 6,
-      "team": "テゲバジャーロ宮崎",
-      "played": 19,
-      "won": 9,
-      "drawn": 6,
-      "lost": 4,
-      "gd": 6,
-      "points": 33,
-      "is_target": false
-    },
-    {
-      "rank": 7,
-      "team": "徳島ヴォルティス",
-      "played": 19,
-      "won": 9,
-      "drawn": 5,
-      "lost": 5,
-      "gd": 6,
-      "points": 32,
-      "is_target": false
-    },
-    {
       "rank": 8,
       "team": "湘南ベルマーレ",
       "played": 19,
@@ -103,28 +26,6 @@
       "gd": 5,
       "points": 32,
       "is_target": true
-    },
-    {
-      "rank": 9,
-      "team": "ジュビロ磐田",
-      "played": 19,
-      "won": 8,
-      "drawn": 5,
-      "lost": 6,
-      "gd": 5,
-      "points": 29,
-      "is_target": false
-    },
-    {
-      "rank": 10,
-      "team": "北海道コンサドーレ札幌",
-      "played": 19,
-      "won": 7,
-      "drawn": 7,
-      "lost": 5,
-      "gd": 2,
-      "points": 28,
-      "is_target": false
     }
   ],
   "matches": [

@@ -1,4 +1,4 @@
-import { RefreshCw, WifiOff } from 'lucide-react';
+import { Mail, RefreshCw, WifiOff } from 'lucide-react';
 import type { DataSource, SeasonArchive, SeasonId } from '../types';
 import { formatUpdatedAt } from '../utils/format';
 
@@ -11,6 +11,7 @@ interface HeaderProps {
   isLoading: boolean;
   isOfflineError: boolean;
   onRefresh: () => void;
+  onOpenContact: () => void;
 }
 
 export function Header({
@@ -22,6 +23,7 @@ export function Header({
   isLoading,
   isOfflineError,
   onRefresh,
+  onOpenContact,
 }: HeaderProps) {
   const sourceLabel =
     source === 'live'
@@ -46,21 +48,34 @@ export function Header({
           </div>
         </div>
 
-        <button
-          type="button"
-          className="refresh-btn"
-          onClick={onRefresh}
-          disabled={isLoading}
-          aria-label="最新データを再取得"
-          title={`更新: ${formatUpdatedAt(updatedAt)} (${sourceLabel})`}
-        >
-          {isOfflineError ? (
-            <WifiOff size={15} className="refresh-icon" />
-          ) : (
-            <RefreshCw size={15} className={`refresh-icon ${isLoading ? 'spin' : ''}`} />
-          )}
-          <span className="refresh-text">{isLoading ? '更新中' : sourceLabel}</span>
-        </button>
+        <div className="header-actions">
+          <button
+            type="button"
+            className="refresh-btn"
+            onClick={onRefresh}
+            disabled={isLoading}
+            aria-label="最新データを再取得"
+            title={`更新: ${formatUpdatedAt(updatedAt)} (${sourceLabel})`}
+          >
+            {isOfflineError ? (
+              <WifiOff size={15} className="refresh-icon" />
+            ) : (
+              <RefreshCw size={15} className={`refresh-icon ${isLoading ? 'spin' : ''}`} />
+            )}
+            <span className="refresh-text">{isLoading ? '更新中' : sourceLabel}</span>
+          </button>
+
+          <button
+            type="button"
+            className="contact-header-btn"
+            onClick={onOpenContact}
+            aria-label="お問い合わせ・情報提供"
+            title="お問い合わせ・情報提供"
+          >
+            <Mail size={15} />
+            <span>問合せ</span>
+          </button>
+        </div>
       </div>
 
       {/* 5-Season Selector Strip */}

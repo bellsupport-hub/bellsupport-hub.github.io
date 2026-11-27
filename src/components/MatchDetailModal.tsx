@@ -3,24 +3,25 @@ import {
   CheckCircle2,
   Circle,
   ExternalLink,
-  MapPin,
+  MonitorPlay,
   Ticket,
   X,
 } from 'lucide-react';
-import type { Match, Player, VideoItem } from '../types';
+import type { Match, Player, VideoItem, WatchMode, WatchStatus } from '../types';
 import {
   formatKickoffDate,
   formatKickoffTime,
   getMatchOutcome,
   getOutcomeLabel,
 } from '../utils/format';
+import { TeamFlag, VenuePin } from './TeamFlag';
 
 interface MatchDetailModalProps {
   match: Match | null;
   players: Player[];
   videos: VideoItem[];
-  isAttended: boolean;
-  onToggleAttended: (matchId: string) => void;
+  watchStatus: WatchStatus;
+  onToggleWatch: (matchId: string, mode: WatchMode) => void;
   onJumpToPlayer?: (playerId: string) => void;
   onClose: () => void;
 }
@@ -54,8 +55,8 @@ export function MatchDetailModal({
   match,
   players,
   videos,
-  isAttended,
-  onToggleAttended,
+  watchStatus,
+  onToggleWatch,
   onJumpToPlayer,
   onClose,
 }: MatchDetailModalProps) {
@@ -104,8 +105,12 @@ export function MatchDetailModal({
                 {formatKickoffDate(match.kickoff)} {formatKickoffTime(match.kickoff)}
               </span>
             </div>
-            <h2 id="match-detail-title" className="modal-title">
-              湘南ベルマーレ vs {match.opponent}
+            <h2 id="match-detail-title" className="modal-title team-with-flag">
+              <TeamFlag team="湘南ベルマーレ" size={16} />
+              <span>湘南ベルマーレ</span>
+              <span className="vs-prefix">VS</span>
+              <TeamFlag team={match.opponent} size={16} />
+              <span>{match.opponent}</span>
             </h2>
           </div>
           <button
@@ -152,8 +157,13 @@ export function MatchDetailModal({
             )}
 
             <div className="detail-stadium-line">
-              <MapPin size={14} />
-              <span>{match.stadium}</span>
+              <VenuePin
+                isHome={match.is_home}
+                stadium={match.stadium}
+                clickable
+                darkBg
+                showFull
+              />
             </div>
 
             {match.result && match.result.scorers.length > 0 && (
@@ -170,15 +180,24 @@ export function MatchDetailModal({
             )}
           </div>
 
-          {/* Attendance Toggle & Ticket Action */}
-          <div className="detail-action-row">
+          {/* Dual Watch Toggles & Ticket Action */}
+          <div className="detail-action-row detail-watch-grid">
             <button
               type="button"
-              className={`attend-toggle-lg ${isAttended ? 'is-attended' : ''}`}
-              onClick={() => onToggleAttended(match.id)}
+              className={`attend-toggle-lg ${watchStatus.stadium ? 'is-attended' : ''}`}
+              onClick={() => onToggleWatch(match.id, 'stadium')}
             >
-              {isAttended ? <CheckCircle2 size={18} /> : <Circle size={18} />}
-              <span>{isAttended ? '現地観戦済（記録中）' : '現地観戦済にする'}</span>
+              {watchStatus.stadium ? <CheckCircle2 size={17} /> : <Circle size={17} />}
+              <span>{watchStatus.stadium ? '現地観戦済' : '現地観戦を記録'}</span>
+            </button>
+
+            <button
+              type="button"
+              className={`attend-toggle-lg ${watchStatus.online ? 'is-online-active' : ''}`}
+              onClick={() => onToggleWatch(match.id, 'online')}
+            >
+              <MonitorPlay size={17} />
+              <span>{watchStatus.online ? 'オンライン観戦済' : 'オンライン観戦'}</span>
             </button>
 
             {match.ticket_url && (

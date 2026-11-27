@@ -17,17 +17,6 @@
   },
   "standings": [
     {
-      "rank": 11,
-      "team": "モンテディオ山形",
-      "played": 18,
-      "won": 11,
-      "drawn": 0,
-      "lost": 7,
-      "gd": 8,
-      "points": 33,
-      "is_target": false
-    },
-    {
       "rank": 12,
       "team": "湘南ベルマーレ",
       "played": 18,
@@ -37,17 +26,6 @@
       "gd": 6,
       "points": 33,
       "is_target": true
-    },
-    {
-      "rank": 13,
-      "team": "横浜FC",
-      "played": 18,
-      "won": 10,
-      "drawn": 0,
-      "lost": 8,
-      "gd": 4,
-      "points": 30,
-      "is_target": false
     }
   ],
   "matches": [
