@@ -187,6 +187,8 @@ function parseAppearanceHtml(html, seasonId) {
   const roundMeta = new Map(); // roundNum -> { roundNum, kickoff, stadium, opponent, bellmare_score, opponent_score, finished }
   const playerStats = new Map(); // number -> { number, name, apps, goals }
 
+  const processedRounds = new Set();
+
   for (const rows of tables) {
     if (rows.length < 7) continue;
     const headerRow = rows[0];
@@ -204,6 +206,8 @@ function parseAppearanceHtml(html, seasonId) {
       const m = toHalfWidth(headerRow[c]).match(/第(\d+)節/);
       if (!m) continue;
       const roundNum = Number(m[1]);
+      if (processedRounds.has(roundNum)) continue;
+      processedRounds.add(roundNum);
       roundCols.push({ roundNum, playerColIdx: c + 3 });
 
       const metaIdx = c - 1;
@@ -212,16 +216,17 @@ function parseAppearanceHtml(html, seasonId) {
       const vsText = toHalfWidth(vsRow[metaIdx] ?? '');
       const kickoff = parseJDate(dateText, '');
 
-      // vsText format: "大分 ○ 1 - 0" or "仙台 ● 1 - 3" or "宮崎 △ 0 - 0"
-      const vsMatch = vsText.match(/^(.+?)\s+[○●△]\s*(\d+)\s*-\s*(\d+)/);
+      // vsText format: "大分 ○ 1 - 0", "仙台 ● 1 - 3", "宮崎 △ 0 - 0", "栃木SC ☆ 1 - 1" (PK win), "仙台 ★ 1 - 1" (PK loss)
+      const vsMatch = vsText.match(/^(.+?)\s+([○●△☆★])\s*(\d+)\s*-\s*(\d+)/);
       if (kickoff && vsMatch) {
         roundMeta.set(roundNum, {
           roundNum,
           kickoff,
           stadium: venueText || '未定',
           opponent: vsMatch[1].trim(),
-          bellmare_score: Number(vsMatch[2]),
-          opponent_score: Number(vsMatch[3]),
+          symbol: vsMatch[2],
+          bellmare_score: Number(vsMatch[3]),
+          opponent_score: Number(vsMatch[4]),
           finished: true,
         });
       }
@@ -284,6 +289,7 @@ function parseAppearanceHtml(html, seasonId) {
       },
       lineup: null,
       stats: null,
+      _symbol: rm.symbol,
     }))
     .sort((a, b) => new Date(b.kickoff).getTime() - new Date(a.kickoff).getTime());
 
@@ -475,15 +481,20 @@ async function main() {
       );
     }
 
-    // Recompute summary from finished matches
+    // Recompute summary from finished matches (supporting PK wins ☆ and PK losses ★)
     const finished = matches.filter((m) => m.status === 'finished' && m.result);
-    const won = finished.filter((m) => m.result.bellmare_score > m.result.opponent_score).length;
-    const drawn = finished.filter((m) => m.result.bellmare_score === m.result.opponent_score).length;
-    const lost = finished.filter((m) => m.result.bellmare_score < m.result.opponent_score).length;
+    const won = finished.filter(
+      (m) => m._symbol === '☆' || m.result.bellmare_score > m.result.opponent_score
+    ).length;
+    const lost = finished.filter(
+      (m) => m._symbol === '★' || m.result.bellmare_score < m.result.opponent_score
+    ).length;
+    const drawn = finished.length - won - lost;
     const gf = finished.reduce((acc, m) => acc + m.result.bellmare_score, 0);
     const ga = finished.reduce((acc, m) => acc + m.result.opponent_score, 0);
 
-    existing.matches = matches;
+    // Strip internal _symbol helper before saving
+    existing.matches = matches.map(({ _symbol, ...rest }) => rest);
     existing.summary = {
       rank: existing.summary?.rank || def.rank,
       played: finished.length,

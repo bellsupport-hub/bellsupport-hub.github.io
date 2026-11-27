@@ -6,14 +6,14 @@
   "note": "J1 19位（8勝8分22敗・勝点32・36得点63失点）。鈴木章斗が10番として攻撃を牽引するも惜しくもJ2降格。",
   "summary": {
     "rank": 19,
-    "played": 36,
+    "played": 38,
     "won": 8,
-    "drawn": 7,
-    "lost": 21,
-    "gf": 34,
-    "ga": 59,
-    "gd": -25,
-    "points": 31
+    "drawn": 8,
+    "lost": 22,
+    "gf": 36,
+    "ga": 63,
+    "gd": -27,
+    "points": 32
   },
   "standings": [
     {
@@ -588,6 +588,95 @@
           20,
           22,
           25,
+          27,
+          72,
+          77,
+          81
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r26",
+      "round": "第26節",
+      "kickoff": "2025-08-16T14:00:00+09:00",
+      "is_home": true,
+      "opponent": "FC東京",
+      "stadium": "レモンＳ",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 2,
+        "opponent_score": 2,
+        "scorers": [
+          "鈴木章斗",
+          "鈴木雄斗"
+        ]
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          1,
+          4,
+          8,
+          13,
+          14,
+          15,
+          28,
+          37,
+          66,
+          9,
+          10
+        ],
+        "substitutes": [
+          6,
+          7,
+          20,
+          22,
+          27,
+          50,
+          72,
+          77,
+          81
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": "2025-r25",
+      "round": "第25節",
+      "kickoff": "2025-08-10T14:00:00+09:00",
+      "is_home": false,
+      "opponent": "柏",
+      "stadium": "三協Ｆ柏",
+      "status": "finished",
+      "ticket_url": null,
+      "result": {
+        "bellmare_score": 0,
+        "opponent_score": 2,
+        "scorers": []
+      },
+      "lineup": {
+        "formation": "3-1-4-2",
+        "starters": [
+          1,
+          8,
+          7,
+          14,
+          18,
+          28,
+          37,
+          50,
+          66,
+          9,
+          10
+        ],
+        "substitutes": [
+          4,
+          6,
+          13,
+          15,
+          22,
           27,
           72,
           77,
