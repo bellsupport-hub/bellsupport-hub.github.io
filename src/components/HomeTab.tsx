@@ -231,7 +231,7 @@ export function HomeTab({
           <div className="section-title-group">
             <Trophy size={16} className="section-icon" />
             <h2 id="standings-heading" className="section-title">
-              {standings.competition} 戦績
+              {standings.competition} 順位表
             </h2>
           </div>
           {targetStanding && (
@@ -243,50 +243,79 @@ export function HomeTab({
         </div>
 
         <div className="surface-card standings-card">
-          <div className="table-scroll">
-            <table className="standings-table">
-              <thead>
-                <tr>
-                  <th scope="col" className="col-rank">順位</th>
-                  <th scope="col" className="col-team">チーム</th>
-                  <th scope="col" className="col-num">試合</th>
-                  <th scope="col" className="col-num">勝</th>
-                  <th scope="col" className="col-num">分</th>
-                  <th scope="col" className="col-num">敗</th>
-                  <th scope="col" className="col-num">得失</th>
-                  <th scope="col" className="col-pts">勝点</th>
-                </tr>
-              </thead>
-              <tbody>
-                {visibleStandings.map((row) => (
-                  <tr
-                    key={row.team}
-                    className={row.is_target ? 'is-target-row' : undefined}
-                  >
-                    <td className="col-rank num-font">
-                      <span className={`rank-num ${row.rank <= 2 ? 'is-promo' : ''}`}>
-                        {row.rank}
-                      </span>
-                    </td>
-                    <td className="col-team">
-                      <span className="team-cell-name">
-                        <TeamFlag team={row.team} size={14} />
-                        <span>{row.team}</span>
-                      </span>
-                    </td>
-                    <td className="col-num num-font">{row.played}</td>
-                    <td className="col-num num-font">{row.won}</td>
-                    <td className="col-num num-font">{row.drawn}</td>
-                    <td className="col-num num-font">{row.lost}</td>
-                    <td className="col-num num-font">
-                      {row.gd > 0 ? `+${row.gd}` : row.gd}
-                    </td>
-                    <td className="col-pts num-font">{row.points}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          {(() => {
+            const hasPk = standings.standings.some(
+              (r) => typeof r.pk_won === 'number'
+            );
+            return (
+              <div className="table-scroll">
+                <table className="standings-table">
+                  <thead>
+                    <tr>
+                      <th scope="col" className="col-rank">順位</th>
+                      <th scope="col" className="col-team">チーム</th>
+                      <th scope="col" className="col-num">試合</th>
+                      {hasPk ? (
+                        <>
+                          <th scope="col" className="col-num">勝(PK)</th>
+                          <th scope="col" className="col-num">敗(PK)</th>
+                        </>
+                      ) : (
+                        <>
+                          <th scope="col" className="col-num">勝</th>
+                          <th scope="col" className="col-num">分</th>
+                          <th scope="col" className="col-num">敗</th>
+                        </>
+                      )}
+                      <th scope="col" className="col-num">得失</th>
+                      <th scope="col" className="col-pts">勝点</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {visibleStandings.map((row) => (
+                      <tr
+                        key={row.team}
+                        className={row.is_target ? 'is-target-row' : undefined}
+                      >
+                        <td className="col-rank num-font">
+                          <span className={`rank-num ${row.rank <= 2 ? 'is-promo' : ''}`}>
+                            {row.rank}
+                          </span>
+                        </td>
+                        <td className="col-team">
+                          <span className="team-cell-name">
+                            <TeamFlag team={row.team} size={14} />
+                            <span>{row.team}</span>
+                          </span>
+                        </td>
+                        <td className="col-num num-font">{row.played}</td>
+                        {hasPk ? (
+                          <>
+                            <td className="col-num num-font">
+                              {row.won}({row.pk_won ?? 0})
+                            </td>
+                            <td className="col-num num-font">
+                              {row.lost}({row.pk_lost ?? 0})
+                            </td>
+                          </>
+                        ) : (
+                          <>
+                            <td className="col-num num-font">{row.won}</td>
+                            <td className="col-num num-font">{row.drawn}</td>
+                            <td className="col-num num-font">{row.lost}</td>
+                          </>
+                        )}
+                        <td className="col-num num-font">
+                          {row.gd > 0 ? `+${row.gd}` : row.gd}
+                        </td>
+                        <td className="col-pts num-font">{row.points}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+          })()}
 
           {standings.standings.length > 4 && (
             <button

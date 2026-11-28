@@ -165,6 +165,13 @@ export function normalizeTeamKey(name: string): string {
     .trim();
 }
 
+const FULL_NAME_TO_SHORT: Record<string, string> = Object.fromEntries(
+  Object.entries(TEAM_FULL_NAMES).map(([shortKey, fullName]) => [
+    normalizeTeamKey(fullName),
+    shortKey,
+  ])
+);
+
 export function getTeamFullName(shortName: string): string {
   const key = normalizeTeamKey(shortName);
   return TEAM_FULL_NAMES[key] ?? shortName;
@@ -172,7 +179,10 @@ export function getTeamFullName(shortName: string): string {
 
 export function getTeamColors(teamName: string): [string, string] {
   const key = normalizeTeamKey(teamName);
-  return TEAM_COLORS[key] ?? ['#94A3B8', '#475569'];
+  if (TEAM_COLORS[key]) return TEAM_COLORS[key];
+  const shortKey = FULL_NAME_TO_SHORT[key];
+  if (shortKey && TEAM_COLORS[shortKey]) return TEAM_COLORS[shortKey];
+  return ['#94A3B8', '#475569'];
 }
 
 export function getStadiumInfo(shortName: string) {
