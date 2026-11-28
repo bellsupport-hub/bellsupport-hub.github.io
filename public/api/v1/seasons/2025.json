@@ -17,6 +17,204 @@
   },
   "standings": [
     {
+      "rank": 1,
+      "team": "鹿島アントラーズ",
+      "played": 38,
+      "won": 23,
+      "drawn": 7,
+      "lost": 8,
+      "gd": 27,
+      "points": 76,
+      "is_target": false
+    },
+    {
+      "rank": 2,
+      "team": "柏レイソル",
+      "played": 38,
+      "won": 21,
+      "drawn": 12,
+      "lost": 5,
+      "gd": 26,
+      "points": 75,
+      "is_target": false
+    },
+    {
+      "rank": 3,
+      "team": "京都サンガF.C.",
+      "played": 38,
+      "won": 19,
+      "drawn": 11,
+      "lost": 8,
+      "gd": 22,
+      "points": 68,
+      "is_target": false
+    },
+    {
+      "rank": 4,
+      "team": "サンフレッチェ広島",
+      "played": 38,
+      "won": 20,
+      "drawn": 8,
+      "lost": 10,
+      "gd": 18,
+      "points": 68,
+      "is_target": false
+    },
+    {
+      "rank": 5,
+      "team": "ヴィッセル神戸",
+      "played": 38,
+      "won": 18,
+      "drawn": 10,
+      "lost": 10,
+      "gd": 13,
+      "points": 64,
+      "is_target": false
+    },
+    {
+      "rank": 6,
+      "team": "FC町田ゼルビア",
+      "played": 38,
+      "won": 17,
+      "drawn": 9,
+      "lost": 12,
+      "gd": 14,
+      "points": 60,
+      "is_target": false
+    },
+    {
+      "rank": 7,
+      "team": "浦和レッズ",
+      "played": 38,
+      "won": 16,
+      "drawn": 11,
+      "lost": 11,
+      "gd": 6,
+      "points": 59,
+      "is_target": false
+    },
+    {
+      "rank": 8,
+      "team": "川崎フロンターレ",
+      "played": 38,
+      "won": 15,
+      "drawn": 12,
+      "lost": 11,
+      "gd": 10,
+      "points": 57,
+      "is_target": false
+    },
+    {
+      "rank": 9,
+      "team": "ガンバ大阪",
+      "played": 38,
+      "won": 17,
+      "drawn": 6,
+      "lost": 15,
+      "gd": -2,
+      "points": 57,
+      "is_target": false
+    },
+    {
+      "rank": 10,
+      "team": "セレッソ大阪",
+      "played": 38,
+      "won": 14,
+      "drawn": 10,
+      "lost": 14,
+      "gd": 3,
+      "points": 52,
+      "is_target": false
+    },
+    {
+      "rank": 11,
+      "team": "FC東京",
+      "played": 38,
+      "won": 13,
+      "drawn": 11,
+      "lost": 14,
+      "gd": -7,
+      "points": 50,
+      "is_target": false
+    },
+    {
+      "rank": 12,
+      "team": "アビスパ福岡",
+      "played": 38,
+      "won": 12,
+      "drawn": 12,
+      "lost": 14,
+      "gd": -4,
+      "points": 48,
+      "is_target": false
+    },
+    {
+      "rank": 13,
+      "team": "ファジアーノ岡山",
+      "played": 38,
+      "won": 12,
+      "drawn": 9,
+      "lost": 17,
+      "gd": -9,
+      "points": 45,
+      "is_target": false
+    },
+    {
+      "rank": 14,
+      "team": "清水エスパルス",
+      "played": 38,
+      "won": 11,
+      "drawn": 11,
+      "lost": 16,
+      "gd": -10,
+      "points": 44,
+      "is_target": false
+    },
+    {
+      "rank": 15,
+      "team": "横浜F・マリノス",
+      "played": 38,
+      "won": 12,
+      "drawn": 7,
+      "lost": 19,
+      "gd": -1,
+      "points": 43,
+      "is_target": false
+    },
+    {
+      "rank": 16,
+      "team": "名古屋グランパス",
+      "played": 38,
+      "won": 11,
+      "drawn": 10,
+      "lost": 17,
+      "gd": -12,
+      "points": 43,
+      "is_target": false
+    },
+    {
+      "rank": 17,
+      "team": "東京ヴェルディ",
+      "played": 38,
+      "won": 11,
+      "drawn": 10,
+      "lost": 17,
+      "gd": -18,
+      "points": 43,
+      "is_target": false
+    },
+    {
+      "rank": 18,
+      "team": "横浜FC",
+      "played": 38,
+      "won": 9,
+      "drawn": 8,
+      "lost": 21,
+      "gd": -18,
+      "points": 35,
+      "is_target": false
+    },
+    {
       "rank": 19,
       "team": "湘南ベルマーレ",
       "played": 38,
@@ -26,6 +224,17 @@
       "gd": -27,
       "points": 32,
       "is_target": true
+    },
+    {
+      "rank": 20,
+      "team": "アルビレックス新潟",
+      "played": 38,
+      "won": 4,
+      "drawn": 12,
+      "lost": 22,
+      "gd": -31,
+      "points": 24,
+      "is_target": false
     }
   ],
   "matches": [

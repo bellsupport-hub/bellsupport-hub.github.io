@@ -28,6 +28,8 @@ export interface StandingRow {
   won: number;
   drawn: number;
   lost: number;
+  pk_won?: number;
+  pk_lost?: number;
   gd: number;
   points: number;
   is_target: boolean;
