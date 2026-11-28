@@ -167,9 +167,7 @@ export default function App() {
         {activeTab === 'stadium' && (
           <StadiumTab
             stadiumGuide={data.stadiumGuide}
-            allMatches={allMatchesAcrossSeasons}
             currentSeason={currentSeason}
-            videos={data.videos.videos}
           />
         )}
 

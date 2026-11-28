@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import { ExternalLink, MapPin, Music, Play, Sparkles, Ticket } from 'lucide-react';
-import type { Match, SeasonArchive, StadiumGuideData, VideoItem } from '../types';
+import type { SeasonArchive, StadiumGuideData } from '../types';
 import { getGoogleMapsUrl, getTeamFullName } from '../utils/clubMeta';
 import { formatKickoffDate, formatKickoffTime } from '../utils/format';
 import { TeamFlag, VenuePin } from './TeamFlag';
@@ -9,9 +9,7 @@ type SubTab = 'guide' | 'chants' | 'dance';
 
 interface StadiumTabProps {
   stadiumGuide: StadiumGuideData;
-  allMatches: Match[];
   currentSeason: SeasonArchive;
-  videos: VideoItem[];
 }
 
 interface ChantChapter {
@@ -56,17 +54,11 @@ const CHANT_CHAPTERS: ChantChapter[] = [
   { timeLabel: '42:43', startSec: 2563, title: '選手挨拶〜ウォーキング' },
 ];
 
-export function StadiumTab({
-  stadiumGuide,
-  allMatches,
-  currentSeason,
-  videos,
-}: StadiumTabProps) {
+export function StadiumTab({ stadiumGuide, currentSeason }: StadiumTabProps) {
   const [subTab, setSubTab] = useState<SubTab>('guide');
   const [activeChapterIdx, setActiveChapterIdx] = useState<number>(0);
   const [autoplayChant, setAutoplayChant] = useState(false);
   const [playNonce, setPlayNonce] = useState(0);
-  const [danceSeasonFilter, setDanceSeasonFilter] = useState<string>('all');
   const chantPlayerRef = useRef<HTMLDivElement | null>(null);
 
   const { stadium } = stadiumGuide;
@@ -76,46 +68,6 @@ export function StadiumTab({
       .filter((m) => m.status === 'scheduled' && !m.is_home)
       .sort((a, b) => new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime());
   }, [currentSeason.matches]);
-
-  const wonMatchIds = useMemo(() => {
-    const set = new Set<string>();
-    for (const m of allMatches) {
-      if (m.status === 'finished' && m.result && m.result.bellmare_score > m.result.opponent_score) {
-        set.add(m.id);
-      }
-    }
-    return set;
-  }, [allMatches]);
-
-  const danceVideos = useMemo(() => {
-    return videos
-      .filter(
-        (v) =>
-          v.source === 'bellmare' &&
-          (/勝利のダンス|勝鬨/.test(v.title) ||
-            (v.match_id !== null &&
-              wonMatchIds.has(v.match_id) &&
-              /MATCH REPORT|INSIDE BELLMARE|AWAY FILM|INSIDE/i.test(v.title)))
-      )
-      .sort((a, b) => b.published_at.localeCompare(a.published_at));
-  }, [videos, wonMatchIds]);
-
-  const danceSeasons = useMemo(() => {
-    const seen = new Set<string>();
-    const list: string[] = [];
-    for (const v of danceVideos) {
-      if (!seen.has(v.season)) {
-        seen.add(v.season);
-        list.push(v.season);
-      }
-    }
-    return list;
-  }, [danceVideos]);
-
-  const filteredDanceVideos = useMemo(() => {
-    if (danceSeasonFilter === 'all') return danceVideos;
-    return danceVideos.filter((v) => v.season === danceSeasonFilter);
-  }, [danceVideos, danceSeasonFilter]);
 
   const activeChapter = CHANT_CHAPTERS[activeChapterIdx] ?? CHANT_CHAPTERS[0];
 
@@ -251,19 +203,9 @@ export function StadiumTab({
         </div>
       )}
 
-      {/* Sub-tab 2: Chants (WIP + Chapter-cued YouTube player) */}
+      {/* Sub-tab 2: Official Chants (Chapter-cued YouTube player) */}
       {subTab === 'chants' && (
         <div className="section-stack">
-          <section className="surface-card guide-card chant-wip-card">
-            <div className="chant-wip-head">
-              <h3 className="guide-card-title">応援チャント集</h3>
-              <span className="chant-wip-badge">準備中</span>
-            </div>
-            <p className="guide-body-text">
-              応援チャント集は現在準備中です。下のチャプターをタップすると、該当チャントの開始位置からYouTube動画を頭出し再生できます。
-            </p>
-          </section>
-
           <section className="surface-card video-card" ref={chantPlayerRef}>
             <div className="video-embed-frame">
               <iframe
@@ -324,84 +266,17 @@ export function StadiumTab({
         </div>
       )}
 
-      {/* Sub-tab 3: Victory Dance (Official Bellmare winning-match videos) */}
+      {/* Sub-tab 3: Victory Dance (WIP) */}
       {subTab === 'dance' && (
-        <div className="section-stack">
-          <section className="surface-card guide-card">
-            <div className="chant-wip-head">
-              <h3 className="guide-card-title">勝利のダンス・勝利時公式動画</h3>
-              <span className="dance-count-chip num-font">{danceVideos.length}本</span>
-            </div>
-            <p className="guide-body-text">
-              湘南ベルマーレ公式YouTubeチャンネルの勝利試合レポート（MATCH REPORT / INSIDE BELLMARE / AWAY FILM）や勝利時の儀式・関連動画を自動集約しています。
-            </p>
-          </section>
-
-          {danceSeasons.length > 1 && (
-            <div className="filter-pills" role="tablist" aria-label="シーズンフィルタ">
-              <button
-                type="button"
-                role="tab"
-                aria-selected={danceSeasonFilter === 'all'}
-                className={`filter-pill ${danceSeasonFilter === 'all' ? 'is-active' : ''}`}
-                onClick={() => setDanceSeasonFilter('all')}
-              >
-                すべて ({danceVideos.length})
-              </button>
-              {danceSeasons.map((sId) => (
-                <button
-                  key={sId}
-                  type="button"
-                  role="tab"
-                  aria-selected={danceSeasonFilter === sId}
-                  className={`filter-pill ${danceSeasonFilter === sId ? 'is-active' : ''}`}
-                  onClick={() => setDanceSeasonFilter(sId)}
-                >
-                  {sId === '2026-special' ? '2026特別大会' : sId}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {filteredDanceVideos.length > 0 ? (
-            <div className="videos-list">
-              {filteredDanceVideos.map((v) => (
-                <article key={v.id} className="surface-card video-card">
-                  <div className="video-embed-frame">
-                    <iframe
-                      src={`https://www.youtube-nocookie.com/embed/${v.youtube_id}?rel=0&playsinline=1`}
-                      title={v.title}
-                      loading="lazy"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </div>
-                  <div className="video-card-body">
-                    <div className="video-card-meta">
-                      <span className="video-source-badge is-bellmare">ベルマーレ公式</span>
-                      <span className="video-season-badge num-font">
-                        {v.season === '2026-special' ? '2026特別大会' : v.season}
-                      </span>
-                      <span className="video-date num-font">{v.published_at.slice(0, 10)}</span>
-                      <a
-                        href={`https://www.youtube.com/watch?v=${v.youtube_id}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="video-card-yt-inline"
-                      >
-                        <span>YouTube</span>
-                        <ExternalLink size={12} />
-                      </a>
-                    </div>
-                    <h4 className="video-card-title">{v.title}</h4>
-                  </div>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <div className="empty-card">該当する公式動画がありません。</div>
-          )}
-        </div>
+        <section className="surface-card guide-card">
+          <div className="chant-wip-head">
+            <h3 className="guide-card-title">勝利のダンス</h3>
+            <span className="chant-wip-badge">準備中</span>
+          </div>
+          <p className="guide-body-text">
+            勝利のダンス動画コレクションは現在準備中です。公開までしばらくお待ちください。
+          </p>
+        </section>
       )}
     </div>
   );
