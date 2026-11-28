@@ -36,9 +36,9 @@ export const FALLBACK_DATA: HubDataBundle = {
       competition: 'J2・J3百年構想リーグ',
       manager: '長澤 徹',
       note: '',
-      summary: { rank: 12, played: 18, won: 11, drawn: 0, lost: 7, gf: 25, ga: 19, gd: 6, points: 33 },
+      summary: { rank: 3, played: 18, won: 11, drawn: 0, lost: 7, gf: 25, ga: 19, gd: 6, points: 31 },
       standings: [
-        { rank: 12, team: '湘南ベルマーレ', played: 18, won: 11, drawn: 0, lost: 7, gd: 6, points: 33, is_target: true },
+        { rank: 3, team: '湘南ベルマーレ', played: 18, won: 11, drawn: 0, lost: 7, pk_won: 3, pk_lost: 1, gd: 6, points: 31, is_target: true },
       ],
       matches: [],
       players: [],

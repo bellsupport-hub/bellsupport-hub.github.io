@@ -479,7 +479,7 @@ async function main() {
           weight: prev?.weight ?? 0,
           apps: st.apps,
           goals: st.goals,
-          assists: prev?.assists ?? 0,
+          assists: 0,
         });
       }
       // Keep any extra registered players (0 apps) that were already in existing.players
@@ -509,7 +509,7 @@ async function main() {
 
         if (rd.starters.length > 0) {
           m.lineup = {
-            formation: m.lineup?.formation || '3-1-4-2',
+            formation: m.lineup?.formation ?? '',
             starters: sortByPosition(rd.starters),
             substitutes: sortByPosition(rd.substitutes),
           };

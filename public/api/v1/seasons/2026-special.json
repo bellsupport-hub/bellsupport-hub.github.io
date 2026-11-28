@@ -3,7 +3,7 @@
   "label": "2026特別大会",
   "competition": "J2・J3百年構想リーグ",
   "manager": "長澤 徹",
-  "note": "秋春制移行前の2026年上半期に開催された百年構想リーグ（地域リーグラウンド EAST-A）。18試合11勝7敗（12位）で秋春制開幕へ弾みをつけた。",
+  "note": "秋春制移行前の2026年上半期に開催された百年構想リーグ（地域リーグラウンド EAST-A）。18試合11勝7敗（90勝8・PK勝3・PK敗1・90敗6）・勝点31でEAST-A 3位。",
   "summary": {
     "rank": 3,
     "played": 18,
@@ -166,7 +166,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           31,
           3,
@@ -210,7 +210,7 @@
         "scorers": []
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           3,
@@ -254,7 +254,7 @@
         "scorers": []
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           3,
@@ -299,7 +299,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           31,
           3,
@@ -345,7 +345,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           3,
@@ -391,7 +391,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           3,
@@ -437,7 +437,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           3,
@@ -483,7 +483,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           31,
           3,
@@ -529,7 +529,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           31,
           2,
@@ -575,7 +575,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           3,
@@ -623,7 +623,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           2,
@@ -669,7 +669,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           3,
@@ -715,7 +715,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           3,
@@ -761,7 +761,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           3,
@@ -809,7 +809,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           3,
@@ -855,7 +855,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           3,
@@ -902,7 +902,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           3,
@@ -948,7 +948,7 @@
         ]
       },
       "lineup": {
-        "formation": "3-1-4-2",
+        "formation": "",
         "starters": [
           99,
           2,
@@ -984,8 +984,8 @@
       "name": "ポープ ウィリアム",
       "kana": "ポープ ウィリアム",
       "position": "GK",
-      "height": 192,
-      "weight": 88,
+      "height": 0,
+      "weight": 0,
       "apps": 16,
       "goals": 0,
       "assists": 0
@@ -996,11 +996,11 @@
       "name": "松村 晟怜",
       "kana": "マツムラ セナ",
       "position": "DF",
-      "height": 182,
-      "weight": 74,
+      "height": 0,
+      "weight": 0,
       "apps": 5,
       "goals": 0,
-      "assists": 2
+      "assists": 0
     },
     {
       "id": "hakamata-yutaro",
@@ -1008,8 +1008,8 @@
       "name": "袴田 裕太郎",
       "kana": "ハカマタ ユウタロウ",
       "position": "DF",
-      "height": 183,
-      "weight": 78,
+      "height": 0,
+      "weight": 0,
       "apps": 18,
       "goals": 1,
       "assists": 0
@@ -1020,11 +1020,11 @@
       "name": "舘 幸希",
       "kana": "タチ コウキ",
       "position": "DF",
-      "height": 174,
-      "weight": 70,
+      "height": 0,
+      "weight": 0,
       "apps": 4,
       "goals": 0,
-      "assists": 1
+      "assists": 0
     },
     {
       "id": "matsumoto-hiroya",
@@ -1032,11 +1032,11 @@
       "name": "松本 大弥",
       "kana": "マツモト ヒロヤ",
       "position": "MF",
-      "height": 180,
-      "weight": 74,
+      "height": 0,
+      "weight": 0,
       "apps": 12,
       "goals": 1,
-      "assists": 2
+      "assists": 0
     },
     {
       "id": "takeda-shohei",
@@ -1044,11 +1044,11 @@
       "name": "武田 将平",
       "kana": "タケダ ショウヘイ",
       "position": "MF",
-      "height": 181,
-      "weight": 76,
+      "height": 0,
+      "weight": 0,
       "apps": 18,
       "goals": 0,
-      "assists": 1
+      "assists": 0
     },
     {
       "id": "onose-kosuke",
@@ -1056,11 +1056,11 @@
       "name": "小野瀬 康介",
       "kana": "オノセ コウスケ",
       "position": "MF",
-      "height": 176,
-      "weight": 71,
+      "height": 0,
+      "weight": 0,
       "apps": 6,
       "goals": 0,
-      "assists": 4
+      "assists": 0
     },
     {
       "id": "ohno-kazunari",
@@ -1068,8 +1068,8 @@
       "name": "大野 和成",
       "kana": "オオノ カズナリ",
       "position": "DF",
-      "height": 180,
-      "weight": 77,
+      "height": 0,
+      "weight": 0,
       "apps": 6,
       "goals": 0,
       "assists": 0
@@ -1092,11 +1092,11 @@
       "name": "鈴木 章斗",
       "kana": "スズキ アキト",
       "position": "FW",
-      "height": 179,
-      "weight": 72,
+      "height": 0,
+      "weight": 0,
       "apps": 18,
       "goals": 7,
-      "assists": 3
+      "assists": 0
     },
     {
       "id": "oda-yutaro",
@@ -1104,11 +1104,11 @@
       "name": "小田 裕太郎",
       "kana": "オダ ユウタロウ",
       "position": "FW",
-      "height": 181,
-      "weight": 70,
+      "height": 0,
+      "weight": 0,
       "apps": 15,
       "goals": 4,
-      "assists": 2
+      "assists": 0
     },
     {
       "id": "hiraoka-taiyo",
@@ -1116,11 +1116,11 @@
       "name": "下口 稚葉",
       "kana": "ヒラオカ タイヨウ",
       "position": "DF",
-      "height": 172,
-      "weight": 66,
+      "height": 0,
+      "weight": 0,
       "apps": 15,
       "goals": 0,
-      "assists": 3
+      "assists": 0
     },
     {
       "id": "takahashi-naoya",
@@ -1188,11 +1188,11 @@
       "name": "西野 太陽",
       "kana": "ニシノ タイヨウ",
       "position": "FW",
-      "height": 180,
-      "weight": 73,
+      "height": 0,
+      "weight": 0,
       "apps": 14,
       "goals": 4,
-      "assists": 1
+      "assists": 0
     },
     {
       "id": "ishibashi-sena",

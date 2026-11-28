@@ -183,10 +183,6 @@ export function PlayersTab({
                       <span className="p-stat-label">得点</span>
                       <strong className="p-stat-val num-font is-accent">{player.goals}</strong>
                     </div>
-                    <div className="p-stat">
-                      <span className="p-stat-label">アシスト</span>
-                      <strong className="p-stat-val num-font">{player.assists}</strong>
-                    </div>
                   </div>
                 </article>
               );
