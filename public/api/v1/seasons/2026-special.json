@@ -72,7 +72,8 @@
           55
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33262"
     },
     {
       "id": "2026-special-r17",
@@ -115,7 +116,8 @@
           77
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33254"
     },
     {
       "id": "2026-special-r16",
@@ -157,7 +159,8 @@
           86
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33252"
     },
     {
       "id": "2026-special-r15",
@@ -202,7 +205,8 @@
           77
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33243"
     },
     {
       "id": "2026-special-r14",
@@ -247,7 +251,8 @@
           77
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33240"
     },
     {
       "id": "2026-special-r13",
@@ -292,7 +297,8 @@
           86
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33234"
     },
     {
       "id": "2026-special-r12",
@@ -337,7 +343,8 @@
           77
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33231"
     },
     {
       "id": "2026-special-r11",
@@ -382,7 +389,8 @@
           77
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33224"
     },
     {
       "id": "2026-special-r10",
@@ -427,7 +435,8 @@
           37
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33218"
     },
     {
       "id": "2026-special-r9",
@@ -472,7 +481,8 @@
           86
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33216"
     },
     {
       "id": "2026-special-r8",
@@ -519,7 +529,8 @@
           86
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33209"
     },
     {
       "id": "2026-special-r7",
@@ -564,7 +575,8 @@
           86
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33203"
     },
     {
       "id": "2026-special-r6",
@@ -609,7 +621,8 @@
           86
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33199"
     },
     {
       "id": "2026-special-r5",
@@ -654,7 +667,8 @@
           86
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33193"
     },
     {
       "id": "2026-special-r4",
@@ -701,7 +715,8 @@
           77
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33189"
     },
     {
       "id": "2026-special-r3",
@@ -746,7 +761,8 @@
           50
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33184"
     },
     {
       "id": "2026-special-r2",
@@ -792,7 +808,8 @@
           86
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=32950"
     },
     {
       "id": "2026-special-r1",
@@ -837,7 +854,8 @@
           86
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=32945"
     }
   ],
   "players": [

@@ -174,12 +174,16 @@ export function MatchDetailModal({
             )}
 
             <a
-              href="https://www.jleague.jp/club/shonan/day/"
+              href={match.jleague_match_url || 'https://www.jleague.jp/club/shonan/day/'}
               target="_blank"
               rel="noopener noreferrer"
               className="jleague-stats-link"
             >
-              <span>Jリーグ公式で詳細・スタッツを見る</span>
+              <span>
+                {match.jleague_match_url
+                  ? 'Jリーグ公式 試合詳細・スタッツを見る'
+                  : 'Jリーグ公式 日程・結果ページを見る'}
+              </span>
               <ExternalLink size={12} />
             </a>
           </div>

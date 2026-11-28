@@ -67,6 +67,7 @@ export interface Match {
   stadium: string;
   status: 'scheduled' | 'finished';
   ticket_url: string | null;
+  jleague_match_url?: string | null;
   result: MatchResult | null;
   lineup: MatchLineup | null;
   stats: MatchStats | null;
