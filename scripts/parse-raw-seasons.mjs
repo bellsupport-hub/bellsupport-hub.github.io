@@ -22,7 +22,7 @@ const ROOT_DIR = path.resolve(__dirname, '..');
 const RAW_DIR = path.join(ROOT_DIR, 'data/raw');
 const PLAYER_IDS_PATH = path.join(ROOT_DIR, 'data/player-ids.json');
 const SEASONS_OUT_DIR = path.join(ROOT_DIR, 'public/api/v1/seasons');
-const TICKET_URL = 'https://www.jleague-ticket.jp/club/sb/';
+const TICKET_URL = 'https://www.jleague-ticket.jp/club/bm/';
 
 function normalizeNameKey(name) {
   return String(name ?? '').replace(/[\s\u3000]+/g, '').trim();

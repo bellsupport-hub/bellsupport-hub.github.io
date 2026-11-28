@@ -17,7 +17,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const API_OUT_DIR = path.resolve(__dirname, '../public/api/v1');
-const TICKET_URL = 'https://www.jleague-ticket.jp/club/sb/';
+const TICKET_URL = 'https://www.jleague-ticket.jp/club/bm/';
 
 const API_KEY = process.env.GEMINI_API_KEY?.trim();
 const MODEL = process.env.GEMINI_MODEL?.trim() || 'gemini-3.5-flash-lite';
