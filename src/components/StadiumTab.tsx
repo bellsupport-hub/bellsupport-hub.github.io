@@ -1,126 +1,75 @@
-import { useMemo, useState } from 'react';
-import { ExternalLink, Map as MapIcon, MapPin, Search, Ticket, X } from 'lucide-react';
-import type { Match, SeasonArchive, StadiumGuideData, WatchStatus } from '../types';
-import { getGoogleMapsUrl, getStadiumInfo, getTeamFullName } from '../utils/clubMeta';
-import { formatKickoffDate, formatKickoffTime, getMatchOutcome } from '../utils/format';
+import { useMemo, useRef, useState } from 'react';
+import { ExternalLink, MapPin, Music, Play, Sparkles, Ticket } from 'lucide-react';
+import type { Match, SeasonArchive, StadiumGuideData, VideoItem } from '../types';
+import { getGoogleMapsUrl, getTeamFullName } from '../utils/clubMeta';
+import { formatKickoffDate, formatKickoffTime } from '../utils/format';
 import { TeamFlag, VenuePin } from './TeamFlag';
 
-type SubTab = 'guide' | 'venues' | 'pending';
-type VenueFilter = 'all' | 'home' | 'away' | 'visited';
+type SubTab = 'guide' | 'chants' | 'dance';
 
 interface StadiumTabProps {
   stadiumGuide: StadiumGuideData;
   allMatches: Match[];
   currentSeason: SeasonArchive;
-  getWatchStatus: (matchId: string) => WatchStatus;
+  videos: VideoItem[];
 }
 
-interface VenueStats {
-  key: string;
-  name: string;
-  shorts: string[];
-  isHome: boolean;
-  opponents: string[];
-  played: number;
-  won: number;
-  drawn: number;
-  lost: number;
-  gf: number;
-  ga: number;
-  scheduled: number;
-  visitedCount: number;
+interface ChantChapter {
+  timeLabel: string;
+  startSec: number;
+  title: string;
 }
+
+const CHANT_VIDEO_ID = 'jIBv3_JHnG8';
+const CHANT_VIDEO_TITLE = '【俺らは歌うのさ 湘南の為に】湘南ベルマーレ チャント集';
+const CHANT_VIDEO_META = '2026.11.14 vs 横浜FC @レモンガススタジアム平塚（J.LEAGUE LIFE）';
+
+const CHANT_CHAPTERS: ChantChapter[] = [
+  { timeLabel: '00:00', startSec: 0, title: '俺たちの湘南' },
+  { timeLabel: '02:00', startSec: 120, title: 'どんな時も俺の誇り' },
+  { timeLabel: '04:21', startSec: 261, title: 'ビッグウェーブ' },
+  { timeLabel: '05:54', startSec: 354, title: 'ラピュタ' },
+  { timeLabel: '08:19', startSec: 499, title: '湘南コール' },
+  { timeLabel: '08:29', startSec: 509, title: '闘え湘南' },
+  { timeLabel: '10:10', startSec: 610, title: 'それ行け湘南' },
+  { timeLabel: '11:06', startSec: 666, title: 'ベルマーレオーレ' },
+  { timeLabel: '11:55', startSec: 715, title: 'バモ湘南' },
+  { timeLabel: '13:06', startSec: 786, title: '大脱走' },
+  { timeLabel: '14:52', startSec: 892, title: '湘南コール' },
+  { timeLabel: '15:11', startSec: 911, title: '最後に踊るため' },
+  { timeLabel: '16:46', startSec: 1006, title: '勝利を掴み取れ' },
+  { timeLabel: '19:11', startSec: 1151, title: '勇者湘南' },
+  { timeLabel: '21:03', startSec: 1263, title: '猪突猛進' },
+  { timeLabel: '21:23', startSec: 1283, title: '得点' },
+  { timeLabel: '21:34', startSec: 1294, title: 'One Bellmare' },
+  { timeLabel: '22:28', startSec: 1348, title: 'バモバモス湘南' },
+  { timeLabel: '23:59', startSec: 1439, title: '山田 寛人' },
+  { timeLabel: '24:55', startSec: 1495, title: '俺たちの声' },
+  { timeLabel: '28:05', startSec: 1685, title: 'いつでもどこでも' },
+  { timeLabel: '30:09', startSec: 1809, title: '最後に踊ろう' },
+  { timeLabel: '32:18', startSec: 1938, title: 'VAMO湘南' },
+  { timeLabel: '33:24', startSec: 2004, title: 'アレアレ湘南' },
+  { timeLabel: '35:12', startSec: 2112, title: '得点' },
+  { timeLabel: '36:12', startSec: 2172, title: '自分を信じ、仲間を信じ' },
+  { timeLabel: '40:36', startSec: 2436, title: 'ビッグウェーブ' },
+  { timeLabel: '41:49', startSec: 2509, title: '勝利の歌' },
+  { timeLabel: '42:43', startSec: 2563, title: '選手挨拶〜ウォーキング' },
+];
 
 export function StadiumTab({
   stadiumGuide,
   allMatches,
   currentSeason,
-  getWatchStatus,
+  videos,
 }: StadiumTabProps) {
   const [subTab, setSubTab] = useState<SubTab>('guide');
-  const [venueFilter, setVenueFilter] = useState<VenueFilter>('all');
-  const [venueQuery, setVenueQuery] = useState('');
+  const [activeChapterIdx, setActiveChapterIdx] = useState<number>(0);
+  const [autoplayChant, setAutoplayChant] = useState(false);
+  const [playNonce, setPlayNonce] = useState(0);
+  const [danceSeasonFilter, setDanceSeasonFilter] = useState<string>('all');
+  const chantPlayerRef = useRef<HTMLDivElement | null>(null);
 
   const { stadium } = stadiumGuide;
-
-  const venueDirectory = useMemo<VenueStats[]>(() => {
-    const map = new Map<
-      string,
-      {
-        key: string;
-        name: string;
-        shorts: Set<string>;
-        isHome: boolean;
-        opponents: Set<string>;
-        played: number;
-        won: number;
-        drawn: number;
-        lost: number;
-        gf: number;
-        ga: number;
-        scheduled: number;
-        visitedCount: number;
-      }
-    >();
-
-    for (const m of allMatches) {
-      const info = getStadiumInfo(m.stadium);
-      const key = info.query;
-      let rec = map.get(key);
-      if (!rec) {
-        rec = {
-          key,
-          name: info.name,
-          shorts: new Set([m.stadium]),
-          isHome: m.is_home,
-          opponents: new Set(),
-          played: 0,
-          won: 0,
-          drawn: 0,
-          lost: 0,
-          gf: 0,
-          ga: 0,
-          scheduled: 0,
-          visitedCount: 0,
-        };
-        map.set(key, rec);
-      }
-      rec.shorts.add(m.stadium);
-      if (m.is_home) rec.isHome = true;
-      else rec.opponents.add(m.opponent);
-
-      if (getWatchStatus(m.id).stadium) {
-        rec.visitedCount += 1;
-      }
-
-      if (m.status === 'finished' && m.result) {
-        rec.played += 1;
-        rec.gf += m.result.bellmare_score;
-        rec.ga += m.result.opponent_score;
-        const outcome = getMatchOutcome(m);
-        if (outcome === 'W') rec.won += 1;
-        else if (outcome === 'D') rec.drawn += 1;
-        else if (outcome === 'L') rec.lost += 1;
-      } else {
-        rec.scheduled += 1;
-      }
-    }
-
-    return Array.from(map.values())
-      .map((r) => ({
-        ...r,
-        shorts: Array.from(r.shorts),
-        opponents: Array.from(r.opponents),
-      }))
-      .sort((a, b) => {
-        if (a.isHome !== b.isHome) return a.isHome ? -1 : 1;
-        return b.played + b.scheduled - (a.played + a.scheduled);
-      });
-  }, [allMatches, getWatchStatus]);
-
-  const homeRecord = venueDirectory.find((v) => v.key === 'レモンガススタジアム平塚');
-  const awayVenues = venueDirectory.filter((v) => !v.isHome);
-  const visitedAwayCount = awayVenues.filter((v) => v.visitedCount > 0).length;
 
   const upcomingAwayMatches = useMemo(() => {
     return currentSeason.matches
@@ -128,17 +77,54 @@ export function StadiumTab({
       .sort((a, b) => new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime());
   }, [currentSeason.matches]);
 
-  const filteredVenues = useMemo(() => {
-    const q = venueQuery.trim().toLowerCase();
-    return venueDirectory.filter((v) => {
-      if (venueFilter === 'home' && !v.isHome) return false;
-      if (venueFilter === 'away' && v.isHome) return false;
-      if (venueFilter === 'visited' && v.visitedCount === 0) return false;
-      if (!q) return true;
-      const hay = `${v.name} ${v.shorts.join(' ')} ${v.opponents.join(' ')}`.toLowerCase();
-      return hay.includes(q);
-    });
-  }, [venueDirectory, venueFilter, venueQuery]);
+  const wonMatchIds = useMemo(() => {
+    const set = new Set<string>();
+    for (const m of allMatches) {
+      if (m.status === 'finished' && m.result && m.result.bellmare_score > m.result.opponent_score) {
+        set.add(m.id);
+      }
+    }
+    return set;
+  }, [allMatches]);
+
+  const danceVideos = useMemo(() => {
+    return videos
+      .filter(
+        (v) =>
+          v.source === 'bellmare' &&
+          (/勝利のダンス|勝鬨/.test(v.title) ||
+            (v.match_id !== null &&
+              wonMatchIds.has(v.match_id) &&
+              /MATCH REPORT|INSIDE BELLMARE|AWAY FILM|INSIDE/i.test(v.title)))
+      )
+      .sort((a, b) => b.published_at.localeCompare(a.published_at));
+  }, [videos, wonMatchIds]);
+
+  const danceSeasons = useMemo(() => {
+    const seen = new Set<string>();
+    const list: string[] = [];
+    for (const v of danceVideos) {
+      if (!seen.has(v.season)) {
+        seen.add(v.season);
+        list.push(v.season);
+      }
+    }
+    return list;
+  }, [danceVideos]);
+
+  const filteredDanceVideos = useMemo(() => {
+    if (danceSeasonFilter === 'all') return danceVideos;
+    return danceVideos.filter((v) => v.season === danceSeasonFilter);
+  }, [danceVideos, danceSeasonFilter]);
+
+  const activeChapter = CHANT_CHAPTERS[activeChapterIdx] ?? CHANT_CHAPTERS[0];
+
+  const handleSelectChapter = (idx: number) => {
+    setActiveChapterIdx(idx);
+    setAutoplayChant(true);
+    setPlayNonce((n) => n + 1);
+    chantPlayerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
 
   return (
     <div className="tab-content">
@@ -157,27 +143,28 @@ export function StadiumTab({
         <button
           type="button"
           role="tab"
-          aria-selected={subTab === 'venues'}
-          className={`segment-btn ${subTab === 'venues' ? 'is-active' : ''}`}
-          onClick={() => setSubTab('venues')}
+          aria-selected={subTab === 'chants'}
+          className={`segment-btn ${subTab === 'chants' ? 'is-active' : ''}`}
+          onClick={() => setSubTab('chants')}
         >
-          <MapIcon size={15} />
-          <span>全会場 ({venueDirectory.length})</span>
+          <Music size={15} />
+          <span>応援チャント集</span>
         </button>
         <button
           type="button"
           role="tab"
-          aria-selected={subTab === 'pending'}
-          className={`segment-btn ${subTab === 'pending' ? 'is-active' : ''}`}
-          onClick={() => setSubTab('pending')}
+          aria-selected={subTab === 'dance'}
+          className={`segment-btn ${subTab === 'dance' ? 'is-active' : ''}`}
+          onClick={() => setSubTab('dance')}
         >
-          <span>情報提供枠</span>
+          <Sparkles size={15} />
+          <span>勝利のダンス</span>
         </button>
       </div>
 
+      {/* Sub-tab 1: Home & Away Trips */}
       {subTab === 'guide' && (
         <div className="section-stack">
-          {/* Verified Home Stadium Card */}
           <section className="stadium-hero-card">
             <div className="stadium-hero-top">
               <div className="stadium-hero-info">
@@ -199,31 +186,6 @@ export function StadiumTab({
               </a>
             </div>
 
-            {homeRecord && (
-              <div className="stadium-home-stats num-font">
-                <div className="stadium-home-stat-box">
-                  <span>2020〜試合</span>
-                  <strong>{homeRecord.played}</strong>
-                </div>
-                <div className="stadium-home-stat-box">
-                  <span>勝-分-敗</span>
-                  <strong>
-                    {homeRecord.won}-{homeRecord.drawn}-{homeRecord.lost}
-                  </strong>
-                </div>
-                <div className="stadium-home-stat-box">
-                  <span>得 / 失</span>
-                  <strong>
-                    {homeRecord.gf}/{homeRecord.ga}
-                  </strong>
-                </div>
-                <div className="stadium-home-stat-box is-accent">
-                  <span>現地観戦</span>
-                  <strong>{homeRecord.visitedCount}回</strong>
-                </div>
-              </div>
-            )}
-
             <div className="stadium-official-links">
               <a
                 href="https://www.bellmare.co.jp/"
@@ -234,19 +196,9 @@ export function StadiumTab({
                 <span>湘南ベルマーレ公式サイト</span>
                 <ExternalLink size={13} />
               </a>
-              <a
-                href={stadium.bus_official_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="stadium-ext-link"
-              >
-                <span>神奈中バス公式</span>
-                <ExternalLink size={13} />
-              </a>
             </div>
           </section>
 
-          {/* Upcoming Away Trips */}
           <section className="section-block">
             <div className="section-header">
               <h3 className="section-title">
@@ -299,129 +251,157 @@ export function StadiumTab({
         </div>
       )}
 
-      {subTab === 'venues' && (
+      {/* Sub-tab 2: Chants (WIP + Chapter-cued YouTube player) */}
+      {subTab === 'chants' && (
         <div className="section-stack">
-          <div className="surface-card guide-card away-conquest-card">
-            <div>
-              <p className="guide-card-sub">アウェイスタジアム現地制覇（2020〜2026-27）</p>
-              <strong className="conquest-num num-font">
-                {visitedAwayCount} <span>/ {awayVenues.length} 会場</span>
-              </strong>
+          <section className="surface-card guide-card chant-wip-card">
+            <div className="chant-wip-head">
+              <h3 className="guide-card-title">応援チャント集</h3>
+              <span className="chant-wip-badge">準備中</span>
             </div>
-            <p className="guide-card-sub conquest-hint">
-              試合タブで「現地」を記録すると自動集計されます
+            <p className="guide-body-text">
+              応援チャント集は現在準備中です。下のチャプターをタップすると、該当チャントの開始位置からYouTube動画を頭出し再生できます。
             </p>
-          </div>
+          </section>
 
-          <div className="search-input-wrap">
-            <Search size={17} className="search-icon" />
-            <input
-              type="search"
-              className="search-input"
-              value={venueQuery}
-              onChange={(e) => setVenueQuery(e.target.value)}
-              placeholder="スタジアム名・略称・クラブ名で検索"
-              aria-label="スタジアムを検索"
-            />
-            {venueQuery && (
-              <button
-                type="button"
-                className="search-clear-btn"
-                onClick={() => setVenueQuery('')}
-                aria-label="検索をクリア"
-              >
-                <X size={15} />
-              </button>
-            )}
-          </div>
+          <section className="surface-card video-card" ref={chantPlayerRef}>
+            <div className="video-embed-frame">
+              <iframe
+                key={`${CHANT_VIDEO_ID}-${activeChapter.startSec}-${playNonce}`}
+                src={`https://www.youtube-nocookie.com/embed/${CHANT_VIDEO_ID}?start=${activeChapter.startSec}&rel=0&playsinline=1${autoplayChant ? '&autoplay=1' : ''}`}
+                title={`${CHANT_VIDEO_TITLE} - ${activeChapter.title}`}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
 
-          <div className="filter-pills" role="tablist" aria-label="会場フィルタ">
-            {(
-              [
-                { id: 'all', label: `すべて (${venueDirectory.length})` },
-                { id: 'home', label: 'HOME' },
-                { id: 'away', label: `AWAY (${awayVenues.length})` },
-                { id: 'visited', label: '現地訪問済' },
-              ] as { id: VenueFilter; label: string }[]
-            ).map((opt) => (
-              <button
-                key={opt.id}
-                type="button"
-                role="tab"
-                aria-selected={venueFilter === opt.id}
-                className={`filter-pill ${venueFilter === opt.id ? 'is-active' : ''}`}
-                onClick={() => setVenueFilter(opt.id)}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="match-list">
-            {filteredVenues.map((v) => (
-              <article key={v.key} className="surface-card venue-dir-card">
-                <div className="venue-dir-top">
-                  <div className="venue-dir-title-wrap">
-                    <span className={`venue-ha-badge ${v.isHome ? 'is-home' : 'is-away'}`}>
-                      {v.isHome ? 'HOME' : 'AWAY'}
-                    </span>
-                    <h4 className="venue-dir-name">{v.name}</h4>
-                  </div>
-                  <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                      v.key
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="venue-dir-map-link"
-                  >
-                    <span>地図</span>
-                    <ExternalLink size={12} />
-                  </a>
-                </div>
-
-                <div className="venue-dir-meta">
-                  <span>表記: {v.shorts.join(' / ')}</span>
-                  {v.opponents.length > 0 && (
-                    <span className="venue-dir-opponents">
-                      {v.opponents.map((op) => (
-                        <span key={op} className="team-with-flag">
-                          <TeamFlag team={op} size={11} />
-                          <span>{op}</span>
-                        </span>
-                      ))}
-                    </span>
-                  )}
-                </div>
-
-                <div className="venue-dir-record num-font">
+            <div className="video-card-body">
+              <div className="video-card-meta">
+                <span className="chant-now-badge num-font">
+                  <Play size={11} />
                   <span>
-                    戦績: <strong>{v.played}戦</strong> {v.won}勝{v.drawn}分{v.lost}敗（
-                    {v.gf}得点/{v.ga}失点）{v.scheduled > 0 ? ` + 予定${v.scheduled}` : ''}
+                    {activeChapter.timeLabel} {activeChapter.title}
                   </span>
-                  {v.visitedCount > 0 && (
-                    <strong className="venue-visited-badge">現地 {v.visitedCount}回</strong>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
+                </span>
+                <a
+                  href={`https://www.youtube.com/watch?v=${CHANT_VIDEO_ID}&t=${activeChapter.startSec}s`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="video-card-yt-inline"
+                >
+                  <span>YouTubeで開く</span>
+                  <ExternalLink size={12} />
+                </a>
+              </div>
+              <h4 className="video-card-title">{CHANT_VIDEO_TITLE}</h4>
+              <p className="chant-video-sub">{CHANT_VIDEO_META}</p>
+            </div>
+          </section>
+
+          <section className="section-block">
+            <div className="section-header">
+              <h3 className="section-title">チャプター頭出し（全{CHANT_CHAPTERS.length}曲）</h3>
+              <span className="section-meta">タップで即頭出し</span>
+            </div>
+            <div className="chant-chapter-grid">
+              {CHANT_CHAPTERS.map((ch, idx) => {
+                const isActive = idx === activeChapterIdx;
+                return (
+                  <button
+                    key={`${ch.timeLabel}-${ch.title}`}
+                    type="button"
+                    className={`chant-chapter-btn ${isActive ? 'is-active' : ''}`}
+                    onClick={() => handleSelectChapter(idx)}
+                  >
+                    <span className="chant-chapter-time num-font">{ch.timeLabel}</span>
+                    <span className="chant-chapter-title">{ch.title}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
         </div>
       )}
 
-      {subTab === 'pending' && (
-        <section className="surface-card guide-card">
-          <h3 className="guide-card-title">事実確認済みデータの追加枠</h3>
-          <p className="guide-body-text">
-            真偽不明・未確認の仮情報は掲載しない方針のため、以下のコンテンツは公式・事実確認済みの情報が揃い次第、順次追加します。右上の「問合せ」から情報提供も可能です。
-          </p>
-          <ul className="pending-info-list">
-            <li>レモンガススタジアム平塚の最新アクセス・直行シャトルバス案内</li>
-            <li>スタジアムグルメ（フードパーク）公式出店情報</li>
-            <li>アウェイ各会場の最寄り駅・ビジターゲート・遠征メモ</li>
-            <li>事実確認済みの応援チャント集</li>
-          </ul>
-        </section>
+      {/* Sub-tab 3: Victory Dance (Official Bellmare winning-match videos) */}
+      {subTab === 'dance' && (
+        <div className="section-stack">
+          <section className="surface-card guide-card">
+            <div className="chant-wip-head">
+              <h3 className="guide-card-title">勝利のダンス・勝利時公式動画</h3>
+              <span className="dance-count-chip num-font">{danceVideos.length}本</span>
+            </div>
+            <p className="guide-body-text">
+              湘南ベルマーレ公式YouTubeチャンネルの勝利試合レポート（MATCH REPORT / INSIDE BELLMARE / AWAY FILM）や勝利時の儀式・関連動画を自動集約しています。
+            </p>
+          </section>
+
+          {danceSeasons.length > 1 && (
+            <div className="filter-pills" role="tablist" aria-label="シーズンフィルタ">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={danceSeasonFilter === 'all'}
+                className={`filter-pill ${danceSeasonFilter === 'all' ? 'is-active' : ''}`}
+                onClick={() => setDanceSeasonFilter('all')}
+              >
+                すべて ({danceVideos.length})
+              </button>
+              {danceSeasons.map((sId) => (
+                <button
+                  key={sId}
+                  type="button"
+                  role="tab"
+                  aria-selected={danceSeasonFilter === sId}
+                  className={`filter-pill ${danceSeasonFilter === sId ? 'is-active' : ''}`}
+                  onClick={() => setDanceSeasonFilter(sId)}
+                >
+                  {sId === '2026-special' ? '2026特別大会' : sId}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {filteredDanceVideos.length > 0 ? (
+            <div className="videos-list">
+              {filteredDanceVideos.map((v) => (
+                <article key={v.id} className="surface-card video-card">
+                  <div className="video-embed-frame">
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${v.youtube_id}?rel=0&playsinline=1`}
+                      title={v.title}
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                  <div className="video-card-body">
+                    <div className="video-card-meta">
+                      <span className="video-source-badge is-bellmare">ベルマーレ公式</span>
+                      <span className="video-season-badge num-font">
+                        {v.season === '2026-special' ? '2026特別大会' : v.season}
+                      </span>
+                      <span className="video-date num-font">{v.published_at.slice(0, 10)}</span>
+                      <a
+                        href={`https://www.youtube.com/watch?v=${v.youtube_id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="video-card-yt-inline"
+                      >
+                        <span>YouTube</span>
+                        <ExternalLink size={12} />
+                      </a>
+                    </div>
+                    <h4 className="video-card-title">{v.title}</h4>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="empty-card">該当する公式動画がありません。</div>
+          )}
+        </div>
       )}
     </div>
   );

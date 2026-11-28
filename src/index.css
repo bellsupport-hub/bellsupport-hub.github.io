@@ -3305,3 +3305,118 @@ a {
 .contact-submit-btn {
   min-width: 0;
 }
+
+/* ===== Stadium Tab: Chants & Victory Dance ===== */
+.chant-wip-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.chant-wip-head .guide-card-title {
+  margin-bottom: 0;
+}
+
+.chant-wip-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.72rem;
+  font-weight: 800;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.dance-count-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: rgba(0, 146, 63, 0.12);
+  color: var(--color-brand);
+  font-size: 0.75rem;
+  font-weight: 800;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.chant-now-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(0, 146, 63, 0.12);
+  color: var(--color-brand);
+  font-size: 0.74rem;
+  font-weight: 800;
+  max-width: 100%;
+}
+
+.chant-video-sub {
+  margin: 4px 0 0;
+  font-size: 0.76rem;
+  color: var(--color-text-muted);
+}
+
+.chant-chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.chant-chapter-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 10px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: var(--color-dark);
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+  transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.1s ease;
+}
+
+.chant-chapter-btn:hover {
+  border-color: var(--color-brand);
+  background: #f5fbf7;
+}
+
+.chant-chapter-btn.is-active {
+  border-color: var(--color-brand);
+  background: rgba(0, 146, 63, 0.1);
+  color: var(--color-brand);
+}
+
+.chant-chapter-time {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--color-brand);
+  background: rgba(0, 146, 63, 0.1);
+  padding: 2px 6px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.chant-chapter-btn.is-active .chant-chapter-time {
+  background: var(--color-brand);
+  color: #ffffff;
+}
+
+.chant-chapter-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
