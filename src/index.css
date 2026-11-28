@@ -3250,3 +3250,58 @@ a {
     white-space: nowrap;
   }
 }
+
+/* ==========================================================================
+   Stadium Tab Layout Fixes (independent map button, away-trip header, overflow)
+   ========================================================================== */
+.stadium-hero-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.shrink-icon {
+  flex-shrink: 0;
+}
+
+.stadium-map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  min-width: auto;
+  padding: 7px 11px;
+  border-radius: 10px;
+  background: #7bc143;
+  color: #0b1522;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.stadium-map-btn:hover {
+  opacity: 0.92;
+}
+
+.away-trip-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.away-trip-venue {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.venue-pin-link {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.contact-submit-btn {
+  min-width: 0;
+}

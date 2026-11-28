@@ -37,10 +37,11 @@
       "opponent": "磐田",
       "stadium": "レモンＳ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r37",
@@ -50,10 +51,11 @@
       "opponent": "鳥栖",
       "stadium": "駅スタ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r36",
@@ -63,10 +65,11 @@
       "opponent": "宮崎",
       "stadium": "レモンＳ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r35",
@@ -76,10 +79,11 @@
       "opponent": "山形",
       "stadium": "ＮＤスタ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r34",
@@ -89,10 +93,11 @@
       "opponent": "大分",
       "stadium": "レモンＳ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r33",
@@ -102,10 +107,11 @@
       "opponent": "栃木Ｃ",
       "stadium": "ＣＦＳ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r32",
@@ -115,10 +121,11 @@
       "opponent": "秋田",
       "stadium": "ソユスタ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r31",
@@ -128,10 +135,11 @@
       "opponent": "藤枝",
       "stadium": "レモンＳ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r30",
@@ -141,10 +149,11 @@
       "opponent": "いわき",
       "stadium": "ハワスタ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r29",
@@ -154,10 +163,11 @@
       "opponent": "札幌",
       "stadium": "レモンＳ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r28",
@@ -167,10 +177,11 @@
       "opponent": "横浜FC",
       "stadium": "ニッパツ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r27",
@@ -180,10 +191,11 @@
       "opponent": "新潟",
       "stadium": "デンカＳ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r26",
@@ -193,10 +205,11 @@
       "opponent": "大宮",
       "stadium": "レモンＳ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r25",
@@ -206,10 +219,11 @@
       "opponent": "徳島",
       "stadium": "レモンＳ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r24",
@@ -219,10 +233,11 @@
       "opponent": "甲府",
       "stadium": "ＪＩＴス",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r23",
@@ -232,10 +247,11 @@
       "opponent": "八戸",
       "stadium": "レモンＳ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/club/bm/",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r22",
@@ -245,10 +261,11 @@
       "opponent": "今治",
       "stadium": "レモンＳ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/sales/perform/2640652/001",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r21",
@@ -258,10 +275,11 @@
       "opponent": "仙台",
       "stadium": "ユアスタ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/sales/perform/2640285/001",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r20",
@@ -271,10 +289,11 @@
       "opponent": "富山",
       "stadium": "レモンＳ",
       "status": "scheduled",
-      "ticket_url": "https://www.jleague-ticket.jp/club/sb/",
+      "ticket_url": "https://www.jleague-ticket.jp/sales/perform/2634861/001",
       "result": null,
       "lineup": null,
-      "stats": null
+      "stats": null,
+      "jleague_match_url": null
     },
     {
       "id": "2026-27-r19",
@@ -319,7 +338,8 @@
           19
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34325"
     },
     {
       "id": "2026-27-r18",
@@ -365,7 +385,8 @@
           77
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34316"
     },
     {
       "id": "2026-27-r17",
@@ -411,7 +432,8 @@
           38
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34298"
     },
     {
       "id": "2026-27-r16",
@@ -456,7 +478,8 @@
           19
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34295"
     },
     {
       "id": "2026-27-r15",
@@ -499,7 +522,8 @@
           9
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34281"
     },
     {
       "id": "2026-27-r14",
@@ -542,7 +566,8 @@
           9
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34267"
     },
     {
       "id": "2026-27-r13",
@@ -588,7 +613,8 @@
           77
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34266"
     },
     {
       "id": "2026-27-r12",
@@ -633,7 +659,8 @@
           34
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34251"
     },
     {
       "id": "2026-27-r11",
@@ -678,7 +705,8 @@
           9
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34244"
     },
     {
       "id": "2026-27-r10",
@@ -723,7 +751,8 @@
           9
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34236"
     },
     {
       "id": "2026-27-r9",
@@ -768,7 +797,8 @@
           9
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34218"
     },
     {
       "id": "2026-27-r8",
@@ -814,7 +844,8 @@
           11
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34216"
     },
     {
       "id": "2026-27-r7",
@@ -859,7 +890,8 @@
           9
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34202"
     },
     {
       "id": "2026-27-r6",
@@ -904,7 +936,8 @@
           11
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34189"
     },
     {
       "id": "2026-27-r5",
@@ -949,7 +982,8 @@
           77
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34179"
     },
     {
       "id": "2026-27-r4",
@@ -995,7 +1029,8 @@
           77
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34172"
     },
     {
       "id": "2026-27-r3",
@@ -1038,7 +1073,8 @@
           77
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34166"
     },
     {
       "id": "2026-27-r2",
@@ -1083,7 +1119,8 @@
           77
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34151"
     },
     {
       "id": "2026-27-r1",
@@ -1128,7 +1165,8 @@
           29
         ]
       },
-      "stats": null
+      "stats": null,
+      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=34142"
     }
   ],
   "players": [

@@ -180,11 +180,11 @@ export function StadiumTab({
           {/* Verified Home Stadium Card */}
           <section className="stadium-hero-card">
             <div className="stadium-hero-top">
-              <div>
+              <div className="stadium-hero-info">
                 <span className="stadium-kicker">HOME STADIUM</span>
                 <h2 className="stadium-name">{stadium.name}</h2>
                 <p className="stadium-address">
-                  <MapPin size={14} />
+                  <MapPin size={14} className="shrink-icon" />
                   <span>{stadium.address}</span>
                 </p>
               </div>
@@ -192,7 +192,7 @@ export function StadiumTab({
                 href={getGoogleMapsUrl('レモンＳ')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary-accent stadium-map-btn"
+                className="stadium-map-btn"
               >
                 <span>マップ</span>
                 <ExternalLink size={13} />
@@ -226,12 +226,12 @@ export function StadiumTab({
 
             <div className="stadium-official-links">
               <a
-                href="https://www.bellmare.co.jp/stadium"
+                href="https://www.bellmare.co.jp/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="stadium-ext-link"
               >
-                <span>ベルマーレ公式 アクセス</span>
+                <span>湘南ベルマーレ公式サイト</span>
                 <ExternalLink size={13} />
               </a>
               <a
@@ -259,7 +259,7 @@ export function StadiumTab({
               <div className="match-list">
                 {upcomingAwayMatches.map((m) => (
                   <article key={m.id} className="surface-card away-trip-card">
-                    <div className="match-card-head">
+                    <div className="away-trip-head">
                       <span className="round-chip">{m.round}</span>
                       <span className="match-date num-font">
                         {formatKickoffDate(m.kickoff)} {formatKickoffTime(m.kickoff)}

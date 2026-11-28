@@ -27,7 +27,7 @@ const RAW_DIR = path.join(ROOT_DIR, 'data/raw');
 const API_DIR = path.join(ROOT_DIR, 'public/api/v1');
 const SEASONS_DIR = path.join(API_DIR, 'seasons');
 const PLAYER_IDS_PATH = path.join(ROOT_DIR, 'data/player-ids.json');
-const TICKET_URL = 'https://www.jleague-ticket.jp/club/sb/';
+const TICKET_URL = 'https://www.jleague-ticket.jp/club/bm/';
 
 const SEASON_DEFAULTS = {
   '2026-27': { label: '2026-27', competition: 'J2リーグ', manager: '長澤 徹', rank: 8 },
