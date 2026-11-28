@@ -169,7 +169,7 @@ export default function App() {
             stadiumGuide={data.stadiumGuide}
             allMatches={allMatchesAcrossSeasons}
             currentSeason={currentSeason}
-            getWatchStatus={getWatchStatus}
+            videos={data.videos.videos}
           />
         )}
 
