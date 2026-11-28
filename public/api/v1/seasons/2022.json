@@ -38,6 +38,7 @@
       "stadium": "三協Ｆ柏",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 1,
@@ -53,26 +54,25 @@
           2,
           3,
           4,
+          16,
+          26,
+          14,
+          28,
           11,
           13,
-          14,
-          16,
-          18,
-          26,
-          28
+          18
         ],
         "substitutes": [
-          9,
+          23,
+          22,
           10,
           15,
-          22,
-          23,
           44,
-          49
+          49,
+          9
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27628"
+      "stats": null
     },
     {
       "id": "2022-r33",
@@ -83,6 +83,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 3,
         "opponent_score": 0,
@@ -98,26 +99,25 @@
           2,
           3,
           4,
+          16,
           10,
+          14,
+          44,
           11,
           13,
-          14,
-          16,
-          18,
-          44
+          18
         ],
         "substitutes": [
-          6,
-          9,
-          15,
-          22,
           23,
+          6,
+          22,
+          15,
           28,
-          49
+          49,
+          9
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27618"
+      "stats": null
     },
     {
       "id": "2022-r27",
@@ -128,6 +128,7 @@
       "stadium": "ノエスタ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 1,
@@ -139,27 +140,26 @@
           1,
           2,
           4,
-          5,
-          9,
-          11,
-          14,
           16,
+          5,
+          14,
           28,
           44,
-          49
+          49,
+          9,
+          11
         ],
         "substitutes": [
           31,
           8,
+          26,
           10,
-          13,
           15,
-          17,
-          26
+          13,
+          17
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27570"
+      "stats": null
     },
     {
       "id": "2022-r32",
@@ -170,6 +170,7 @@
       "stadium": "味スタ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 0,
@@ -185,26 +186,25 @@
           2,
           3,
           4,
-          9,
-          11,
-          14,
           16,
+          14,
           27,
           28,
-          44
+          44,
+          9,
+          11
         ],
         "substitutes": [
           31,
-          10,
-          13,
-          15,
-          18,
           24,
-          49
+          10,
+          15,
+          49,
+          13,
+          18
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27610"
+      "stats": null
     },
     {
       "id": "2022-r31",
@@ -215,6 +215,7 @@
       "stadium": "ヨドコウ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 1,
@@ -227,26 +228,25 @@
           2,
           3,
           6,
-          13,
-          14,
           16,
+          14,
           27,
           28,
           44,
-          49
+          49,
+          13
         ],
         "substitutes": [
-          9,
-          10,
-          11,
-          15,
-          18,
           23,
-          24
+          24,
+          10,
+          15,
+          9,
+          11,
+          18
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27603"
+      "stats": null
     },
     {
       "id": "2022-r30",
@@ -257,6 +257,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 0,
@@ -269,26 +270,25 @@
           2,
           3,
           6,
+          16,
+          14,
+          27,
+          44,
           9,
           11,
-          13,
-          14,
-          16,
-          27,
-          44
+          13
         ],
         "substitutes": [
+          23,
           4,
+          26,
           10,
           15,
-          18,
-          23,
-          26,
-          49
+          49,
+          18
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27592"
+      "stats": null
     },
     {
       "id": "2022-r29",
@@ -299,6 +299,7 @@
       "stadium": "アイスタ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 1,
@@ -314,25 +315,24 @@
           3,
           6,
           8,
-          11,
           14,
-          18,
           28,
           44,
-          49
+          49,
+          11,
+          18
         ],
         "substitutes": [
-          9,
-          10,
-          13,
-          16,
           23,
+          16,
           26,
-          27
+          10,
+          27,
+          9,
+          13
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27584"
+      "stats": null
     },
     {
       "id": "2022-r25",
@@ -343,6 +343,7 @@
       "stadium": "日産ス",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 3,
@@ -357,24 +358,23 @@
           4,
           8,
           10,
-          13,
           15,
-          18,
           27,
-          44
+          44,
+          13,
+          18
         ],
         "substitutes": [
-          6,
-          9,
-          11,
-          14,
           23,
+          6,
           26,
-          49
+          14,
+          49,
+          9,
+          11
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27548"
+      "stats": null
     },
     {
       "id": "2022-r28",
@@ -385,6 +385,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 1,
@@ -401,25 +402,24 @@
           3,
           6,
           8,
+          14,
+          28,
+          44,
           11,
           13,
-          14,
-          18,
-          28,
-          44
+          18
         ],
         "substitutes": [
-          4,
-          9,
-          10,
           23,
+          4,
           26,
+          10,
           27,
-          49
+          49,
+          9
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27574"
+      "stats": null
     },
     {
       "id": "2022-r26",
@@ -430,6 +430,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 1,
@@ -445,25 +446,24 @@
           4,
           6,
           8,
-          11,
-          13,
+          26,
           14,
           15,
-          17,
-          26
+          11,
+          13,
+          17
         ],
         "substitutes": [
-          9,
-          18,
           23,
           24,
           28,
           44,
-          49
+          49,
+          9,
+          18
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27557"
+      "stats": null
     },
     {
       "id": "2022-r24",
@@ -474,6 +474,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 5,
@@ -489,25 +490,24 @@
           3,
           4,
           8,
-          13,
           15,
-          18,
           27,
           42,
-          49
+          49,
+          13,
+          18
         ],
         "substitutes": [
           21,
           6,
-          11,
-          14,
-          17,
           26,
-          44
+          14,
+          44,
+          11,
+          17
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27543"
+      "stats": null
     },
     {
       "id": "2022-r23",
@@ -518,6 +518,7 @@
       "stadium": "ヤマハ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 1,
@@ -530,26 +531,25 @@
           2,
           3,
           4,
-          7,
           8,
-          13,
+          7,
           14,
-          18,
           27,
-          42
+          42,
+          13,
+          18
         ],
         "substitutes": [
           21,
           6,
-          11,
           15,
-          17,
           44,
-          49
+          49,
+          11,
+          17
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27533"
+      "stats": null
     },
     {
       "id": "2022-r22",
@@ -560,6 +560,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 0,
@@ -572,26 +573,25 @@
           2,
           3,
           4,
-          7,
           8,
-          13,
-          18,
+          7,
           27,
           28,
-          42
+          42,
+          13,
+          18
         ],
         "substitutes": [
           21,
-          11,
-          15,
           16,
-          17,
+          15,
           44,
-          49
+          49,
+          11,
+          17
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27523"
+      "stats": null
     },
     {
       "id": "2022-r21",
@@ -602,6 +602,7 @@
       "stadium": "Ｅスタ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 1,
@@ -615,27 +616,26 @@
           1,
           3,
           4,
-          7,
           8,
-          13,
           16,
-          17,
+          7,
           27,
           28,
-          42
+          42,
+          13,
+          17
         ],
         "substitutes": [
           21,
+          24,
+          26,
+          15,
           9,
           11,
-          15,
-          18,
-          24,
-          26
+          18
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27511"
+      "stats": null
     },
     {
       "id": "2022-r20",
@@ -646,6 +646,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 0,
@@ -660,26 +661,25 @@
           2,
           3,
           4,
-          7,
           8,
-          13,
+          7,
           14,
-          17,
           27,
-          42
+          42,
+          13,
+          17
         ],
         "substitutes": [
           31,
-          9,
-          11,
-          15,
           16,
           26,
-          28
+          15,
+          28,
+          9,
+          11
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27506"
+      "stats": null
     },
     {
       "id": "2022-r19",
@@ -690,6 +690,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 0,
@@ -702,26 +703,25 @@
           2,
           3,
           4,
-          7,
-          13,
-          14,
-          18,
           22,
+          7,
+          14,
           27,
-          42
+          42,
+          13,
+          18
         ],
         "substitutes": [
           21,
           8,
+          26,
+          41,
           9,
           11,
-          17,
-          26,
-          41
+          17
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27496"
+      "stats": null
     },
     {
       "id": "2022-r18",
@@ -732,6 +732,7 @@
       "stadium": "サンガＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 0,
@@ -746,26 +747,25 @@
           2,
           3,
           4,
-          7,
-          13,
-          14,
-          18,
           22,
+          7,
+          14,
           27,
-          42
+          42,
+          13,
+          18
         ],
         "substitutes": [
           21,
           8,
+          26,
+          15,
           9,
           11,
-          15,
-          17,
-          26
+          17
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27488"
+      "stats": null
     },
     {
       "id": "2022-r17",
@@ -776,6 +776,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 0,
@@ -791,26 +792,25 @@
           2,
           3,
           4,
-          7,
-          13,
-          14,
-          18,
           22,
+          7,
+          14,
           27,
-          42
+          42,
+          13,
+          18
         ],
         "substitutes": [
           21,
           8,
+          15,
+          28,
           9,
           11,
-          15,
-          17,
-          28
+          17
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27473"
+      "stats": null
     },
     {
       "id": "2022-r16",
@@ -821,6 +821,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 2,
@@ -833,26 +834,25 @@
           2,
           3,
           4,
-          11,
-          15,
-          17,
-          18,
           22,
           26,
-          27
+          15,
+          27,
+          11,
+          17,
+          18
         ],
         "substitutes": [
           31,
-          9,
-          10,
-          13,
-          14,
           24,
-          42
+          10,
+          14,
+          42,
+          9,
+          13
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27468"
+      "stats": null
     },
     {
       "id": "2022-r15",
@@ -863,6 +863,7 @@
       "stadium": "等々力",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 4,
         "opponent_score": 0,
@@ -878,27 +879,26 @@
           1,
           2,
           3,
-          11,
-          15,
           16,
-          17,
-          18,
           22,
           26,
-          27
+          15,
+          27,
+          11,
+          17,
+          18
         ],
         "substitutes": [
           31,
           4,
-          9,
           10,
-          13,
           14,
-          42
+          42,
+          9,
+          13
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27459"
+      "stats": null
     },
     {
       "id": "2022-r14",
@@ -909,6 +909,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 1,
@@ -922,27 +923,26 @@
           1,
           2,
           3,
+          16,
+          22,
+          26,
           7,
           10,
-          13,
           14,
-          16,
-          18,
-          22,
-          26
+          13,
+          18
         ],
         "substitutes": [
           31,
           4,
+          15,
+          27,
           9,
           11,
-          15,
-          17,
-          27
+          17
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27449"
+      "stats": null
     },
     {
       "id": "2022-r13",
@@ -953,6 +953,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 4,
@@ -967,26 +968,25 @@
           2,
           3,
           4,
-          9,
-          11,
+          22,
+          26,
           14,
           15,
-          17,
-          22,
-          26
+          9,
+          11,
+          17
         ],
         "substitutes": [
           31,
-          7,
           8,
+          7,
           10,
-          18,
           27,
-          41
+          41,
+          18
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27443"
+      "stats": null
     },
     {
       "id": "2022-r12",
@@ -997,6 +997,7 @@
       "stadium": "ベススタ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 0,
@@ -1009,26 +1010,25 @@
           2,
           3,
           4,
-          9,
-          11,
-          13,
+          22,
+          26,
           14,
           15,
-          22,
-          26
+          9,
+          11,
+          13
         ],
         "substitutes": [
+          23,
           8,
           10,
-          17,
-          18,
-          23,
           27,
-          41
+          41,
+          17,
+          18
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27432"
+      "stats": null
     },
     {
       "id": "2022-r11",
@@ -1039,6 +1039,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 4,
@@ -1049,30 +1050,29 @@
       "lineup": {
         "formation": "3-1-4-2",
         "starters": [
+          23,
           2,
+          8,
+          16,
+          26,
           5,
           7,
-          8,
-          9,
           10,
           15,
-          16,
-          23,
-          26,
-          27
+          27,
+          9
         ],
         "substitutes": [
           1,
           3,
+          22,
+          14,
           11,
           13,
-          14,
-          18,
-          22
+          18
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27421"
+      "stats": null
     },
     {
       "id": "2022-r10",
@@ -1083,6 +1083,7 @@
       "stadium": "札幌ド",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 1,
@@ -1094,27 +1095,26 @@
           1,
           2,
           3,
+          16,
+          22,
+          26,
           7,
+          14,
           11,
           13,
-          14,
-          16,
-          18,
-          22,
-          26
+          18
         ],
         "substitutes": [
+          23,
           4,
-          9,
           10,
           15,
-          17,
-          23,
-          27
+          27,
+          9,
+          17
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27412"
+      "stats": null
     },
     {
       "id": "2022-r9",
@@ -1125,6 +1125,7 @@
       "stadium": "パナスタ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 0,
@@ -1135,30 +1136,29 @@
       "lineup": {
         "formation": "3-1-4-2",
         "starters": [
+          23,
           2,
           3,
+          16,
+          22,
           7,
+          27,
+          42,
           11,
           13,
-          16,
-          18,
-          22,
-          23,
-          27,
-          42
+          18
         ],
         "substitutes": [
           31,
           8,
-          9,
+          26,
           10,
           15,
-          17,
-          26
+          9,
+          17
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27403"
+      "stats": null
     },
     {
       "id": "2022-r8",
@@ -1169,6 +1169,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 0,
@@ -1179,28 +1180,27 @@
         "starters": [
           1,
           2,
-          5,
           8,
+          22,
+          5,
           10,
-          13,
           14,
           15,
-          17,
-          22,
-          42
+          42,
+          13,
+          17
         ],
         "substitutes": [
+          23,
           4,
+          16,
           7,
           9,
           11,
-          16,
-          18,
-          23
+          18
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27396"
+      "stats": null
     },
     {
       "id": "2022-r7",
@@ -1211,6 +1211,7 @@
       "stadium": "豊田ス",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 2,
@@ -1223,28 +1224,27 @@
         "starters": [
           1,
           3,
-          5,
           8,
+          22,
+          24,
+          5,
           10,
+          14,
           11,
           13,
-          14,
-          17,
-          22,
-          24
+          17
         ],
         "substitutes": [
-          9,
+          23,
           16,
           20,
-          23,
+          30,
+          9,
           25,
-          29,
-          30
+          29
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27390"
+      "stats": null
     },
     {
       "id": "2022-r6",
@@ -1255,6 +1255,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 1,
@@ -1265,28 +1266,27 @@
         "starters": [
           1,
           3,
-          5,
-          11,
-          14,
-          15,
           16,
-          17,
           22,
           24,
+          5,
+          14,
+          15,
+          11,
+          17,
           29
         ],
         "substitutes": [
-          8,
-          10,
           23,
-          25,
+          8,
           30,
           32,
-          34
+          10,
+          34,
+          25
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27376"
+      "stats": null
     },
     {
       "id": "2022-r5",
@@ -1297,6 +1297,7 @@
       "stadium": "カシマ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 2,
@@ -1310,27 +1311,26 @@
           1,
           3,
           6,
-          7,
           8,
-          13,
-          15,
           16,
-          18,
           22,
-          41
+          7,
+          15,
+          41,
+          13,
+          18
         ],
         "substitutes": [
-          4,
-          9,
-          14,
-          17,
           23,
-          29,
-          42
+          4,
+          14,
+          42,
+          9,
+          17,
+          29
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27369"
+      "stats": null
     },
     {
       "id": "2022-r4",
@@ -1341,6 +1341,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 1,
@@ -1354,27 +1355,26 @@
           1,
           3,
           6,
-          7,
           8,
-          9,
-          15,
           16,
-          18,
           22,
-          41
+          7,
+          15,
+          41,
+          9,
+          18
         ],
         "substitutes": [
+          23,
           2,
           4,
-          13,
           14,
-          17,
-          23,
-          27
+          27,
+          13,
+          17
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27360"
+      "stats": null
     },
     {
       "id": "2022-r3",
@@ -1385,6 +1385,7 @@
       "stadium": "埼玉",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 2,
@@ -1397,26 +1398,25 @@
           2,
           4,
           6,
-          7,
-          13,
-          14,
           16,
-          18,
           22,
-          28
+          7,
+          14,
+          28,
+          13,
+          18
         ],
         "substitutes": [
-          5,
-          9,
-          15,
-          17,
           23,
+          5,
+          15,
           41,
-          42
+          42,
+          9,
+          17
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27350"
+      "stats": null
     },
     {
       "id": "2022-r2",
@@ -1427,6 +1427,7 @@
       "stadium": "駅スタ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 1,
@@ -1440,27 +1441,26 @@
           1,
           2,
           6,
-          7,
           8,
-          10,
-          11,
-          13,
-          14,
           16,
-          26
+          26,
+          7,
+          10,
+          14,
+          11,
+          13
         ],
         "substitutes": [
-          4,
-          9,
-          18,
           23,
+          4,
           28,
           41,
-          42
+          42,
+          9,
+          18
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27344"
+      "stats": null
     },
     {
       "id": "2022-r1",
@@ -1471,6 +1471,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 2,
@@ -1482,27 +1483,26 @@
           1,
           4,
           6,
-          11,
-          13,
-          14,
-          15,
           16,
           22,
           26,
-          28
+          14,
+          15,
+          28,
+          11,
+          13
         ],
         "substitutes": [
+          23,
           2,
           3,
           7,
-          9,
           10,
-          18,
-          23
+          9,
+          18
         ]
       },
-      "stats": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=27334"
+      "stats": null
     }
   ],
   "players": [
@@ -1523,7 +1523,7 @@
       "number": 2,
       "name": "杉岡 大暉",
       "kana": "",
-      "position": "MF",
+      "position": "DF",
       "height": 0,
       "weight": 0,
       "apps": 29,
@@ -1535,7 +1535,7 @@
       "number": 3,
       "name": "石原 広教",
       "kana": "",
-      "position": "MF",
+      "position": "DF",
       "height": 0,
       "weight": 0,
       "apps": 30,
@@ -1547,7 +1547,7 @@
       "number": 4,
       "name": "舘 幸希",
       "kana": "",
-      "position": "MF",
+      "position": "DF",
       "height": 0,
       "weight": 0,
       "apps": 25,
@@ -1571,7 +1571,7 @@
       "number": 6,
       "name": "岡本 拓也",
       "kana": "",
-      "position": "MF",
+      "position": "DF",
       "height": 0,
       "weight": 0,
       "apps": 11,
@@ -1595,7 +1595,7 @@
       "number": 8,
       "name": "大野 和成",
       "kana": "",
-      "position": "MF",
+      "position": "DF",
       "height": 0,
       "weight": 0,
       "apps": 19,
@@ -1607,7 +1607,7 @@
       "number": 9,
       "name": "ウェリントン",
       "kana": "",
-      "position": "MF",
+      "position": "FW",
       "height": 0,
       "weight": 0,
       "apps": 27,
@@ -1631,7 +1631,7 @@
       "number": 11,
       "name": "タリク",
       "kana": "",
-      "position": "MF",
+      "position": "FW",
       "height": 0,
       "weight": 0,
       "apps": 31,
@@ -1643,7 +1643,7 @@
       "number": 13,
       "name": "瀬川 祐輔",
       "kana": "",
-      "position": "MF",
+      "position": "FW",
       "height": 0,
       "weight": 0,
       "apps": 32,
@@ -1679,7 +1679,7 @@
       "number": 16,
       "name": "山本 脩斗",
       "kana": "",
-      "position": "MF",
+      "position": "DF",
       "height": 0,
       "weight": 0,
       "apps": 21,
@@ -1691,7 +1691,7 @@
       "number": 17,
       "name": "大橋 祐紀",
       "kana": "",
-      "position": "MF",
+      "position": "FW",
       "height": 0,
       "weight": 0,
       "apps": 23,
@@ -1703,7 +1703,7 @@
       "number": 18,
       "name": "町野 修斗",
       "kana": "",
-      "position": "MF",
+      "position": "FW",
       "height": 0,
       "weight": 0,
       "apps": 30,
@@ -1715,7 +1715,7 @@
       "number": 19,
       "name": "根本 凌",
       "kana": "",
-      "position": "MF",
+      "position": "FW",
       "height": 0,
       "weight": 0,
       "apps": 0,
@@ -1727,7 +1727,7 @@
       "number": 20,
       "name": "蓑田 広大",
       "kana": "",
-      "position": "MF",
+      "position": "DF",
       "height": 0,
       "weight": 0,
       "apps": 1,
@@ -1751,7 +1751,7 @@
       "number": 22,
       "name": "大岩 一貴",
       "kana": "",
-      "position": "MF",
+      "position": "DF",
       "height": 0,
       "weight": 0,
       "apps": 18,
@@ -1763,7 +1763,7 @@
       "number": 23,
       "name": "富居 大樹",
       "kana": "",
-      "position": "MF",
+      "position": "GK",
       "height": 0,
       "weight": 0,
       "apps": 2,
@@ -1775,7 +1775,7 @@
       "number": 24,
       "name": "福島 隼斗",
       "kana": "",
-      "position": "MF",
+      "position": "DF",
       "height": 0,
       "weight": 0,
       "apps": 4,
@@ -1787,7 +1787,7 @@
       "number": 25,
       "name": "若月 大和",
       "kana": "",
-      "position": "MF",
+      "position": "FW",
       "height": 0,
       "weight": 0,
       "apps": 1,
@@ -1799,7 +1799,7 @@
       "number": 26,
       "name": "畑 大雅",
       "kana": "",
-      "position": "MF",
+      "position": "DF",
       "height": 0,
       "weight": 0,
       "apps": 18,
@@ -1835,7 +1835,7 @@
       "number": 29,
       "name": "鈴木 章斗",
       "kana": "",
-      "position": "MF",
+      "position": "FW",
       "height": 0,
       "weight": 0,
       "apps": 2,
@@ -1847,7 +1847,7 @@
       "number": 30,
       "name": "鈴木 淳之介",
       "kana": "",
-      "position": "MF",
+      "position": "DF",
       "height": 0,
       "weight": 0,
       "apps": 0,
@@ -1871,7 +1871,7 @@
       "number": 32,
       "name": "松村 晟怜",
       "kana": "",
-      "position": "MF",
+      "position": "DF",
       "height": 0,
       "weight": 0,
       "apps": 1,

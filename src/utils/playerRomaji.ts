@@ -46,7 +46,7 @@ const PLAYER_ROMAJI_BY_NAME: Record<string, string> = {
   '中村 駿': 'Shun NAKAMURA',
   '三幸 秀稔': 'Hidetoshi MIYUKI',
   '柴田 壮介': 'Sosuke SHIBATA',
-  '石川 玄大': 'Genta ISHIKAWA',
+  '石川 玄大': 'Gendai ISHIKAWA',
   'ウェリントン ジュニオール': 'Wellington JUNIOR',
   'オリベイラ': 'OLIVEIRA',
   '金子 大毅': 'Daiki KANEKO',
