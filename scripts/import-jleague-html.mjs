@@ -435,6 +435,11 @@ async function main() {
         .filter((m) => m.ticket_url && m.ticket_url !== TICKET_URL)
         .map((m) => [m.id, m.ticket_url])
     );
+    const prevJleagueUrlByMatchId = new Map(
+      (existing.matches ?? [])
+        .filter((m) => m.jleague_match_url && m.jleague_match_url.startsWith('https://www.jleague.jp/match/'))
+        .map((m) => [m.id, m.jleague_match_url])
+    );
 
     let matches = existing.matches;
     if (group.schedule) {
@@ -445,7 +450,7 @@ async function main() {
 
     if (group.appearance) {
       const appHtml = await fs.readFile(path.join(RAW_DIR, group.appearance), 'utf8');
-      const { roundDetails, roundUrls, playerStats, matchesFromAppearance } = parseAppearanceHtml(
+      const { roundDetails, playerStats, matchesFromAppearance } = parseAppearanceHtml(
         appHtml,
         seasonId
       );
@@ -499,8 +504,6 @@ async function main() {
         const rm = m.round.match(/第(\d+)節/);
         if (!rm) continue;
         const rNum = Number(rm[1]);
-        m.jleague_match_url = roundUrls.get(rNum) ?? m.jleague_match_url ?? null;
-
         const rd = roundDetails.get(rNum);
         if (!rd) continue;
 
@@ -522,11 +525,12 @@ async function main() {
       );
     }
 
-    // Preserve any verified direct ticket URLs for scheduled matches
+    // Preserve verified direct ticket URLs and verified jleague.jp match URLs
     for (const m of matches) {
       if (m.status === 'scheduled' && prevTicketByMatchId.has(m.id)) {
         m.ticket_url = prevTicketByMatchId.get(m.id);
       }
+      m.jleague_match_url = prevJleagueUrlByMatchId.get(m.id) ?? null;
     }
 
     // Recompute summary from finished matches (supporting PK wins ☆ and PK losses ★)

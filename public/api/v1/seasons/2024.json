@@ -38,7 +38,7 @@
       "stadium": "ノエスタ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30808",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 3,
@@ -80,7 +80,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30798",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 3,
@@ -125,7 +125,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30783",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 1,
@@ -169,7 +169,7 @@
       "stadium": "味スタ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30771",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 0,
@@ -214,7 +214,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30763",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 1,
@@ -259,7 +259,7 @@
       "stadium": "味スタ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30754",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 0,
@@ -304,7 +304,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30741",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 3,
         "opponent_score": 2,
@@ -350,7 +350,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30734",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 2,
@@ -394,7 +394,7 @@
       "stadium": "デンカＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30724",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 3,
@@ -438,7 +438,7 @@
       "stadium": "駅スタ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30717",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 1,
@@ -483,7 +483,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30702",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 1,
@@ -525,7 +525,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30695",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 2,
@@ -569,7 +569,7 @@
       "stadium": "Ｇスタ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30681",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 0,
@@ -613,7 +613,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30673",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 1,
@@ -657,7 +657,7 @@
       "stadium": "パナスタ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30665",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 0,
@@ -701,7 +701,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30656",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 5,
         "opponent_score": 0,
@@ -747,7 +747,7 @@
       "stadium": "浦和駒場",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30644",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 3,
         "opponent_score": 2,
@@ -793,7 +793,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30637",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 1,
@@ -835,7 +835,7 @@
       "stadium": "Ｕ等々力",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30622",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 1,
@@ -879,7 +879,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30615",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 1,
@@ -921,7 +921,7 @@
       "stadium": "豊田ス",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30608",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 1,
@@ -965,7 +965,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30594",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 2,
@@ -1009,7 +1009,7 @@
       "stadium": "ヤマハ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30581",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 3,
@@ -1054,7 +1054,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30579",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 1,
@@ -1098,7 +1098,7 @@
       "stadium": "三協Ｆ柏",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30561",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 2,
@@ -1142,7 +1142,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30556",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 0,
@@ -1184,7 +1184,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30548",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 1,
@@ -1228,7 +1228,7 @@
       "stadium": "カシマ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30532",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 3,
@@ -1272,7 +1272,7 @@
       "stadium": "札幌ド",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30520",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 3,
         "opponent_score": 3,
@@ -1318,7 +1318,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30514",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 1,
@@ -1360,7 +1360,7 @@
       "stadium": "日産ス",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30506",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 2,
@@ -1405,7 +1405,7 @@
       "stadium": "Ｅピース",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30495",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 2,
@@ -1447,7 +1447,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30483",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 2,
@@ -1491,7 +1491,7 @@
       "stadium": "ヨドコウ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30479",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 0,
         "opponent_score": 2,
@@ -1533,7 +1533,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30469",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 4,
         "opponent_score": 4,
@@ -1578,7 +1578,7 @@
       "stadium": "ベススタ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30456",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 1,
@@ -1622,7 +1622,7 @@
       "stadium": "サンガＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30444",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 2,
         "opponent_score": 1,
@@ -1667,7 +1667,7 @@
       "stadium": "レモンＳ",
       "status": "finished",
       "ticket_url": null,
-      "jleague_match_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30436",
+      "jleague_match_url": null,
       "result": {
         "bellmare_score": 1,
         "opponent_score": 2,
