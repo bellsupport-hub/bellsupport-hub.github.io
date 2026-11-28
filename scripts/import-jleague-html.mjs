@@ -181,8 +181,39 @@ function countGoalsInCell(cellText) {
   return total;
 }
 
+function extractRoundMatchUrls(html) {
+  const roundUrls = new Map();
+  for (const tm of html.matchAll(/<table[^>]*>([\s\S]*?)<\/table>/gi)) {
+    const trs = [...tm[1].matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)].map((m) => m[1]);
+    if (trs.length < 5) continue;
+    const row0Cells = [...trs[0].matchAll(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/gi)].map((m) =>
+      toHalfWidth(stripTags(m[1]))
+    );
+    const linkRow = trs.slice(0, 6).find((tr) => tr.includes('match_card_id='));
+    if (!linkRow) continue;
+    const linkCells = [...linkRow.matchAll(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/gi)].map((m) => m[1]);
+    const dataRounds = row0Cells
+      .map((c) => {
+        const m = c.match(/第(\d+)節/);
+        return m ? Number(m[1]) : null;
+      })
+      .filter((n) => n !== null);
+    const dataLinks = linkCells.slice(linkCells.length - dataRounds.length);
+    dataRounds.forEach((rNum, idx) => {
+      const m = (dataLinks[idx] || '').match(
+        /https?:\/\/data\.j-league\.or\.jp\/SFMS02\/\?match_card_id=\d+/
+      );
+      if (m && !roundUrls.has(rNum)) {
+        roundUrls.set(rNum, m[0]);
+      }
+    });
+  }
+  return roundUrls;
+}
+
 function parseAppearanceHtml(html, seasonId) {
   const tables = extractTables(html);
+  const roundUrls = extractRoundMatchUrls(html);
   const roundDetails = new Map(); // roundNum -> { starters, substitutes, scorers }
   const roundMeta = new Map(); // roundNum -> { roundNum, kickoff, stadium, opponent, bellmare_score, opponent_score, finished }
   const playerStats = new Map(); // number -> { number, name, apps, goals }
@@ -282,6 +313,7 @@ function parseAppearanceHtml(html, seasonId) {
       stadium: rm.stadium,
       status: 'finished',
       ticket_url: null,
+      jleague_match_url: roundUrls.get(rm.roundNum) ?? null,
       result: {
         bellmare_score: rm.bellmare_score,
         opponent_score: rm.opponent_score,
@@ -293,7 +325,7 @@ function parseAppearanceHtml(html, seasonId) {
     }))
     .sort((a, b) => new Date(b.kickoff).getTime() - new Date(a.kickoff).getTime());
 
-  return { roundDetails, playerStats, matchesFromAppearance };
+  return { roundDetails, roundUrls, playerStats, matchesFromAppearance };
 }
 
 function parseClubHistoryHtml(html) {
@@ -398,6 +430,12 @@ async function main() {
       // New season file (e.g., 2020, 2021, 2022)
     }
 
+    const prevTicketByMatchId = new Map(
+      (existing.matches ?? [])
+        .filter((m) => m.ticket_url && m.ticket_url !== TICKET_URL)
+        .map((m) => [m.id, m.ticket_url])
+    );
+
     let matches = existing.matches;
     if (group.schedule) {
       const schedHtml = await fs.readFile(path.join(RAW_DIR, group.schedule), 'utf8');
@@ -407,7 +445,7 @@ async function main() {
 
     if (group.appearance) {
       const appHtml = await fs.readFile(path.join(RAW_DIR, group.appearance), 'utf8');
-      const { roundDetails, playerStats, matchesFromAppearance } = parseAppearanceHtml(
+      const { roundDetails, roundUrls, playerStats, matchesFromAppearance } = parseAppearanceHtml(
         appHtml,
         seasonId
       );
@@ -460,7 +498,10 @@ async function main() {
       for (const m of matches) {
         const rm = m.round.match(/第(\d+)節/);
         if (!rm) continue;
-        const rd = roundDetails.get(Number(rm[1]));
+        const rNum = Number(rm[1]);
+        m.jleague_match_url = roundUrls.get(rNum) ?? m.jleague_match_url ?? null;
+
+        const rd = roundDetails.get(rNum);
         if (!rd) continue;
 
         if (rd.starters.length > 0) {
@@ -481,6 +522,13 @@ async function main() {
       );
     }
 
+    // Preserve any verified direct ticket URLs for scheduled matches
+    for (const m of matches) {
+      if (m.status === 'scheduled' && prevTicketByMatchId.has(m.id)) {
+        m.ticket_url = prevTicketByMatchId.get(m.id);
+      }
+    }
+
     // Recompute summary from finished matches (supporting PK wins ☆ and PK losses ★)
     const finished = matches.filter((m) => m.status === 'finished' && m.result);
     const won = finished.filter(
@@ -493,10 +541,13 @@ async function main() {
     const gf = finished.reduce((acc, m) => acc + m.result.bellmare_score, 0);
     const ga = finished.reduce((acc, m) => acc + m.result.opponent_score, 0);
 
+    const envRank = seasonId === '2026-27' && process.env.RANK ? Number(process.env.RANK) : null;
+    const nextRank = Number.isFinite(envRank) && envRank > 0 ? envRank : (existing.summary?.rank || def.rank);
+
     // Strip internal _symbol helper before saving
     existing.matches = matches.map(({ _symbol, ...rest }) => rest);
     existing.summary = {
-      rank: existing.summary?.rank || def.rank,
+      rank: nextRank,
       played: finished.length,
       won,
       drawn,
@@ -507,24 +558,34 @@ async function main() {
       points: won * 3 + drawn,
     };
 
-    // Ensure standings always has at least Shonan Bellmare's accurate target row
-    if (!Array.isArray(existing.standings) || !existing.standings.some((r) => r.is_target)) {
-      existing.standings = [
-        {
-          rank: existing.summary.rank,
-          team: '湘南ベルマーレ',
-          played: existing.summary.played,
-          won: existing.summary.won,
-          drawn: existing.summary.drawn,
-          lost: existing.summary.lost,
-          gd: existing.summary.gd,
-          points: existing.summary.points,
-          is_target: true,
-        },
-      ];
-    }
+    // Keep Shonan Bellmare's target row in standings always synced with summary
+    const targetRow = {
+      rank: existing.summary.rank,
+      team: '湘南ベルマーレ',
+      played: existing.summary.played,
+      won: existing.summary.won,
+      drawn: existing.summary.drawn,
+      lost: existing.summary.lost,
+      gd: existing.summary.gd,
+      points: existing.summary.points,
+      is_target: true,
+    };
+    const otherRows = Array.isArray(existing.standings)
+      ? existing.standings.filter((r) => !r.is_target)
+      : [];
+    existing.standings = [...otherRows, targetRow].sort((a, b) => a.rank - b.rank);
 
     await fs.writeFile(outPath, `${JSON.stringify(existing, null, 2)}\n`, 'utf8');
+  }
+
+  // Update meta.json updated_at timestamp automatically
+  const metaPath = path.join(API_DIR, 'meta.json');
+  try {
+    const meta = JSON.parse(await fs.readFile(metaPath, 'utf8'));
+    meta.updated_at = new Date().toISOString();
+    await fs.writeFile(metaPath, `${JSON.stringify(meta, null, 2)}\n`, 'utf8');
+  } catch {
+    // Ignore if meta.json is absent
   }
 
   await fs.writeFile(PLAYER_IDS_PATH, `${JSON.stringify(playerIdMap, null, 2)}\n`, 'utf8');
